@@ -1,5 +1,5 @@
 from neomodel import StructuredNode, StringProperty, RelationshipTo, RelationshipFrom, config, UniqueIdProperty, IntegerProperty
-from neo4j_model.person import Person
+from server.neo4j_model.person import Person
 class Zodiac(StructuredNode):
     zodiac_sign = StringProperty()
 

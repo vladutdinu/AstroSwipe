@@ -12,16 +12,12 @@ from server.fastapi_model.person_model import PersonModel
 from server.fastapi_model.zodiac_model import ZodiacModel
 from server.fastapi_model.match_model import MatchModel
 
-env_vars = {}
-with open('./server/.env') as env:
-    for line in env:
-        key, value = line.strip().split('=', 1)
-        env_vars.update({key: value})
 
 app = FastAPI()
 
-config.DATABASE_URL = 'neo4j+s://{}:{}@{}:{}'.format(env_vars['USER'], env_vars['PASSWORD'], env_vars['SERVER'], env_vars['PORT'])
-
+config.DATABASE_URL = 'neo4j+s://{}:{}@{}:{}'.format(os.environ['USER'], os.environ['PASSWORD'], os.environ['SERVER'], os.environ['PORT_NEO'])
+print(config.DATABASE_URL)
+print(os.environ)
 db.set_connection(config.DATABASE_URL)
         
 @app.get('/')
