@@ -24,7 +24,7 @@ async def home() -> JSONResponse:
     return JSONResponse("hello world")
 
 @app.post("/create_person")
-async def create_student(person: PersonModel) -> JSONResponse:
+async def create_person(person: PersonModel) -> JSONResponse:
     person_to_add = person
     person_to_add.unique_id = str(hashlib.sha256(person.email.encode('utf-8')).hexdigest())
     with db.transaction:
