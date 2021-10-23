@@ -3,3 +3,4 @@ neomodel==4.0.6
 pydantic==1.8.2
 starlette==0.14.2
 uvicorn==0.13.4
+anyio==3.3.4

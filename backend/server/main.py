@@ -6,14 +6,14 @@ import uvicorn
 import hashlib
 import json
 from starlette.responses import JSONResponse
-from neo4j_model.person import Person
-from neo4j_model.zodiac import Zodiac
-from fastapi_model.person_model import PersonModel
-from fastapi_model.zodiac_model import ZodiacModel
-from fastapi_model.match_model import MatchModel
+from server.neo4j_model.person import Person
+from server.neo4j_model.zodiac import Zodiac
+from server.fastapi_model.person_model import PersonModel
+from server.fastapi_model.zodiac_model import ZodiacModel
+from server.fastapi_model.match_model import MatchModel
 
 env_vars = {}
-with open('./src/.env') as env:
+with open('./server/.env') as env:
     for line in env:
         key, value = line.strip().split('=', 1)
         env_vars.update({key: value})
@@ -24,6 +24,10 @@ config.DATABASE_URL = 'neo4j+s://{}:{}@{}:{}'.format(env_vars['USER'], env_vars[
 
 db.set_connection(config.DATABASE_URL)
         
+@app.get('/')
+async def home() -> JSONResponse:
+    return JSONResponse("hello world")
+
 @app.post("/create_person")
 async def create_student(person: PersonModel) -> JSONResponse:
     person_to_add = person
