@@ -9,3 +9,4 @@ class PersonModel(BaseModel):
     zodiac_sign : str
     personal_bio : str
     age : int
+    user_type: str

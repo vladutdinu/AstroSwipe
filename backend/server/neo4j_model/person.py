@@ -9,5 +9,8 @@ class Person(StructuredNode):
     personal_bio    = StringProperty()
     age             = IntegerProperty()
 
+    USER_TYPES      = {"A":"admin", "B":"basic", "P":"premium"}
+    user_type       = StringProperty(choices=USER_TYPES)
+    
     matched = Relationship("Person", "Matched")
     
