@@ -16,8 +16,7 @@ from server.fastapi_model.match_model import MatchModel
 app = FastAPI()
 
 config.DATABASE_URL = 'neo4j+s://{}:{}@{}:{}'.format(os.environ['USER'], os.environ['PASSWORD'], os.environ['SERVER'], os.environ['PORT_NEO'])
-print(config.DATABASE_URL)
-print(os.environ)
+
 db.set_connection(config.DATABASE_URL)
         
 @app.get('/')
