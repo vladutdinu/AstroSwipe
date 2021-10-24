@@ -1,5 +1,5 @@
 from enum import unique
-from fastapi import Depends, FastAPI, BackgroundTasks
+from fastapi import Depends, FastAPI
 from neomodel import config, db
 import os
 import uvicorn
@@ -41,7 +41,7 @@ Please click on the link to complete the registration
 """
 @app.post('/register')
 async def simple_send(person: PersonModel) -> JSONResponse:
-    bk_task = BackgroundTasks()
+
     token = utl.signJWT(person, os.environ['JWT_SECRET_FASTAPI'])
     
     message = MessageSchema(
@@ -51,7 +51,7 @@ async def simple_send(person: PersonModel) -> JSONResponse:
         )
     
     fm = FastMail(conf)
-    bk_task.add_task(fm.send_message,message)
+    await fm.send_message(message)
     return JSONResponse(status_code=200, content={"message": "email has been sent"})     
 
 
