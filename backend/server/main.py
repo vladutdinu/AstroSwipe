@@ -35,7 +35,7 @@ config.DATABASE_URL = 'neo4j+s://{}:{}@{}:{}'.format(os.environ['USER'], os.envi
 db.set_connection(config.DATABASE_URL)
 html = """
 Thanks for registering to Astro swipe!
-This is your verification link: http://127.0.0.1:8000/code_verif?token={}
+This is your verification link: {}/code_verif?token={}
 
 Please click on the link to complete the registration
 """
@@ -47,7 +47,7 @@ async def simple_send(person: PersonModel) -> JSONResponse:
     message = MessageSchema(
         subject="Astroswipe account validation",
         recipients=[person.email],  # List of recipients, as many as you can pass 
-        body=html.format(token.decode("utf-8"))
+        body=html.format(os.environ['FASTAPI_URL'], token)
         )
     
     fm = FastMail(conf)
