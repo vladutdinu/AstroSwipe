@@ -5,6 +5,8 @@ import os
 import uvicorn
 import hashlib
 import json
+import requests
+from fastapi_mail import FastMail, MessageSchema,ConnectionConfig
 from starlette.responses import JSONResponse
 from server.neo4j_model.person import Person
 from server.neo4j_model.zodiac import Zodiac
@@ -12,14 +14,85 @@ from server.fastapi_model.person_model import PersonModel
 from server.fastapi_model.zodiac_model import ZodiacModel
 from server.fastapi_model.match_model import MatchModel
 from server.fastapi_model.login_model import LoginModel
+
 import server.utils.utils as utl
 
-app = FastAPI()
 
+app = FastAPI()
+conf = ConnectionConfig(
+    MAIL_USERNAME = os.environ['FASTAPI_USER'],
+    MAIL_PASSWORD = os.environ['FASTAPI_PASS'],
+    MAIL_FROM = "astroswipe2021@gmail.com",
+    MAIL_PORT = 587,
+    MAIL_SERVER = "smtp.gmail.com",
+    MAIL_TLS = True,
+    MAIL_SSL = False,
+    USE_CREDENTIALS = True,
+    VALIDATE_CERTS = True
+)
 config.DATABASE_URL = 'neo4j+s://{}:{}@{}:{}'.format(os.environ['USER'], os.environ['PASSWORD'], os.environ['SERVER'], os.environ['PORT_NEO'])
 
 db.set_connection(config.DATABASE_URL)
-        
+html = """
+Thanks for registering to Astro swipe!
+This is your verification link: http://127.0.0.1:8000/code_verif?token={}
+
+Please click on the link to complete the registration
+"""
+@app.post('/register')
+async def simple_send(person: PersonModel) -> JSONResponse:
+
+    token = utl.signJWT(person, os.environ['JWT_SECRET_FASTAPI'])
+    
+    message = MessageSchema(
+        subject="Astroswipe account validation",
+        recipients=[person.email],  # List of recipients, as many as you can pass 
+        body=html.format(token.decode("utf-8"))
+        )
+    
+    fm = FastMail(conf)
+    await fm.send_message(message)
+    return JSONResponse(status_code=200, content={"message": "email has been sent"})     
+
+
+@app.get('/code_verif')
+async def code_verif(token: str) -> JSONResponse:
+    payload =  utl.decodeJWT(token, os.environ['JWT_SECRET_FASTAPI'])
+    print(payload)
+    if payload is not None:
+        uuid = str(hashlib.sha256(payload['person']['email'].encode('utf-8')).hexdigest())
+        with db.transaction:
+            try:
+                p = Person.nodes.get(unique_id=uuid)
+                z = Zodiac.nodes.get(zodiac_sign=payload['person']['zodiac_sign'])
+                return JSONResponse(
+                    status_code=205,
+                    content={"message": "User already in database"}
+                )
+            except:
+                p = Person(
+                    unique_id = uuid,
+                    email = payload['person']['email'],
+                    first_name = payload['person']['first_name'],
+                    last_name = payload['person']['last_name'],
+                    zodiac_sign = payload['person']['zodiac_sign'],
+                    personal_bio = payload['person']['personal_bio'],
+                    age = payload['person']['age'],
+                    user_type = payload['person']['user_type']
+                ).save()
+                z = Zodiac.nodes.get(zodiac_sign=payload['person']['zodiac_sign'])  
+            z.person.connect(p)
+            return JSONResponse(
+                    status_code=201,
+                    content={"message": "User created"}
+                )
+    else:
+        return JSONResponse(
+            status_code=400,
+            content={"message":"Wrong URL"}
+        )
+
+
 @app.get('/')
 async def home() -> JSONResponse:
     return JSONResponse("hello world")
