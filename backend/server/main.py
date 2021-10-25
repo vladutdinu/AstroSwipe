@@ -13,6 +13,7 @@ from server.neo4j_model.zodiac import Zodiac
 from server.fastapi_model.person_model import PersonModel
 from server.fastapi_model.zodiac_model import ZodiacModel
 from server.fastapi_model.match_model import MatchModel
+from server.fastapi_model.like_model import LikeModel
 from server.fastapi_model.login_model import LoginModel
 
 import server.utils.utils as utl
@@ -209,12 +210,15 @@ async def get_persons(key) -> JSONResponse:
                 }
             )
 
-@app.post("/match")
-async def match(matches: MatchModel) -> JSONResponse:
+@app.post("/like")
+async def match(likes: LikeModel) -> JSONResponse:
     with db.transaction:
-       p = Person.nodes.get(unique_id=str(hashlib.sha256(matches.email1.encode('utf-8')).hexdigest()))
-       p1 = Person.nodes.get(unique_id=str(hashlib.sha256(matches.email2.encode('utf-8')).hexdigest()))
-       p.matched.connect(p1)
+        p = Person.nodes.filter(unique_id=str(hashlib.sha256(likes.email1.encode('utf-8')).hexdigest()))
+        p1 = Person.nodes.filter(unique_id=str(hashlib.sha256(likes.email2.encode('utf-8')).hexdigest()))
+        p[0].likes.connect(p1[0])
+    
+        if p[0] in p1[0].likes and p1[0] in p[0].likes:
+            p[0].matched.connect(p1[0])
 
 @app.post("/unmatch")
 async def unmatch(matches: MatchModel) -> JSONResponse:
@@ -222,6 +226,8 @@ async def unmatch(matches: MatchModel) -> JSONResponse:
        p = Person.nodes.get(unique_id=str(hashlib.sha256(matches.email1.encode('utf-8')).hexdigest()))
        p1 = Person.nodes.get(unique_id=str(hashlib.sha256(matches.email2.encode('utf-8')).hexdigest()))
        p.matched.disconnect(p1)
+       p[0].likes.disconnect(p1[0])
+       p1[0].likes.disconnect(p[0])
 
 @app.get("/get_matches")
 async def get_matches(email, key) -> JSONResponse:

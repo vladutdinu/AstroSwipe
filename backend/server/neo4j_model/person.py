@@ -1,5 +1,6 @@
 from neomodel import StructuredNode, StringProperty, RelationshipTo, RelationshipFrom, config, UniqueIdProperty, IntegerProperty
 from neomodel.relationship_manager import Relationship
+from neomodel.cardinality import OneOrMore
 class Person(StructuredNode):
     unique_id       = UniqueIdProperty()
     email           = StringProperty()
@@ -13,4 +14,5 @@ class Person(StructuredNode):
     user_type       = StringProperty(choices=USER_TYPES)
     
     matched = Relationship("Person", "Matched")
+    likes = RelationshipTo("Person", "Likes")
     
