@@ -15,14 +15,18 @@ from server.fastapi_model.zodiac_model import ZodiacModel
 from server.fastapi_model.match_model import MatchModel
 from server.fastapi_model.like_model import LikeModel
 from server.fastapi_model.login_model import LoginModel
-
+from server.fastapi_model.register_model import RegisterModel
 import server.utils.utils as utl
 
 STATUS_CODES = {
     "FOUND_USER_CODE": 230,
     "FOUND_USER_MESSAGE": "USER ALREADY IN DATABASE",
     "ACTIVATED_USER_CODE": 231,
-    "ACTIVATED_USER_MESSAGE": "USER HAS BEEN ACTIVATED"
+    "ACTIVATED_USER_MESSAGE": "USER HAS BEEN ACTIVATED",
+    "LIKED_USER_CODE": 232,
+    "LIKED_USER_MESSAGE": "USER HAS SUCESSFULY LIKED ANOTHER USER",
+    "UNMATCH_USER_CODE": 233,
+    "UNMATCH_USER_MESSAGE": "USER HAS SUCESSFULY UNMATCH ANOTHER USER"
 }
 
 app = FastAPI()
@@ -43,50 +47,69 @@ config.DATABASE_URL = 'neo4j+s://{}:{}@{}:{}'.format(
 db.set_connection(config.DATABASE_URL)
 html = """
 Thanks for registering to Astro swipe!
-This is your verification link: {}/code_verif?token={}
+This is your verification link: {}:8000/code_verif?token={}
 
 Please click on the link to complete the registration
 """
 
 
-@app.post('/register')
-async def simple_send(person: PersonModel) -> JSONResponse:
-    uuid = str(hashlib.sha256(person.email.encode('utf-8')).hexdigest())
+@app.post('/register_step1')
+async def register_step1(register: RegisterModel) -> JSONResponse:
+    if register.password != register.conf_password:
+        return JSONResponse(
+            status_code=406,
+            content={
+                "message": "Passwords does not match"
+            }
+        )
+    else:
+        uuid = str(hashlib.sha256(register.email.encode('utf-8')).hexdigest())
+        hashed_pass = str(hashlib.sha256(register.password.encode('utf-8')).hexdigest())
+        with db.transaction:
+            try:
+                p = Person.nodes.get(unique_id=uuid)
+                return JSONResponse(
+                    status_code=STATUS_CODES['FOUND_USER_CODE'],
+                    content={
+                        "message": STATUS_CODES['FOUND_USER_MESSAGE']
+                    }
+                )
+            except:
+                p = Person(
+                    unique_id=uuid,
+                    email=register.email,
+                    password=hashed_pass
+                ).save()
+
+        
+
+@app.post('/register_step2')
+async def register_step2(person: PersonModel) -> JSONResponse:
     with db.transaction:
-        try:
-            p = Person.nodes.get(unique_id=uuid)
-            z = Zodiac.nodes.get(zodiac_sign=person.zodiac_sign)
-            return JSONResponse(
-                status_code=STATUS_CODES['FOUND_USER_CODE'],
-                content={
-                    "message": STATUS_CODES['FOUND_USER_MESSAGE']
-                }
-            )
-        except:
-            p = Person(
-                unique_id=person.unique_id,
-                email=person.email,
-                first_name=person.first_name,
-                last_name=person.last_name,
-                zodiac_sign=person.zodiac_sign,
-                personal_bio=person.personal_bio,
-                age=person.age,
-                user_type=person.user_type
-            ).save()
-            z = Zodiac.nodes.get(zodiac_sign=person.zodiac_sign)
+        uuid = str(hashlib.sha256(person.email.encode('utf-8')).hexdigest())
+        p = Person.nodes.get(unique_id=uuid)
+        p.first_name =person.first_name 
+        p.last_name  =person.last_name  
+        p.zodiac_sign=person.zodiac_sign
+        p.personal_bio=person.personal_bio
+        p.age         =person.age   
+        p.country     =person.country
+        p.city        =person.city
+        p.sex         =person.sex     
+        z = Zodiac.nodes.get(zodiac_sign=p.zodiac_sign)
+        p.save()
         z.person.connect(p)
 
-    token = utl.signJWT(person, os.environ['JWT_SECRET_FASTAPI'])
+    token = utl.signJWT(p, os.environ['JWT_SECRET_FASTAPI'])
 
     message = MessageSchema(
         subject="Astroswipe account validation",
-        recipients=[person.email],
-        body=html.format(os.environ['FASTAPI_URL'], token)
+        recipients=[p.email],
+        body=html.format(os.environ['FASTAPI_URL'], str(token, "utf-8"))
     )
     fm = FastMail(conf)
     await fm.send_message(message)
     return JSONResponse(status_code=200, content={"message": "email has been sent"})
-
 
 @app.get('/code_verif')
 async def code_verif(token: str) -> JSONResponse:
@@ -96,8 +119,8 @@ async def code_verif(token: str) -> JSONResponse:
             payload['person']['email'].encode('utf-8')).hexdigest())
         with db.transaction:
             p = Person.nodes.get(unique_id=uuid)
-            z = Zodiac.nodes.get(zodiac_sign=payload['person']['zodiac_sign'])
             p.activated = True
+            p.save()
             return JSONResponse(
                 status_code=STATUS_CODES["ACTIVATED_USER_CODE"],
                 content={"message": STATUS_CODES["ACTIVATED_USER_MESSAGE"]}
@@ -118,9 +141,11 @@ async def home() -> JSONResponse:
 async def home(login_model: LoginModel) -> JSONResponse:
     email_hash = str(hashlib.sha256(
         login_model.email.encode('utf-8')).hexdigest())
+    pass_hash = str(hashlib.sha256(
+        login_model.password.encode('utf-8')).hexdigest())
     with db.transaction:
         try:
-            p = Person.nodes.get(unique_id=email_hash)
+            p = Person.nodes.get(unique_id=email_hash, password=pass_hash)
             token = utl.signJWT(p, os.environ['JWT_SECRET_FASTAPI'])
             return JSONResponse(
                 status_code=200,
@@ -255,18 +280,30 @@ async def get_persons(token, zodiac) -> JSONResponse:
 
 
 @app.post("/like")
-async def match(likes: LikeModel, token) -> JSONResponse:
+async def like(likes: LikeModel, token) -> JSONResponse:
     with db.transaction:
         payload = utl.decodeJWT(token, os.environ['JWT_SECRET_FASTAPI'])
         if payload is not None:
-            p = Person.nodes.filter(unique_id=str(
-                hashlib.sha256(likes.email1.encode('utf-8')).hexdigest()))
-            p1 = Person.nodes.filter(unique_id=str(
-                hashlib.sha256(likes.email2.encode('utf-8')).hexdigest()))
-            p[0].likes.connect(p1[0])
-
-            if p[0] in p1[0].likes and p1[0] in p[0].likes:
-                p[0].matched.connect(p1[0])
+            utl.like_person(likes)
+            return JSONResponse(
+                status_code=STATUS_CODES['LIKED_USER_CODE'],
+                content={
+                    "message": STATUS_CODES['LIKED_USER_MESSAGE'],
+                    "token" : token
+                }
+            )
+        else:
+            p = Person.nodes.get(unique_id=str(hashlib.sha256(
+                likes.email1.encode('utf-8')).hexdigest()))
+            token = utl.signJWT(p, os.environ['JWT_SECRET_FASTAPI'])
+            utl.like_person(likes)
+            return JSONResponse(
+                status_code=STATUS_CODES['LIKED_USER_CODE'],
+                content={
+                    "message": STATUS_CODES['LIKED_USER_MESSAGE'],
+                    "token": str(token, "utf-8")
+                }
+            )
 
 
 @app.post("/unmatch")
@@ -274,83 +311,56 @@ async def unmatch(matches: MatchModel, token) -> JSONResponse:
     with db.transaction:
         payload = utl.decodeJWT(token, os.environ['JWT_SECRET_FASTAPI'])
         if payload is not None:
+            utl.unmatch_person(matches)
+            return JSONResponse(
+                status_code=STATUS_CODES['UNMATCH_USER_CODE'],
+                content={
+                    "message": STATUS_CODES['UNMATCH_USER_MESSAGE'],
+                    "token" : token
+                }
+            )
+        else:
             p = Person.nodes.get(unique_id=str(hashlib.sha256(
                 matches.email1.encode('utf-8')).hexdigest()))
-            p1 = Person.nodes.get(unique_id=str(hashlib.sha256(
-                matches.email2.encode('utf-8')).hexdigest()))
-            p.matched.disconnect(p1)
-            p[0].likes.disconnect(p1[0])
-            p1[0].likes.disconnect(p[0])
-
+            token = utl.signJWT(p, os.environ['JWT_SECRET_FASTAPI'])
+            utl.unmatch_person(matches)
+            return JSONResponse(
+                status_code=STATUS_CODES['UNMATCH_USER_CODE'],
+                content={
+                    "message": STATUS_CODES['UNMATCH_USER_MESSAGE'],
+                    "token" : str(token, "utf-8")
+                }
+            )
 
 @app.get("/get_matches")
-async def get_matches(token) -> JSONResponse:
+async def get_matches(email, token) -> JSONResponse:
     with db.transaction:
         payload = utl.decodeJWT(token, os.environ['JWT_SECRET_FASTAPI'])
         if payload is not None:
-            if payload['person']['user_type'] == 'A':
-                try:
-                    matches = Person.nodes.get(unique_id=str(
-                        hashlib.sha256(payload['person']['email'].encode('utf-8')).hexdigest()))
-                    result = []
-                    for match in matches.matched:
-                        result.append(match.__properties__)
-                    return JSONResponse(
-                        status_code=200,
-                        content=result,
-                        headers={
-                            "type": "admin"
-                        })
-                except:
-                    return JSONResponse(
-                        status_code=401,
-                        content={"message": "User is not in DB"},
-                    )
-
-            if payload['person']['user_type'] == 'P':
-                try:
-                    matches = Person.nodes.get(unique_id=str(
-                        hashlib.sha256(payload['person']['email'].encode('utf-8')).hexdigest()))
-                    result = []
-                    for match in matches.matched:
-                        result.append(match.__properties__)
-                    return JSONResponse(
-                        status_code=200,
-                        content=result,
-                        headers={
-                            "type": "premium"
-                        })
-                except:
-                    return JSONResponse(
-                        status_code=401,
-                        content={"message": "User is not in DB"},
-                    )
-
-            if payload['person']['user_type'] == 'B':
-                try:
-                    matches = Person.nodes.get(unique_id=str(
-                        hashlib.sha256(payload['person']['email'].encode('utf-8')).hexdigest()))
-                    result = []
-                    for match in matches.matched:
-                        result.append(match.__properties__)
-                    return JSONResponse(
-                        status_code=200,
-                        content=result,
-                        headers={
-                            "type": "basic"
-                        })
-                except:
-                    return JSONResponse(
-                        status_code=401,
-                        content={"message": "User is not in DB"},
-                    )
-        else:
+            matches = Person.nodes.get(unique_id=str(
+                hashlib.sha256(payload['person']['email'].encode('utf-8')).hexdigest()))
+            data = utl.get_matches(matches)
             return JSONResponse(
-                status_code=401,
-                content={
-                    "message": "User is not in DB"
+                status_code=200,
+                content=data,
+                headers={
+                    "user_type" : payload['person']['user_type']
                 }
             )
+        else:
+            matches = Person.nodes.get(unique_id=str(
+                hashlib.sha256(email.encode('utf-8')).hexdigest()))
+            token = utl.signJWT(matches, os.environ['JWT_SECRET_FASTAPI'])
+            data = utl.get_matches(matches)
+            return JSONResponse(
+                status_code=200,
+                content=data.append({"token":str(token,'utf-8')}),
+                headers={
+                    "Premium"
+                }
+            )
+           
+
 
 if __name__ == "__main__":
     uvicorn.run("main:app", host="127.0.0.1", port=8000, log_level="info")

@@ -6,6 +6,9 @@ class PersonModel(BaseModel):
     email : str
     first_name : str
     last_name : str
+    country : str
+    city : str
+    sex : str
     zodiac_sign : str
     personal_bio : str
     age : int
