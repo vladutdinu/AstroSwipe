@@ -315,19 +315,27 @@ async def get_matches(token) -> JSONResponse:
             )
 
 @app.post('/update_bio')
-async def update_bio(person: PersonModel, token):
+async def update_bio(token):
     with db.transaction:
         payload = utl.decodeJWT(token, os.environ['JWT_SECRET_FASTAPI'])
         if payload is not None:
             p = Person.nodes.get(unique_id=str(
-                hashlib.sha256(person.email.encode('utf-8')).hexdigest()))
-            p.country = person.country
-            p.city = person.city
-            p.sex = person.sex
-            p.zodiac_sign = person.zodiac_sign
-            p.personal_bio = person.personal_bio
-            p.preffered_zodiac_sign = person.preffered_zodiac_sign
-            p.age = person.age
+                hashlib.sha256(payload['person']['email'].encode('utf-8')).hexdigest()))
+            
+            p.country = payload['person']['country']
+            p.city = payload['person']['city']
+            p.sex = payload['person']['sex']
+            p.zodiac_sign = payload['person']['zodiac_sign']
+            p.personal_bio = payload['person']['personal_bio']
+            p.preffered_zodiac_sign = payload['person']['preffered_zodiac_sign']
+            p.age = payload['person']['age']
+            p.save()
+            return JSONResponse(
+                status_code=200,
+                content={
+                    "token": str(utl.signJWT(p, os.environ['JWT_SECRET_FASTAPI']), "utf-8")
+                }
+            )
 
 if __name__ == "__main__":
     uvicorn.run("main:app", host="127.0.0.1", port=8000, log_level="info")
