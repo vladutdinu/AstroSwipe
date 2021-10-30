@@ -18,7 +18,7 @@ def decodeJWT(token: str, JWT_SECRET) -> dict:
 def signJWT(person: Person, JWT_SECRET) -> dict:
     payload = {
         "person": person.__properties__,
-        "expires": time.time() + 600
+        "expires": time.time() + 3600*6
     }
     token = jwt.encode(payload, JWT_SECRET, algorithm='HS256')
 

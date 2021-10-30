@@ -1,5 +1,7 @@
 from enum import unique
+from typing import List, Optional
 from fastapi import Depends, FastAPI
+from fastapi.param_functions import Query
 from neomodel import config, db
 import os
 import uvicorn
@@ -52,7 +54,6 @@ This is your verification link: {}:8000/code_verif?token={}
 Please click on the link to complete the registration
 """
 
-
 @app.post('/register_step1')
 async def register_step1(register: RegisterModel) -> JSONResponse:
     if register.password != register.conf_password:
@@ -79,9 +80,7 @@ async def register_step1(register: RegisterModel) -> JSONResponse:
                     unique_id=uuid,
                     email=register.email,
                     password=hashed_pass
-                ).save()
-
-        
+                ).save()  
 
 @app.post('/register_step2')
 async def register_step2(person: PersonModel) -> JSONResponse:
@@ -131,11 +130,9 @@ async def code_verif(token: str) -> JSONResponse:
             content={"message": "Wrong URL"}
         )
 
-
 @app.get('/')
 async def home() -> JSONResponse:
     return JSONResponse("hello world")
-
 
 @app.get('/login')
 async def home(login_model: LoginModel) -> JSONResponse:
@@ -155,12 +152,8 @@ async def home(login_model: LoginModel) -> JSONResponse:
             )
         except:
             return JSONResponse(
-                status_code=401,
-                content={
-                    "message": "User is not in DB"
-                }
+                status_code=401
             )
-
 
 @app.post("/create_person")
 async def create_person(person: PersonModel, token) -> JSONResponse:
@@ -180,6 +173,7 @@ async def create_person(person: PersonModel, token) -> JSONResponse:
                     first_name=person_to_add.first_name,
                     last_name=person_to_add.last_name,
                     zodiac_sign=person_to_add.zodiac_sign,
+                    preffered_zodiac_sign=person_to_add.preffered_zodiac_sign,
                     personal_bio=person_to_add.personal_bio,
                     age=person_to_add.age,
                     user_type=person_to_add.user_type
@@ -196,12 +190,8 @@ async def create_person(person: PersonModel, token) -> JSONResponse:
             )
     else:
         return JSONResponse(
-            status_code=401,
-            content={
-                "message": "User is not in database"
-            }
+            status_code=401
         )
-
 
 @app.post("/create_zodiac")
 async def create_zodiac(zodiac_sign: ZodiacModel, token: str) -> JSONResponse:
@@ -221,7 +211,6 @@ async def create_zodiac(zodiac_sign: ZodiacModel, token: str) -> JSONResponse:
                 }
             )
 
-
 @app.get("/get_zodiac")
 async def get_zodiacs(sign, token) -> JSONResponse:
     with db.transaction:
@@ -232,12 +221,8 @@ async def get_zodiacs(sign, token) -> JSONResponse:
             return JSONResponse(zodiacs.__properties__)
         else:
             return JSONResponse(
-                status_code=401,
-                content={
-                    "message": "User is not in DB"
-                }
+                status_code=401
             )
-
 
 @app.get("/get_persons")
 async def get_persons(token) -> JSONResponse:
@@ -253,31 +238,24 @@ async def get_persons(token) -> JSONResponse:
                 return JSONResponse(return_value)
         else:
             return JSONResponse(
-                status_code=401,
-                content={
-                    "message": "User is not in DB"
-                }
+                status_code=401
             )
 
 @app.get("/get_persons_by_zodiac")
-async def get_persons(token, zodiac) -> JSONResponse:
+async def get_persons_by_zodiac(token, zodiac) -> JSONResponse:
     with db.transaction:
         payload = utl.decodeJWT(token, os.environ['JWT_SECRET_FASTAPI'])
         if payload is not None:
-            if payload['person']['user_type'] == 'A':
-                persons = Person.nodes.filter(zodiac_sign=zodiac)
+            if payload['person']['user_type'] == 'B': #modify to A when prod
                 return_value = []
+                persons = Person.nodes.filter(zodiac_sign=zodiac)
                 for person in persons:
-                    return_value.append(person.__properties__)
+                        return_value.append(person.__properties__)
                 return JSONResponse(return_value)
         else:
             return JSONResponse(
-                status_code=401,
-                content={
-                    "message": "User is not in DB"
-                }
+                status_code=401
             )
-
 
 @app.post("/like")
 async def like(likes: LikeModel, token) -> JSONResponse:
@@ -293,18 +271,9 @@ async def like(likes: LikeModel, token) -> JSONResponse:
                 }
             )
         else:
-            p = Person.nodes.get(unique_id=str(hashlib.sha256(
-                likes.email1.encode('utf-8')).hexdigest()))
-            token = utl.signJWT(p, os.environ['JWT_SECRET_FASTAPI'])
-            utl.like_person(likes)
             return JSONResponse(
-                status_code=STATUS_CODES['LIKED_USER_CODE'],
-                content={
-                    "message": STATUS_CODES['LIKED_USER_MESSAGE'],
-                    "token": str(token, "utf-8")
-                }
+                status_code=401
             )
-
 
 @app.post("/unmatch")
 async def unmatch(matches: MatchModel, token) -> JSONResponse:
@@ -320,20 +289,13 @@ async def unmatch(matches: MatchModel, token) -> JSONResponse:
                 }
             )
         else:
-            p = Person.nodes.get(unique_id=str(hashlib.sha256(
-                matches.email1.encode('utf-8')).hexdigest()))
-            token = utl.signJWT(p, os.environ['JWT_SECRET_FASTAPI'])
-            utl.unmatch_person(matches)
             return JSONResponse(
-                status_code=STATUS_CODES['UNMATCH_USER_CODE'],
-                content={
-                    "message": STATUS_CODES['UNMATCH_USER_MESSAGE'],
-                    "token" : str(token, "utf-8")
-                }
+                status_code=401
             )
 
+
 @app.get("/get_matches")
-async def get_matches(email, token) -> JSONResponse:
+async def get_matches(token) -> JSONResponse:
     with db.transaction:
         payload = utl.decodeJWT(token, os.environ['JWT_SECRET_FASTAPI'])
         if payload is not None:
@@ -348,19 +310,24 @@ async def get_matches(email, token) -> JSONResponse:
                 }
             )
         else:
-            matches = Person.nodes.get(unique_id=str(
-                hashlib.sha256(email.encode('utf-8')).hexdigest()))
-            token = utl.signJWT(matches, os.environ['JWT_SECRET_FASTAPI'])
-            data = utl.get_matches(matches)
             return JSONResponse(
-                status_code=200,
-                content=data.append({"token":str(token,'utf-8')}),
-                headers={
-                    "Premium"
-                }
+                status_code=401
             )
-           
 
+@app.post('/update_bio')
+async def update_bio(person: PersonModel, token):
+    with db.transaction:
+        payload = utl.decodeJWT(token, os.environ['JWT_SECRET_FASTAPI'])
+        if payload is not None:
+            p = Person.nodes.get(unique_id=str(
+                hashlib.sha256(person.email.encode('utf-8')).hexdigest()))
+            p.country = person.country
+            p.city = person.city
+            p.sex = person.sex
+            p.zodiac_sign = person.zodiac_sign
+            p.personal_bio = person.personal_bio
+            p.preffered_zodiac_sign = person.preffered_zodiac_sign
+            p.age = person.age
 
 if __name__ == "__main__":
     uvicorn.run("main:app", host="127.0.0.1", port=8000, log_level="info")

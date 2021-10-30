@@ -12,6 +12,7 @@ class Person(StructuredNode):
     city            = StringProperty(default='')
     SEX_TYPES       ={"F":"Female", "M":"Male", "N":"Neutral"}
     sex             = StringProperty(choices=SEX_TYPES, default='N')
+    preffered_zodiac_sign = StringProperty(default='')
     zodiac_sign     = StringProperty(default='')
     personal_bio    = StringProperty(default='')
     age             = IntegerProperty(default=1)

@@ -1,5 +1,5 @@
 from pydantic.main import BaseModel
-from typing import Optional
+from typing import Optional, List
 import hashlib
 class PersonModel(BaseModel):
     unique_id : Optional[str] = None
@@ -11,5 +11,6 @@ class PersonModel(BaseModel):
     sex : str
     zodiac_sign : str
     personal_bio : str
+    preffered_zodiac_sign: Optional[str] = None
     age : int
     user_type: str
