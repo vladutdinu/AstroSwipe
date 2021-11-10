@@ -14,3 +14,4 @@ class PersonModel(BaseModel):
     preffered_zodiac_sign: Optional[str] = None
     age : int
     user_type: str
+    like_nr: Optional[int] = None

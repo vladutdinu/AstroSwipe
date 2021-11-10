@@ -25,17 +25,30 @@ def signJWT(person: Person, JWT_SECRET) -> dict:
     token = jwt.encode(payload, JWT_SECRET, algorithm='HS256')
     return token
 
+def give_like(p, p1):
+    p.likes.connect(p1)
+    if p in p1.likes and p1 in p.likes:
+        p.matched.connect(p1)
+    
 
 def like_person(likes):
     p = Person.nodes.get(unique_id=str(
         hashlib.sha256(likes.email1.encode('utf-8')).hexdigest()))
     p1 = Person.nodes.get(unique_id=str(
         hashlib.sha256(likes.email2.encode('utf-8')).hexdigest()))
-
-    p.likes.connect(p1)
-
-    if p in p1.likes and p1 in p.likes:
-        p.matched.connect(p1)
+    if p.user_type == "B":
+        if p.like_nr > 0:
+            give_like(p, p1)
+            p.like_nr-=1
+            p.save()
+            return True
+        else:
+            return False
+    elif p.user_type == "P" or p.user_type == "A":
+        give_like(p, p1)
+        
+        return True
+    
 
 
 def unmatch_person(matches):
@@ -55,3 +68,9 @@ def get_matches(matches):
         if len(res) == 0:
             res.append({"message" : "This user has no matches"})
         return res
+
+async def refresh_likes(persons):
+    for pers in persons:
+        if pers.like_nr != 10:
+            pers.like_nr = 10
+            pers.save()

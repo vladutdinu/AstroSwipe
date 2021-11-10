@@ -17,7 +17,7 @@ class Person(StructuredNode):
     personal_bio    = StringProperty(default='')
     age             = IntegerProperty(default=1)
     activated       = BooleanProperty(default = False)
-
+    like_nr         = IntegerProperty(default=10)
     USER_TYPES      = {"A":"admin", "B":"basic", "P":"premium"}
     user_type       = StringProperty(choices=USER_TYPES, default='B')
     

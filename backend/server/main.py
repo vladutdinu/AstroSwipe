@@ -1,6 +1,6 @@
 from enum import unique
 from typing import List, Optional
-from fastapi import Depends, FastAPI
+from fastapi import Depends, FastAPI, BackgroundTasks
 from fastapi.param_functions import Query
 from neomodel import config, db
 import os
@@ -9,6 +9,7 @@ import hashlib
 import json
 import requests
 from fastapi_mail import FastMail, MessageSchema, ConnectionConfig
+from fastapi_utils.tasks import repeat_every
 from starlette.responses import JSONResponse
 from server.neo4j_model.person import Person
 from server.neo4j_model.zodiac import Zodiac
@@ -28,7 +29,9 @@ STATUS_CODES = {
     "LIKED_USER_CODE": 232,
     "LIKED_USER_MESSAGE": "USER HAS SUCESSFULY LIKED ANOTHER USER",
     "UNMATCH_USER_CODE": 233,
-    "UNMATCH_USER_MESSAGE": "USER HAS SUCESSFULY UNMATCH ANOTHER USER"
+    "UNMATCH_USER_MESSAGE": "USER HAS SUCESSFULY UNMATCH ANOTHER USER",
+    "NOT_ENOUGH_LIKES_CODE": 490,
+    "NOT_ENOUGH_LIKES_MESSAGE": "USER DOES NOT HAVE ENOUGH LIKES"
 }
 
 app = FastAPI()
@@ -53,6 +56,11 @@ This is your verification link: {}:8000/code_verif?token={}
 
 Please click on the link to complete the registration
 """
+@app.on_event("startup")
+@repeat_every(seconds=60*60) 
+async def startup_event():
+    persons = Person.nodes.all()
+    await utl.refresh_likes(persons)
 
 @app.post('/register_step1')
 async def register_step1(register: RegisterModel) -> JSONResponse:
@@ -94,7 +102,8 @@ async def register_step2(person: PersonModel) -> JSONResponse:
         p.age         =person.age   
         p.country     =person.country
         p.city        =person.city
-        p.sex         =person.sex     
+        p.sex         =person.sex
+        p.user_type   =person.user_type     
         z = Zodiac.nodes.get(zodiac_sign=p.zodiac_sign)
         p.save()
         z.person.connect(p)
@@ -246,12 +255,11 @@ async def get_persons_by_zodiac(token, zodiac) -> JSONResponse:
     with db.transaction:
         payload = utl.decodeJWT(token, os.environ['JWT_SECRET_FASTAPI'])
         if payload is not None:
-            if payload['person']['user_type'] == 'B': #modify to A when prod
-                return_value = []
-                persons = Person.nodes.filter(zodiac_sign=zodiac)
-                for person in persons:
-                        return_value.append(person.__properties__)
-                return JSONResponse(return_value)
+            return_value = []
+            persons = Person.nodes.filter(zodiac_sign=zodiac)
+            for person in persons:
+                    return_value.append(person.__properties__)
+            return JSONResponse(return_value)
         else:
             return JSONResponse(
                 status_code=401
@@ -262,14 +270,22 @@ async def like(likes: LikeModel, token) -> JSONResponse:
     with db.transaction:
         payload = utl.decodeJWT(token, os.environ['JWT_SECRET_FASTAPI'])
         if payload is not None:
-            utl.like_person(likes)
-            return JSONResponse(
-                status_code=STATUS_CODES['LIKED_USER_CODE'],
-                content={
-                    "message": STATUS_CODES['LIKED_USER_MESSAGE'],
-                    "token" : token
-                }
-            )
+            if utl.like_person(likes):
+                return JSONResponse(
+                    status_code=STATUS_CODES['LIKED_USER_CODE'],
+                    content={
+                        "message": STATUS_CODES['LIKED_USER_MESSAGE'],
+                        "token" : token
+                    }
+                )
+            else:
+                return JSONResponse(
+                    status_code=STATUS_CODES['NOT_ENOUGH_LIKES_CODE'],
+                    content={
+                        "message": STATUS_CODES['NOT_ENOUGH_LIKES_MESSAGE'],
+                        "token" : token
+                    }
+                )
         else:
             return JSONResponse(
                 status_code=401
