@@ -1,0 +1,64 @@
+.background-image{
+   min-height: 100vh;
+   width: 100%;
+   background: url('../../assets/img/login-background.jpg') no-repeat center center fixed;
+   background-size: cover;
+}
+
+.myform{
+   position: relative;
+   display: -ms-flexbox;
+   display: flex;
+   padding: 1rem;
+   -ms-flex-direction: column;
+   flex-direction: column;
+   width: 100%;
+   pointer-events: auto;
+   background: transparent;
+   background-clip: padding-box;
+   outline: 0;
+   max-width: 500px;
+   margin-top: 40%;
+}
+
+.logo {
+   text-transform: uppercase;
+   color: #fff;
+   font-family: cursive;
+   margin-bottom: 20px;
+}
+
+.myform input {
+   margin: auto;
+   width: 70%;
+   background: transparent;
+   color: #fff;
+}
+
+::placeholder {
+   color: #fff;
+   text-transform: uppercase;
+}
+     
+.hr-or {
+   height: 2px;
+   margin-top: 10px !important;
+   margin-bottom: 10px !important;
+   color: #fff;
+}
+
+.mybtn{
+   font-size: 20px;
+   margin-top: 20px;
+   margin-bottom: 10px;
+   background-color: #fff;
+   border-color: #fff;
+   width: 50%;
+   color: #5A5BC2;
+}
+
+.mybtn:hover {
+   background-color: #8b46db;
+   border-color: #8b46db;
+   color: #fff;
+}

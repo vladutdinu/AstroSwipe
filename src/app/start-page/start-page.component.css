@@ -13,16 +13,22 @@
   background-size: contain;
   background-attachment: scroll;
   perspective: 1000px;
+  transition: ease-in-out 1s;
 }  
 
 .img1 {
   margin-top: 35%;
   margin-left: 31%;
+  width:80%; 
+  height: 25%;
 }
 
 .img2 {
   margin-top: 9%;
   margin-left: 18%;
+  width:50%; 
+  height: 100%;
+  transition: ease-in-out 1s;
 }
 
 
@@ -57,6 +63,11 @@ button {
 	perspective: 500px;
 	transform-style: preserve-3d;
 	}
+
+  button:hover{
+    background-color: rgb(175, 0, 166);
+    color: white;
+  }
 	
 	span {
 		mix-blend-mode: none;
@@ -82,3 +93,174 @@ button {
       transform: rotateY(0deg) rotateX(5deg);
     }
   }
+
+@media screen and (max-width: 1311px) {  
+  .img2 {
+    margin-top: 12%;
+    margin-left: 23%;
+    height: 100%;
+    transition: ease-in-out 2s;
+  }
+}  
+
+@media screen and (max-width: 1201px) {  
+  .img2 {
+    margin-top: 20%;
+    margin-left: 30%;
+    height: 100%;
+    transition: ease-in-out 2s;
+  }
+} 
+
+@media screen and (max-width: 981px) {  
+  .img2 {
+    margin-top: 25%;
+    margin-left: 32%;
+    height: 100%;
+    transition: ease-in-out 1s;
+  }
+} 
+
+@media screen and (max-width: 905px) {  
+ .bg-img2{
+  min-height: 100vh;
+  width: 100%;
+  background: url('../../assets/img/background3.jpg') no-repeat center center fixed;
+  background-size: cover;
+  background-attachment: scroll;
+   perspective: 1000px;
+   transition: ease-in-out 1s;
+}   
+ 
+ .img1 {
+   margin-top: 40%;
+   margin-left: 55%;
+   width:100%; 
+   height: 30%;
+   transition: ease-in-out 1s;
+ }
+ 
+ .img2 {
+   visibility: collapse;
+   transition: ease-in-out 1s;
+ }
+
+ .main-menu{
+  margin-top: -10%;
+  margin-left: 35%;
+  animation: rotateAngle 6s linear infinite;
+  transition: ease-in-out 1s;
+}
+} 
+
+@media screen and (max-width: 835px) {  
+ .img1 {
+   margin-top: 40%;
+   margin-left: 55%;
+   width:100%; 
+   height: 30%;
+   transition: ease-in-out 1s;
+ }
+
+ .img2 {
+   visibility: collapse;
+   transition: ease-in-out 1s;
+ }
+
+ .main-menu{
+  margin-top: -10%;
+  margin-left: 32%;
+  animation: rotateAngle 6s linear infinite;
+  transition: ease-in-out 1s;
+}
+
+button {
+	display: block;
+	position: relative;
+	margin: 0.5em 0;
+	padding: .8em 2.2em;
+	cursor: pointer;
+  width: 230px;
+
+	background: #FFFFFF;
+	border: none;
+	border-radius: .4em;
+
+	text-transform: uppercase;
+	font-size: 1.4em;
+	font-family: "Work Sans", sans-serif;
+	font-weight: 400;
+	letter-spacing: 0.04em;
+
+	mix-blend-mode: color-dodge;
+	perspective: 500px;
+	transform-style: preserve-3d;
+  transition: ease-in-out 1s;
+	}
+} 
+
+@media screen and (max-width: 652px) {  
+  .img1 {
+    margin-top: 40%;
+    margin-left: 60%;
+    width:120%; 
+    height: 40%;
+    transition: ease-in-out 1s;
+  }
+ 
+  .img2 {
+    visibility: collapse;
+    transition: ease-in-out 1s;
+  }
+ 
+  .main-menu{
+   margin-top: -5%;
+   margin-left: 31%;
+   animation: rotateAngle 6s linear infinite;
+   transition: ease-in-out 1s;
+ }
+ } 
+
+ @media screen and (max-width: 552px) {  
+  .img1 {
+    margin-top: 50%;
+    margin-left: 50%;
+    width:130%; 
+    height: 40%;
+    transition: ease-in-out 1s;
+  }
+ 
+  .img2 {
+    visibility: collapse;
+    transition: ease-in-out 1s;
+  }
+ 
+  .main-menu{
+   margin-top: 3%;
+   margin-left: 25%;
+   animation: rotateAngle 6s linear infinite;
+   transition: ease-in-out 1s;
+ }
+ }
+ 
+ @media screen and (max-width: 401px) {  
+  .img1 {
+    margin-top: 90%;
+    margin-left: 45%;
+    width:130%; 
+    height: 40%;
+    transition: ease-in-out 1s;
+  }
+ 
+  .img2 {
+    visibility: collapse;
+    transition: ease-in-out 1s;
+  }
+ 
+  .main-menu{
+   margin-top: 15%;
+   margin-left: 16%;
+   animation: rotateAngle 6s linear infinite;
+   transition: ease-in-out 1s;
+ }
+ } 
