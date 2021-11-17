@@ -1,3 +1,3 @@
 *.fig
 *.pdf
-backend/*.postman_collection
+backend/isw-astroswipe.postman_collection.json
