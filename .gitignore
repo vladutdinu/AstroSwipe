@@ -1,2 +1,3 @@
 *.fig
 *.pdf
+backend/*.postman_collection

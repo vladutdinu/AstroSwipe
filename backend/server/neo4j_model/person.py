@@ -19,8 +19,10 @@ class Person(StructuredNode):
     activated       = BooleanProperty(default = False)
     like_nr         = IntegerProperty(default=10)
     USER_TYPES      = {"A":"admin", "B":"basic", "P":"premium"}
-    user_type       = StringProperty(choices=USER_TYPES, default='B')
-    
+    user_type       = StringProperty(choices=USER_TYPES)
+    pref_age1       = IntegerProperty(default=1)
+    pref_age2       = IntegerProperty(default=1)
+    super_like      = IntegerProperty()
     matched = Relationship("Person", "Matched")
     likes = RelationshipTo("Person", "Likes")
     
