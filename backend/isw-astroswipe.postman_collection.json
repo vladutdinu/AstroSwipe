@@ -1,0 +1,603 @@
+{
+	"info": {
+		"_postman_id": "9b88da64-3cc3-4f86-aa32-ca48cae7a99d",
+		"name": "isw-astroswipe",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Person",
+			"item": [
+				{
+					"name": "Get",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:8000/get_persons",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"get_persons"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"parvan.andrei@student.unitbv.ro\",\r\n    \"first_name\": \"Parvan\",\r\n    \"last_name\": \"Andrei\",\r\n    \"zodiac_sign\": \"Libra\",\r\n    \"personal_bio\": \"Programator junior\",\r\n    \"age\": 21,\r\n    \"user_type\":\"P\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/create_person?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJwZXJzb24iOnsidW5pcXVlX2lkIjoiZGI2YzYxNDUwZmM2OGI4YzVkMjliNmI0MjNjNjg4MDQ1YzliOTk5OThmZWY3MDE2NGNjOWI5NjEwZmMzMmU0YSIsImVtYWlsIjoiaW9udXQuZGludUBzdHVkZW50LnVuaXRidi5ybyIsImZpcnN0X25hbWUiOiJEaW51IiwibGFzdF9uYW1lIjoiVmxhZHV0Iiwiem9kaWFjX3NpZ24iOiJBcXVhcml1cyIsInBlcnNvbmFsX2JpbyI6Ik9vb28gZG9tbnUgS2lkIiwiYWdlIjoyMSwiYWN0aXZhdGVkIjpmYWxzZSwidXNlcl90eXBlIjoiQSIsImlkIjoxNH0sImV4cGlyZXMiOjE2MzUzMzMxNjUuODc1MDcyNX0.sR3qVm2RfezLd9FeUxH8JgylMCwOz7WI3yGeA73uXxM",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"create_person"
+							],
+							"query": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJwZXJzb24iOnsidW5pcXVlX2lkIjoiZGI2YzYxNDUwZmM2OGI4YzVkMjliNmI0MjNjNjg4MDQ1YzliOTk5OThmZWY3MDE2NGNjOWI5NjEwZmMzMmU0YSIsImVtYWlsIjoiaW9udXQuZGludUBzdHVkZW50LnVuaXRidi5ybyIsImZpcnN0X25hbWUiOiJEaW51IiwibGFzdF9uYW1lIjoiVmxhZHV0Iiwiem9kaWFjX3NpZ24iOiJBcXVhcml1cyIsInBlcnNvbmFsX2JpbyI6Ik9vb28gZG9tbnUgS2lkIiwiYWdlIjoyMSwiYWN0aXZhdGVkIjpmYWxzZSwidXNlcl90eXBlIjoiQSIsImlkIjoxNH0sImV4cGlyZXMiOjE2MzUzMzMxNjUuODc1MDcyNX0.sR3qVm2RfezLd9FeUxH8JgylMCwOz7WI3yGeA73uXxM"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetByZodiac",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/get_persons_by_zodiac?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJwZXJzb24iOnsidW5pcXVlX2lkIjoiZDM3MzE5Mzc5NmY0NTY3N2Q0NGE3NmUzOTYyNWI4MDE0MzRlMjY1M2JjMmM4OGJkNDU2MzYyZjAzZGJiYzE5ZSIsImVtYWlsIjoiZ2VvcmdlemlkYXJ1MjExMUBnbWFpbC5jb20iLCJwYXNzd29yZCI6IjMzZWNiNzg5ZDRjYTQyM2Q1MTY4ZWNiNWZhYzZiOTJlYTBjZjYxNDQ5Y2ExMzdhZTE1OWI1MmU2MzZlMzFkMzIiLCJmaXJzdF9uYW1lIjoiWmlkYXJ1IiwibGFzdF9uYW1lIjoiR2VvcmdlIiwiY291bnRyeSI6IlJvbWFuaWEiLCJjaXR5IjoiUGxvaWVzdGkiLCJzZXgiOiJNIiwicHJlZmZlcmVkX3pvZGlhY19zaWduIjoiIiwiem9kaWFjX3NpZ24iOiJTY29ycGl1cyIsInBlcnNvbmFsX2JpbyI6IlByb2Z1bmQiLCJhZ2UiOjIxLCJhY3RpdmF0ZWQiOnRydWUsInVzZXJfdHlwZSI6IkIiLCJpZCI6NH0sImV4cGlyZXMiOjE2MzU5NzUwMzYuMzMyNDA4NH0.orarmoSWtZtbIpH0YWS3UKNJRZr1rUuLh8gqTLlvKas&zodiac=Scorpius",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"get_persons_by_zodiac"
+							],
+							"query": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJwZXJzb24iOnsidW5pcXVlX2lkIjoiZDM3MzE5Mzc5NmY0NTY3N2Q0NGE3NmUzOTYyNWI4MDE0MzRlMjY1M2JjMmM4OGJkNDU2MzYyZjAzZGJiYzE5ZSIsImVtYWlsIjoiZ2VvcmdlemlkYXJ1MjExMUBnbWFpbC5jb20iLCJwYXNzd29yZCI6IjMzZWNiNzg5ZDRjYTQyM2Q1MTY4ZWNiNWZhYzZiOTJlYTBjZjYxNDQ5Y2ExMzdhZTE1OWI1MmU2MzZlMzFkMzIiLCJmaXJzdF9uYW1lIjoiWmlkYXJ1IiwibGFzdF9uYW1lIjoiR2VvcmdlIiwiY291bnRyeSI6IlJvbWFuaWEiLCJjaXR5IjoiUGxvaWVzdGkiLCJzZXgiOiJNIiwicHJlZmZlcmVkX3pvZGlhY19zaWduIjoiIiwiem9kaWFjX3NpZ24iOiJTY29ycGl1cyIsInBlcnNvbmFsX2JpbyI6IlByb2Z1bmQiLCJhZ2UiOjIxLCJhY3RpdmF0ZWQiOnRydWUsInVzZXJfdHlwZSI6IkIiLCJpZCI6NH0sImV4cGlyZXMiOjE2MzU5NzUwMzYuMzMyNDA4NH0.orarmoSWtZtbIpH0YWS3UKNJRZr1rUuLh8gqTLlvKas"
+								},
+								{
+									"key": "zodiac",
+									"value": "Scorpius"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetBySex",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:8000/get_persons_by_sex?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJwZXJzb24iOnsidW5pcXVlX2lkIjoiNzllZGFmMDA1YTY1N2U3ZTdhOWFiY2QwZjEyM2Y2ZmM5MmQwNzk0YzE1NjVlN2E4ODllY2FhODljZGVlZmJmMSIsImVtYWlsIjoiZGludWlvbnV0dmxhZHV0OTlAZ21haWwuY29tIiwicGFzc3dvcmQiOiI1Yzc3ZDdmZDhmNTFlZDBjMmE5MTNlNDYzMjZmZjZkMmVhMmU5NWM4ZWNmMTY2N2M3MmViNzJjY2MzZmMyYjQ2IiwiZmlyc3RfbmFtZSI6IlZsYWR1dCIsImxhc3RfbmFtZSI6IkRpbnUiLCJjb3VudHJ5IjoiUm9tYW5pYSIsImNpdHkiOiJQbG9pZXN0aSIsInNleCI6Ik0iLCJwcmVmZmVyZWRfem9kaWFjX3NpZ24iOiIiLCJ6b2RpYWNfc2lnbiI6IkFxdWFyaXVzIiwicGVyc29uYWxfYmlvIjoiRG9yZXNjIG8gZmVtZWllIG1lc3Rlclx1MDEwMyIsImFnZSI6MjEsImFjdGl2YXRlZCI6dHJ1ZSwibGlrZV9uciI6MTAsInVzZXJfdHlwZSI6IlAiLCJpZCI6MTF9LCJleHBpcmVzIjoxNjM3MTgwNjkzLjE3ODQzM30.6ZJ_apuledcDEG5ujp0q9LbiJEMQXOEqsucSprOgVMg&sex=M",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"get_persons_by_sex"
+							],
+							"query": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJwZXJzb24iOnsidW5pcXVlX2lkIjoiNzllZGFmMDA1YTY1N2U3ZTdhOWFiY2QwZjEyM2Y2ZmM5MmQwNzk0YzE1NjVlN2E4ODllY2FhODljZGVlZmJmMSIsImVtYWlsIjoiZGludWlvbnV0dmxhZHV0OTlAZ21haWwuY29tIiwicGFzc3dvcmQiOiI1Yzc3ZDdmZDhmNTFlZDBjMmE5MTNlNDYzMjZmZjZkMmVhMmU5NWM4ZWNmMTY2N2M3MmViNzJjY2MzZmMyYjQ2IiwiZmlyc3RfbmFtZSI6IlZsYWR1dCIsImxhc3RfbmFtZSI6IkRpbnUiLCJjb3VudHJ5IjoiUm9tYW5pYSIsImNpdHkiOiJQbG9pZXN0aSIsInNleCI6Ik0iLCJwcmVmZmVyZWRfem9kaWFjX3NpZ24iOiIiLCJ6b2RpYWNfc2lnbiI6IkFxdWFyaXVzIiwicGVyc29uYWxfYmlvIjoiRG9yZXNjIG8gZmVtZWllIG1lc3Rlclx1MDEwMyIsImFnZSI6MjEsImFjdGl2YXRlZCI6dHJ1ZSwibGlrZV9uciI6MTAsInVzZXJfdHlwZSI6IlAiLCJpZCI6MTF9LCJleHBpcmVzIjoxNjM3MTgwNjkzLjE3ODQzM30.6ZJ_apuledcDEG5ujp0q9LbiJEMQXOEqsucSprOgVMg"
+								},
+								{
+									"key": "sex",
+									"value": "M"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetByAge",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:8000/get_persons_by_age?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJwZXJzb24iOnsidW5pcXVlX2lkIjoiNzllZGFmMDA1YTY1N2U3ZTdhOWFiY2QwZjEyM2Y2ZmM5MmQwNzk0YzE1NjVlN2E4ODllY2FhODljZGVlZmJmMSIsImVtYWlsIjoiZGludWlvbnV0dmxhZHV0OTlAZ21haWwuY29tIiwicGFzc3dvcmQiOiI1Yzc3ZDdmZDhmNTFlZDBjMmE5MTNlNDYzMjZmZjZkMmVhMmU5NWM4ZWNmMTY2N2M3MmViNzJjY2MzZmMyYjQ2IiwiZmlyc3RfbmFtZSI6IlZsYWR1dCIsImxhc3RfbmFtZSI6IkRpbnUiLCJjb3VudHJ5IjoiUm9tYW5pYSIsImNpdHkiOiJQbG9pZXN0aSIsInNleCI6Ik0iLCJwcmVmZmVyZWRfem9kaWFjX3NpZ24iOiIiLCJ6b2RpYWNfc2lnbiI6IkFxdWFyaXVzIiwicGVyc29uYWxfYmlvIjoiRG9yZXNjIG8gZmVtZWllIG1lc3Rlclx1MDEwMyIsImFnZSI6MjEsImFjdGl2YXRlZCI6dHJ1ZSwibGlrZV9uciI6MTAsInVzZXJfdHlwZSI6IlAiLCJpZCI6MTF9LCJleHBpcmVzIjoxNjM3MTgwNjkzLjE3ODQzM30.6ZJ_apuledcDEG5ujp0q9LbiJEMQXOEqsucSprOgVMg",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"get_persons_by_age"
+							],
+							"query": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJwZXJzb24iOnsidW5pcXVlX2lkIjoiNzllZGFmMDA1YTY1N2U3ZTdhOWFiY2QwZjEyM2Y2ZmM5MmQwNzk0YzE1NjVlN2E4ODllY2FhODljZGVlZmJmMSIsImVtYWlsIjoiZGludWlvbnV0dmxhZHV0OTlAZ21haWwuY29tIiwicGFzc3dvcmQiOiI1Yzc3ZDdmZDhmNTFlZDBjMmE5MTNlNDYzMjZmZjZkMmVhMmU5NWM4ZWNmMTY2N2M3MmViNzJjY2MzZmMyYjQ2IiwiZmlyc3RfbmFtZSI6IlZsYWR1dCIsImxhc3RfbmFtZSI6IkRpbnUiLCJjb3VudHJ5IjoiUm9tYW5pYSIsImNpdHkiOiJQbG9pZXN0aSIsInNleCI6Ik0iLCJwcmVmZmVyZWRfem9kaWFjX3NpZ24iOiIiLCJ6b2RpYWNfc2lnbiI6IkFxdWFyaXVzIiwicGVyc29uYWxfYmlvIjoiRG9yZXNjIG8gZmVtZWllIG1lc3Rlclx1MDEwMyIsImFnZSI6MjEsImFjdGl2YXRlZCI6dHJ1ZSwibGlrZV9uciI6MTAsInVzZXJfdHlwZSI6IlAiLCJpZCI6MTF9LCJleHBpcmVzIjoxNjM3MTgwNjkzLjE3ODQzM30.6ZJ_apuledcDEG5ujp0q9LbiJEMQXOEqsucSprOgVMg"
+								},
+								{
+									"key": "age1",
+									"value": "1",
+									"disabled": true
+								},
+								{
+									"key": "age2",
+									"value": "23",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UpdateBio",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:8000/update_bio?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJwZXJzb24iOnsidW5pcXVlX2lkIjoiNzllZGFmMDA1YTY1N2U3ZTdhOWFiY2QwZjEyM2Y2ZmM5MmQwNzk0YzE1NjVlN2E4ODllY2FhODljZGVlZmJmMSIsImVtYWlsIjoiZGludWlvbnV0dmxhZHV0OTlAZ21haWwuY29tIiwicGFzc3dvcmQiOiI1Yzc3ZDdmZDhmNTFlZDBjMmE5MTNlNDYzMjZmZjZkMmVhMmU5NWM4ZWNmMTY2N2M3MmViNzJjY2MzZmMyYjQ2IiwiZmlyc3RfbmFtZSI6IlZsYWR1dCIsImxhc3RfbmFtZSI6IkRpbnUiLCJjb3VudHJ5IjoiUm9tYW5pYSIsImNpdHkiOiJQbG9pZXN0aSIsInNleCI6Ik0iLCJwcmVmZmVyZWRfem9kaWFjX3NpZ24iOiIiLCJ6b2RpYWNfc2lnbiI6IkFxdWFyaXVzIiwicGVyc29uYWxfYmlvIjoiRG9yZXNjIG8gZmVtZWllIG1lc3RlcsSDIiwiYWdlIjoyMSwiYWN0aXZhdGVkIjp0cnVlLCJsaWtlX25yIjoxMCwidXNlcl90eXBlIjoiUCIsInByZWZfYWdlMSI6MiwicHJlZl9hZ2UyIjoyMiwiaWQiOjEyfSwiZXhwaXJlcyI6MTYzNzE4MTc4Mi40OTA4MTV9.h2CGMlz13yHiN_mM3WXdczA48Xl_aRypCOP7kCtKNIs",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"update_bio"
+							],
+							"query": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJwZXJzb24iOnsidW5pcXVlX2lkIjoiNzllZGFmMDA1YTY1N2U3ZTdhOWFiY2QwZjEyM2Y2ZmM5MmQwNzk0YzE1NjVlN2E4ODllY2FhODljZGVlZmJmMSIsImVtYWlsIjoiZGludWlvbnV0dmxhZHV0OTlAZ21haWwuY29tIiwicGFzc3dvcmQiOiI1Yzc3ZDdmZDhmNTFlZDBjMmE5MTNlNDYzMjZmZjZkMmVhMmU5NWM4ZWNmMTY2N2M3MmViNzJjY2MzZmMyYjQ2IiwiZmlyc3RfbmFtZSI6IlZsYWR1dCIsImxhc3RfbmFtZSI6IkRpbnUiLCJjb3VudHJ5IjoiUm9tYW5pYSIsImNpdHkiOiJQbG9pZXN0aSIsInNleCI6Ik0iLCJwcmVmZmVyZWRfem9kaWFjX3NpZ24iOiIiLCJ6b2RpYWNfc2lnbiI6IkFxdWFyaXVzIiwicGVyc29uYWxfYmlvIjoiRG9yZXNjIG8gZmVtZWllIG1lc3RlcsSDIiwiYWdlIjoyMSwiYWN0aXZhdGVkIjp0cnVlLCJsaWtlX25yIjoxMCwidXNlcl90eXBlIjoiUCIsInByZWZfYWdlMSI6MiwicHJlZl9hZ2UyIjoyMiwiaWQiOjEyfSwiZXhwaXJlcyI6MTYzNzE4MTc4Mi40OTA4MTV9.h2CGMlz13yHiN_mM3WXdczA48Xl_aRypCOP7kCtKNIs"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Become Premium",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:8000/become_premium?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJwZXJzb24iOnsidW5pcXVlX2lkIjoiMjcyOWFiYTM3YTUyNGQ2OTQyYzEyOGUzYTgxNmYxNDBjYTA2YTdjNDE4YTZkYzZkYWZhNWQxZjJjZmM3MGJkYSIsImVtYWlsIjoiYXN0cm9zd2lwZTIwMjFAZ21haWwuY29tIiwicGFzc3dvcmQiOiI1Yzc3ZDdmZDhmNTFlZDBjMmE5MTNlNDYzMjZmZjZkMmVhMmU5NWM4ZWNmMTY2N2M3MmViNzJjY2MzZmMyYjQ2IiwiZmlyc3RfbmFtZSI6IlZsYWR1dCIsImxhc3RfbmFtZSI6IkRpbnUiLCJjb3VudHJ5IjoiUm9tYW5pYSIsImNpdHkiOiJQbG9pZXN0aSIsInNleCI6IkYiLCJwcmVmZmVyZWRfem9kaWFjX3NpZ24iOiIiLCJ6b2RpYWNfc2lnbiI6IkFxdWFyaXVzIiwicGVyc29uYWxfYmlvIjoiRG9yZXNjIHVuIGJhcmJhdCBtZXN0ZXIiLCJhZ2UiOjIxLCJhY3RpdmF0ZWQiOnRydWUsImxpa2VfbnIiOjEwLCJ1c2VyX3R5cGUiOiJCIiwicHJlZl9hZ2UxIjoxLCJwcmVmX2FnZTIiOjEsInN1cGVyX2xpa2UiOjAsImlkIjoxMH0sImV4cGlyZXMiOjE2MzcxODQzMzAuMzk1ODc0fQ.v30s3c2-QcjHxGjULbYwxVfLx8EZLrTYpVeYm89lDCU",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"become_premium"
+							],
+							"query": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJwZXJzb24iOnsidW5pcXVlX2lkIjoiMjcyOWFiYTM3YTUyNGQ2OTQyYzEyOGUzYTgxNmYxNDBjYTA2YTdjNDE4YTZkYzZkYWZhNWQxZjJjZmM3MGJkYSIsImVtYWlsIjoiYXN0cm9zd2lwZTIwMjFAZ21haWwuY29tIiwicGFzc3dvcmQiOiI1Yzc3ZDdmZDhmNTFlZDBjMmE5MTNlNDYzMjZmZjZkMmVhMmU5NWM4ZWNmMTY2N2M3MmViNzJjY2MzZmMyYjQ2IiwiZmlyc3RfbmFtZSI6IlZsYWR1dCIsImxhc3RfbmFtZSI6IkRpbnUiLCJjb3VudHJ5IjoiUm9tYW5pYSIsImNpdHkiOiJQbG9pZXN0aSIsInNleCI6IkYiLCJwcmVmZmVyZWRfem9kaWFjX3NpZ24iOiIiLCJ6b2RpYWNfc2lnbiI6IkFxdWFyaXVzIiwicGVyc29uYWxfYmlvIjoiRG9yZXNjIHVuIGJhcmJhdCBtZXN0ZXIiLCJhZ2UiOjIxLCJhY3RpdmF0ZWQiOnRydWUsImxpa2VfbnIiOjEwLCJ1c2VyX3R5cGUiOiJCIiwicHJlZl9hZ2UxIjoxLCJwcmVmX2FnZTIiOjEsInN1cGVyX2xpa2UiOjAsImlkIjoxMH0sImV4cGlyZXMiOjE2MzcxODQzMzAuMzk1ODc0fQ.v30s3c2-QcjHxGjULbYwxVfLx8EZLrTYpVeYm89lDCU"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Zodiac",
+			"item": [
+				{
+					"name": "Create",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"zodiac_sign\":\"Pisces\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/create_zodiac",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"create_zodiac"
+							],
+							"query": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJwZXJzb24iOnsidW5pcXVlX2lkIjoiZGI2YzYxNDUwZmM2OGI4YzVkMjliNmI0MjNjNjg4MDQ1YzliOTk5OThmZWY3MDE2NGNjOWI5NjEwZmMzMmU0YSIsImVtYWlsIjoiaW9udXQuZGludUBzdHVkZW50LnVuaXRidi5ybyIsImZpcnN0X25hbWUiOiJEaW51IiwibGFzdF9uYW1lIjoiVmxhZHV0Iiwiem9kaWFjX3NpZ24iOiJBcXVhcml1cyIsInBlcnNvbmFsX2JpbyI6Ik9vb28gZG9tbnUgS2lkIiwiYWdlIjoyMSwiYWN0aXZhdGVkIjpmYWxzZSwidXNlcl90eXBlIjoiQSIsImlkIjoxNH0sImV4cGlyZXMiOjE2MzUzMzMyOTMuOTU5MTY5Nn0.8D5JaxvynYY3LJQkDWpoGp5xaL3t6pLEBlQF457x4bI",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:8000/get_zodiac?sign=taurus",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"get_zodiac"
+							],
+							"query": [
+								{
+									"key": "sign",
+									"value": "taurus"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Login",
+			"item": [
+				{
+					"name": "GetToken",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\":\"astroswipe2021@gmail.com\",\r\n    \"password\":\"kid\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/login",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"login"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Email",
+			"item": [
+				{
+					"name": "Rstep1",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"astroswipe2021@gmail.com\",\r\n    \"password\": \"kid\",\r\n    \"conf_password\": \"kid\"\r\n\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8000/register_step1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"register_step1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Rstep2",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"astroswipe2021@gmail.com\",\r\n    \"password\": \"kid\",\r\n    \"first_name\": \"Vladut\",\r\n    \"last_name\": \"Dinu\",\r\n    \"country\": \"Romania\",\r\n    \"city\": \"Ploiesti\",\r\n    \"sex\": \"F\",\r\n    \"zodiac_sign\": \"Aquarius\",\r\n    \"personal_bio\": \"Doresc un barbat mester\",\r\n    \"age\": 21,\r\n    \"user_type\": \"B\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8000/register_step2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"register_step2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "verif",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:8000/code_verif?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJwZXJzb24iOnsidW5pcXVlX2lkIjoiMjcyOWFiYTM3YTUyNGQ2OTQyYzEyOGUzYTgxNmYxNDBjYTA2YTdjNDE4YTZkYzZkYWZhNWQxZjJjZmM3MGJkYSIsImVtYWlsIjoiYXN0cm9zd2lwZTIwMjFAZ21haWwuY29tIiwicGFzc3dvcmQiOiI1Yzc3ZDdmZDhmNTFlZDBjMmE5MTNlNDYzMjZmZjZkMmVhMmU5NWM4ZWNmMTY2N2M3MmViNzJjY2MzZmMyYjQ2IiwiZmlyc3RfbmFtZSI6IlZsYWR1dCIsImxhc3RfbmFtZSI6IkRpbnUiLCJjb3VudHJ5IjoiUm9tYW5pYSIsImNpdHkiOiJQbG9pZXN0aSIsInNleCI6IkYiLCJwcmVmZmVyZWRfem9kaWFjX3NpZ24iOiIiLCJ6b2RpYWNfc2lnbiI6IkFxdWFyaXVzIiwicGVyc29uYWxfYmlvIjoiRG9yZXNjIHVuIGJhcmJhdCBtZXN0ZXJcdTAxMDMiLCJhZ2UiOjIxLCJhY3RpdmF0ZWQiOmZhbHNlLCJsaWtlX25yIjoxMCwidXNlcl90eXBlIjoiQiIsInByZWZfYWdlMSI6MSwicHJlZl9hZ2UyIjoxLCJpZCI6MTN9LCJleHBpcmVzIjoxNjM3MTgxNjk2LjI0MjQwNTJ9.81WdXX-arjSh1DVE9FWhZW0zpEdZuPJm8daDUHQzAyk\n",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"code_verif"
+							],
+							"query": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJwZXJzb24iOnsidW5pcXVlX2lkIjoiMjcyOWFiYTM3YTUyNGQ2OTQyYzEyOGUzYTgxNmYxNDBjYTA2YTdjNDE4YTZkYzZkYWZhNWQxZjJjZmM3MGJkYSIsImVtYWlsIjoiYXN0cm9zd2lwZTIwMjFAZ21haWwuY29tIiwicGFzc3dvcmQiOiI1Yzc3ZDdmZDhmNTFlZDBjMmE5MTNlNDYzMjZmZjZkMmVhMmU5NWM4ZWNmMTY2N2M3MmViNzJjY2MzZmMyYjQ2IiwiZmlyc3RfbmFtZSI6IlZsYWR1dCIsImxhc3RfbmFtZSI6IkRpbnUiLCJjb3VudHJ5IjoiUm9tYW5pYSIsImNpdHkiOiJQbG9pZXN0aSIsInNleCI6IkYiLCJwcmVmZmVyZWRfem9kaWFjX3NpZ24iOiIiLCJ6b2RpYWNfc2lnbiI6IkFxdWFyaXVzIiwicGVyc29uYWxfYmlvIjoiRG9yZXNjIHVuIGJhcmJhdCBtZXN0ZXJcdTAxMDMiLCJhZ2UiOjIxLCJhY3RpdmF0ZWQiOmZhbHNlLCJsaWtlX25yIjoxMCwidXNlcl90eXBlIjoiQiIsInByZWZfYWdlMSI6MSwicHJlZl9hZ2UyIjoxLCJpZCI6MTN9LCJleHBpcmVzIjoxNjM3MTgxNjk2LjI0MjQwNTJ9.81WdXX-arjSh1DVE9FWhZW0zpEdZuPJm8daDUHQzAyk\n"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Like",
+			"item": [
+				{
+					"name": "Like",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email1\":\"dinuionutvladut99@gmail.com\",\r\n    \"email2\":\"nichitagherea12@gmail.com\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/like?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJwZXJzb24iOnsidW5pcXVlX2lkIjoiNzllZGFmMDA1YTY1N2U3ZTdhOWFiY2QwZjEyM2Y2ZmM5MmQwNzk0YzE1NjVlN2E4ODllY2FhODljZGVlZmJmMSIsImVtYWlsIjoiZGludWlvbnV0dmxhZHV0OTlAZ21haWwuY29tIiwicGFzc3dvcmQiOiI1Yzc3ZDdmZDhmNTFlZDBjMmE5MTNlNDYzMjZmZjZkMmVhMmU5NWM4ZWNmMTY2N2M3MmViNzJjY2MzZmMyYjQ2IiwiZmlyc3RfbmFtZSI6IlZsYWR1dCIsImxhc3RfbmFtZSI6IkRpbnUiLCJjb3VudHJ5IjoiUm9tYW5pYSIsImNpdHkiOiJQbG9pZXN0aSIsInNleCI6Ik0iLCJwcmVmZmVyZWRfem9kaWFjX3NpZ24iOiIiLCJ6b2RpYWNfc2lnbiI6IkFxdWFyaXVzIiwicGVyc29uYWxfYmlvIjoiRG9yZXNjIG8gZmVtZWllIG1lc3Rlclx1MDEwMyIsImFnZSI6MjEsImFjdGl2YXRlZCI6dHJ1ZSwibGlrZV9uciI6MTAsInVzZXJfdHlwZSI6IlAiLCJpZCI6MTF9LCJleHBpcmVzIjoxNjM2NTc5OTUwLjg3MTM5Nzd9.YJkqDopSR3DUEWQL6udZMN_PhoMkNFq1G6EbTjghZu4",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"like"
+							],
+							"query": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJwZXJzb24iOnsidW5pcXVlX2lkIjoiNzllZGFmMDA1YTY1N2U3ZTdhOWFiY2QwZjEyM2Y2ZmM5MmQwNzk0YzE1NjVlN2E4ODllY2FhODljZGVlZmJmMSIsImVtYWlsIjoiZGludWlvbnV0dmxhZHV0OTlAZ21haWwuY29tIiwicGFzc3dvcmQiOiI1Yzc3ZDdmZDhmNTFlZDBjMmE5MTNlNDYzMjZmZjZkMmVhMmU5NWM4ZWNmMTY2N2M3MmViNzJjY2MzZmMyYjQ2IiwiZmlyc3RfbmFtZSI6IlZsYWR1dCIsImxhc3RfbmFtZSI6IkRpbnUiLCJjb3VudHJ5IjoiUm9tYW5pYSIsImNpdHkiOiJQbG9pZXN0aSIsInNleCI6Ik0iLCJwcmVmZmVyZWRfem9kaWFjX3NpZ24iOiIiLCJ6b2RpYWNfc2lnbiI6IkFxdWFyaXVzIiwicGVyc29uYWxfYmlvIjoiRG9yZXNjIG8gZmVtZWllIG1lc3Rlclx1MDEwMyIsImFnZSI6MjEsImFjdGl2YXRlZCI6dHJ1ZSwibGlrZV9uciI6MTAsInVzZXJfdHlwZSI6IlAiLCJpZCI6MTF9LCJleHBpcmVzIjoxNjM2NTc5OTUwLjg3MTM5Nzd9.YJkqDopSR3DUEWQL6udZMN_PhoMkNFq1G6EbTjghZu4"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "SuperLike",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email1\":\"astroswipe2021@gmail.com\",\r\n    \"email2\":\"dinuionutvladut99@gmail.com\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/superlike?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJwZXJzb24iOnsidW5pcXVlX2lkIjoiMjcyOWFiYTM3YTUyNGQ2OTQyYzEyOGUzYTgxNmYxNDBjYTA2YTdjNDE4YTZkYzZkYWZhNWQxZjJjZmM3MGJkYSIsImVtYWlsIjoiYXN0cm9zd2lwZTIwMjFAZ21haWwuY29tIiwicGFzc3dvcmQiOiI1Yzc3ZDdmZDhmNTFlZDBjMmE5MTNlNDYzMjZmZjZkMmVhMmU5NWM4ZWNmMTY2N2M3MmViNzJjY2MzZmMyYjQ2IiwiZmlyc3RfbmFtZSI6IlZsYWR1dCIsImxhc3RfbmFtZSI6IkRpbnUiLCJjb3VudHJ5IjoiUm9tYW5pYSIsImNpdHkiOiJQbG9pZXN0aSIsInNleCI6IkYiLCJwcmVmZmVyZWRfem9kaWFjX3NpZ24iOiIiLCJ6b2RpYWNfc2lnbiI6IkFxdWFyaXVzIiwicGVyc29uYWxfYmlvIjoiRG9yZXNjIHVuIGJhcmJhdCBtZXN0ZXIiLCJhZ2UiOjIxLCJhY3RpdmF0ZWQiOnRydWUsImxpa2VfbnIiOjEwLCJ1c2VyX3R5cGUiOiJCIiwicHJlZl9hZ2UxIjoxLCJwcmVmX2FnZTIiOjEsInN1cGVyX2xpa2UiOjIsImlkIjoxMH0sImV4cGlyZXMiOjE2MzcxODM4NDAuNjUxNzg2OH0.be8f4sA6U7I21nc6wrAtAt--rl-ovytFVNI6WWL1_lg",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"superlike"
+							],
+							"query": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJwZXJzb24iOnsidW5pcXVlX2lkIjoiMjcyOWFiYTM3YTUyNGQ2OTQyYzEyOGUzYTgxNmYxNDBjYTA2YTdjNDE4YTZkYzZkYWZhNWQxZjJjZmM3MGJkYSIsImVtYWlsIjoiYXN0cm9zd2lwZTIwMjFAZ21haWwuY29tIiwicGFzc3dvcmQiOiI1Yzc3ZDdmZDhmNTFlZDBjMmE5MTNlNDYzMjZmZjZkMmVhMmU5NWM4ZWNmMTY2N2M3MmViNzJjY2MzZmMyYjQ2IiwiZmlyc3RfbmFtZSI6IlZsYWR1dCIsImxhc3RfbmFtZSI6IkRpbnUiLCJjb3VudHJ5IjoiUm9tYW5pYSIsImNpdHkiOiJQbG9pZXN0aSIsInNleCI6IkYiLCJwcmVmZmVyZWRfem9kaWFjX3NpZ24iOiIiLCJ6b2RpYWNfc2lnbiI6IkFxdWFyaXVzIiwicGVyc29uYWxfYmlvIjoiRG9yZXNjIHVuIGJhcmJhdCBtZXN0ZXIiLCJhZ2UiOjIxLCJhY3RpdmF0ZWQiOnRydWUsImxpa2VfbnIiOjEwLCJ1c2VyX3R5cGUiOiJCIiwicHJlZl9hZ2UxIjoxLCJwcmVmX2FnZTIiOjEsInN1cGVyX2xpa2UiOjIsImlkIjoxMH0sImV4cGlyZXMiOjE2MzcxODM4NDAuNjUxNzg2OH0.be8f4sA6U7I21nc6wrAtAt--rl-ovytFVNI6WWL1_lg"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Unmatch",
+			"item": [
+				{
+					"name": "Unmatch",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email1\":\"astroswipe2021@gmail.com\",\r\n    \"email2\":\"dinuionutvladut99@gmail.com\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/unmatch?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJwZXJzb24iOnsidW5pcXVlX2lkIjoiMjcyOWFiYTM3YTUyNGQ2OTQyYzEyOGUzYTgxNmYxNDBjYTA2YTdjNDE4YTZkYzZkYWZhNWQxZjJjZmM3MGJkYSIsImVtYWlsIjoiYXN0cm9zd2lwZTIwMjFAZ21haWwuY29tIiwicGFzc3dvcmQiOiI1Yzc3ZDdmZDhmNTFlZDBjMmE5MTNlNDYzMjZmZjZkMmVhMmU5NWM4ZWNmMTY2N2M3MmViNzJjY2MzZmMyYjQ2IiwiZmlyc3RfbmFtZSI6IlZsYWR1dCIsImxhc3RfbmFtZSI6IkRpbnUiLCJjb3VudHJ5IjoiUm9tYW5pYSIsImNpdHkiOiJQbG9pZXN0aSIsInNleCI6IkYiLCJwcmVmZmVyZWRfem9kaWFjX3NpZ24iOiIiLCJ6b2RpYWNfc2lnbiI6IkFxdWFyaXVzIiwicGVyc29uYWxfYmlvIjoiRG9yZXNjIHVuIGJhcmJhdCBtZXN0ZXJcdTAxMDMiLCJhZ2UiOjIxLCJhY3RpdmF0ZWQiOnRydWUsImxpa2VfbnIiOjEwLCJ1c2VyX3R5cGUiOiJCIiwicHJlZl9hZ2UxIjoxLCJwcmVmX2FnZTIiOjEsInN1cGVyX2xpa2UiOjIsImlkIjoxOX0sImV4cGlyZXMiOjE2MzcxODI5MjcuNzkwMzE2M30.a6QrRgo3WeJ_J59uyt7cygXYwpqwVhP1djh1b3_FZmQ",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"unmatch"
+							],
+							"query": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJwZXJzb24iOnsidW5pcXVlX2lkIjoiMjcyOWFiYTM3YTUyNGQ2OTQyYzEyOGUzYTgxNmYxNDBjYTA2YTdjNDE4YTZkYzZkYWZhNWQxZjJjZmM3MGJkYSIsImVtYWlsIjoiYXN0cm9zd2lwZTIwMjFAZ21haWwuY29tIiwicGFzc3dvcmQiOiI1Yzc3ZDdmZDhmNTFlZDBjMmE5MTNlNDYzMjZmZjZkMmVhMmU5NWM4ZWNmMTY2N2M3MmViNzJjY2MzZmMyYjQ2IiwiZmlyc3RfbmFtZSI6IlZsYWR1dCIsImxhc3RfbmFtZSI6IkRpbnUiLCJjb3VudHJ5IjoiUm9tYW5pYSIsImNpdHkiOiJQbG9pZXN0aSIsInNleCI6IkYiLCJwcmVmZmVyZWRfem9kaWFjX3NpZ24iOiIiLCJ6b2RpYWNfc2lnbiI6IkFxdWFyaXVzIiwicGVyc29uYWxfYmlvIjoiRG9yZXNjIHVuIGJhcmJhdCBtZXN0ZXJcdTAxMDMiLCJhZ2UiOjIxLCJhY3RpdmF0ZWQiOnRydWUsImxpa2VfbnIiOjEwLCJ1c2VyX3R5cGUiOiJCIiwicHJlZl9hZ2UxIjoxLCJwcmVmX2FnZTIiOjEsInN1cGVyX2xpa2UiOjIsImlkIjoxOX0sImV4cGlyZXMiOjE2MzcxODI5MjcuNzkwMzE2M30.a6QrRgo3WeJ_J59uyt7cygXYwpqwVhP1djh1b3_FZmQ"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Match",
+			"item": [
+				{
+					"name": "GetMatches",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/get_matches?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJwZXJzb24iOnsidW5pcXVlX2lkIjoiNzllZGFmMDA1YTY1N2U3ZTdhOWFiY2QwZjEyM2Y2ZmM5MmQwNzk0YzE1NjVlN2E4ODllY2FhODljZGVlZmJmMSIsImVtYWlsIjoiZGludWlvbnV0dmxhZHV0OTlAZ21haWwuY29tIiwicGFzc3dvcmQiOiI1Yzc3ZDdmZDhmNTFlZDBjMmE5MTNlNDYzMjZmZjZkMmVhMmU5NWM4ZWNmMTY2N2M3MmViNzJjY2MzZmMyYjQ2IiwiZmlyc3RfbmFtZSI6IkRpbnUiLCJsYXN0X25hbWUiOiJWbGFkdXQiLCJjb3VudHJ5IjoiUm9tYW5pYSIsImNpdHkiOiJQbG9pZXN0aSIsInNleCI6Ik0iLCJwcmVmZmVyZWRfem9kaWFjX3NpZ24iOiIiLCJ6b2RpYWNfc2lnbiI6IkFxdWFyaXVzIiwicGVyc29uYWxfYmlvIjoiT28gZG9tbnUga2lkIiwiYWdlIjoyMSwiYWN0aXZhdGVkIjp0cnVlLCJ1c2VyX3R5cGUiOiJCIiwiaWQiOjE4fSwiZXhwaXJlcyI6MTYzNTYzNTU4Ni45MjM0OTk2fQ.blQS8XI_QfBjk3Q1OBTzT3OJRlQaeP0FpX32LgxNyJw",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"get_matches"
+							],
+							"query": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJwZXJzb24iOnsidW5pcXVlX2lkIjoiNzllZGFmMDA1YTY1N2U3ZTdhOWFiY2QwZjEyM2Y2ZmM5MmQwNzk0YzE1NjVlN2E4ODllY2FhODljZGVlZmJmMSIsImVtYWlsIjoiZGludWlvbnV0dmxhZHV0OTlAZ21haWwuY29tIiwicGFzc3dvcmQiOiI1Yzc3ZDdmZDhmNTFlZDBjMmE5MTNlNDYzMjZmZjZkMmVhMmU5NWM4ZWNmMTY2N2M3MmViNzJjY2MzZmMyYjQ2IiwiZmlyc3RfbmFtZSI6IkRpbnUiLCJsYXN0X25hbWUiOiJWbGFkdXQiLCJjb3VudHJ5IjoiUm9tYW5pYSIsImNpdHkiOiJQbG9pZXN0aSIsInNleCI6Ik0iLCJwcmVmZmVyZWRfem9kaWFjX3NpZ24iOiIiLCJ6b2RpYWNfc2lnbiI6IkFxdWFyaXVzIiwicGVyc29uYWxfYmlvIjoiT28gZG9tbnUga2lkIiwiYWdlIjoyMSwiYWN0aXZhdGVkIjp0cnVlLCJ1c2VyX3R5cGUiOiJCIiwiaWQiOjE4fSwiZXhwaXJlcyI6MTYzNTYzNTU4Ni45MjM0OTk2fQ.blQS8XI_QfBjk3Q1OBTzT3OJRlQaeP0FpX32LgxNyJw"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

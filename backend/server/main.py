@@ -9,6 +9,7 @@ import hashlib
 import json
 import requests
 from fastapi_mail import FastMail, MessageSchema, ConnectionConfig
+from neomodel import Q
 from fastapi_utils.tasks import repeat_every
 from starlette.responses import JSONResponse
 from server.neo4j_model.person import Person
@@ -95,15 +96,16 @@ async def register_step2(person: PersonModel) -> JSONResponse:
     with db.transaction:
         uuid = str(hashlib.sha256(person.email.encode('utf-8')).hexdigest())
         p = Person.nodes.get(unique_id=uuid)
-        p.first_name =person.first_name 
-        p.last_name  =person.last_name  
-        p.zodiac_sign=person.zodiac_sign
+        p.first_name  =person.first_name 
+        p.last_name   =person.last_name  
+        p.zodiac_sign =person.zodiac_sign
         p.personal_bio=person.personal_bio
         p.age         =person.age   
         p.country     =person.country
         p.city        =person.city
         p.sex         =person.sex
-        p.user_type   =person.user_type     
+        p.user_type   =person.user_type
+        p.super_like  =2   
         z = Zodiac.nodes.get(zodiac_sign=p.zodiac_sign)
         p.save()
         z.person.connect(p)
@@ -265,6 +267,65 @@ async def get_persons_by_zodiac(token, zodiac) -> JSONResponse:
                 status_code=401
             )
 
+@app.get("/get_persons_by_sex")
+async def get_persons_by_sex(token, sex) -> JSONResponse:
+    with db.transaction:
+        payload = utl.decodeJWT(token, os.environ['JWT_SECRET_FASTAPI'])
+        if payload is not None:
+            return_value = []
+            persons = Person.nodes.filter(sex=sex)
+            for person in persons:
+                    return_value.append(person.__properties__)
+            return JSONResponse(return_value)
+        else:
+            return JSONResponse(
+                status_code=401
+            )
+
+@app.get("/get_persons_by_age")
+async def get_persons_by_age(token) -> JSONResponse:
+    with db.transaction:
+        payload = utl.decodeJWT(token, os.environ['JWT_SECRET_FASTAPI'])
+        if payload is not None:
+            return_value = []
+            var1 = int(payload['person']['pref_age1'])      
+            var2 = int(payload['person']['pref_age2'])         
+            for i in range(var1, var2):
+                persons = Person.nodes.filter(age = i)
+                for person in persons:
+                        return_value.append(person.__properties__)
+            return JSONResponse(return_value)
+        else:
+            return JSONResponse(
+                status_code=401
+            )
+
+@app.post("/superlike")
+async def superlike(likes: LikeModel, token) -> JSONResponse:
+    with db.transaction:
+        payload = utl.decodeJWT(token, os.environ['JWT_SECRET_FASTAPI'])
+        if payload is not None:
+            if utl.super_like(likes):
+                return JSONResponse(
+                    status_code=STATUS_CODES['LIKED_USER_CODE'],
+                    content={
+                        "message": STATUS_CODES['LIKED_USER_MESSAGE'],
+                        "token" : token
+                    }
+                )
+            else:
+                return JSONResponse(
+                    status_code=STATUS_CODES['NOT_ENOUGH_LIKES_CODE'],
+                    content={
+                        "message": STATUS_CODES['NOT_ENOUGH_LIKES_MESSAGE'],
+                        "token" : token
+                    }
+                )
+        else:
+            return JSONResponse(
+                status_code=401
+            )
+
 @app.post("/like")
 async def like(likes: LikeModel, token) -> JSONResponse:
     with db.transaction:
@@ -333,11 +394,13 @@ async def get_matches(token) -> JSONResponse:
 @app.post('/update_bio')
 async def update_bio(token):
     with db.transaction:
+        print(token)
         payload = utl.decodeJWT(token, os.environ['JWT_SECRET_FASTAPI'])
+        
         if payload is not None:
             p = Person.nodes.get(unique_id=str(
                 hashlib.sha256(payload['person']['email'].encode('utf-8')).hexdigest()))
-            
+            print(p)
             p.country = payload['person']['country']
             p.city = payload['person']['city']
             p.sex = payload['person']['sex']
@@ -345,6 +408,8 @@ async def update_bio(token):
             p.personal_bio = payload['person']['personal_bio']
             p.preffered_zodiac_sign = payload['person']['preffered_zodiac_sign']
             p.age = payload['person']['age']
+            p.pref_age1 = payload['person']['pref_age1']
+            p.pref_age2 = payload['person']['pref_age2']
             p.save()
             return JSONResponse(
                 status_code=200,
@@ -352,6 +417,31 @@ async def update_bio(token):
                     "token": str(utl.signJWT(p, os.environ['JWT_SECRET_FASTAPI']), "utf-8")
                 }
             )
+
+@app.post('/become_premium')
+async def become_premium(token):
+    with db.transaction:
+        payload = utl.decodeJWT(token, os.environ['JWT_SECRET_FASTAPI'])
+        print(token)
+        if payload is not None:
+            p = Person.nodes.get(unique_id=str(
+                hashlib.sha256(payload['person']['email'].encode('utf-8')).hexdigest()))
+            print(p)
+            p.user_type = 'P'
+            p.super_like = 5
+            p.save()
+            return JSONResponse(
+                status_code=200,
+                content={
+                    "token": str(utl.signJWT(p, os.environ['JWT_SECRET_FASTAPI']), "utf-8")
+                }
+            )
+
+"""
+    to do : jwt decode and code in front pe servicii pt update bio
+    to do : become premium
+"""
+
 
 if __name__ == "__main__":
     uvicorn.run("main:app", host="127.0.0.1", port=8000, log_level="info")

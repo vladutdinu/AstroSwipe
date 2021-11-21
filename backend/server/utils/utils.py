@@ -30,6 +30,9 @@ def give_like(p, p1):
     if p in p1.likes and p1 in p.likes:
         p.matched.connect(p1)
     
+def super_like_and_match(p, p1):
+    p.likes.connect(p1)
+    p.matched.connect(p1)
 
 def like_person(likes):
     p = Person.nodes.get(unique_id=str(
@@ -49,6 +52,24 @@ def like_person(likes):
         
         return True
     
+
+def super_like(likes):
+    p = Person.nodes.get(unique_id=str(
+        hashlib.sha256(likes.email1.encode('utf-8')).hexdigest()))
+    p1 = Person.nodes.get(unique_id=str(
+        hashlib.sha256(likes.email2.encode('utf-8')).hexdigest()))
+    if p.user_type == "B":
+        if p.super_like > 0:
+            super_like_and_match(p, p1)
+            p.super_like-=1
+            p.save()
+            return True
+        else:
+            return False
+    elif p.user_type == "P" or p.user_type == "A":
+        super_like_and_match(p, p1)
+        
+        return True
 
 
 def unmatch_person(matches):
