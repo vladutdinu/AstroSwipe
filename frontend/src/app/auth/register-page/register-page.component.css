@@ -1,0 +1,173 @@
+.register-background {
+    min-height: 100vh;
+    width: 100%;
+    background: url('../../../assets/img/RegisterPage-background.jpg') no-repeat center center fixed;
+    background-size: cover;
+    background-attachment: fixed;
+}
+
+.login {
+    min-height: 100vh;
+}
+
+.icon {
+    font-size: 30px;
+    color: #ffff;
+    padding: 10px;
+    margin-left: 10px;
+}
+
+.login-heading {
+    font-weight: 300;
+    font-size: 50px;
+    background: -webkit-linear-gradient(right,#4900d1,#be0787);
+    background-clip: border-box;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+input {
+    border-image-source: linear-gradient(to left,#4900d1,#be0787);
+    border-width: 1.5pt;
+    border-image-slice: 1;
+}
+
+.datepicker input {
+    border: none;
+    background-image: linear-gradient(to left,#4900d1,#be0787);
+    color: #fff;
+    height: 40px;
+}
+
+.datepicker input::placeholder {
+    color: #fff;
+}
+
+::-webkit-calendar-picker-indicator {
+    filter: invert(1);
+}
+  
+.btn-login {
+    font-size: 0.9rem;
+    letter-spacing: 0.05rem;
+    padding: 0.75rem 1rem;
+}
+
+.complete-btn {
+    color: #ffff;
+    background: -webkit-linear-gradient(right,#4900d1,#f304ab);
+    border: none;
+}
+
+.complete-btn:hover {
+    color: #f304ab;
+    background: #fff;
+    border: solid 1px;
+    border-color: #4900d1;
+}
+
+.wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 30px;
+}
+.wrapper .file-upload {
+    height: 130px;
+    width: 130px;
+    border-radius: 100px;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 4px solid #fff;
+    overflow: hidden;
+    background-image: linear-gradient(to bottom, #4900d1 50%, #fff 50%);
+    background-size: 100% 200%;
+    transition: all 1s;
+    color: #fff;
+    font-size: 50px;
+}
+.wrapper .file-upload input[type='file'] {
+    height: 200px;
+    width: 200px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0;
+    cursor: pointer;
+}
+.wrapper .file-upload:hover {
+    background-position: 0 -100%;
+    color: #4900d1;
+}
+
+
+/*Circle selection*/
+
+.circle-selection {
+    position: relative;
+    width: 400px;
+    height: 400px;
+    margin: 5px auto;   
+    background: white;
+}
+
+.circle-selection ul {
+    position: absolute;
+    width: 300px;
+    height: 300px;
+    margin: 50px;
+    padding: 0;
+    list-style: none;
+    border-radius: 50%;                                   
+    overflow: hidden;                                    
+}
+
+.circle-selection li {
+    position: absolute;
+    top: -10px;                                           
+    left: -10px;                                         
+    width: 200px;
+    height: 160px;
+    transform-origin: 100% 100%;                          
+    overflow: hidden;                                      
+}
+
+.circle-selection li:nth-child(1) {
+    transform: rotate(0deg) skew(30deg);
+}
+.circle-selection li:nth-child(2) {
+     transform: rotate(60deg) skew(30deg);
+}
+.circle-selection li:nth-child(3) {
+    transform: rotate(120deg) skew(30deg);
+}
+.circle-selection li:nth-child(4) {
+    transform: rotate(180deg) skew(30deg);
+}
+.circle-selection li:nth-child(5) {
+    transform: rotate(240deg) skew(30deg);
+}
+.circle-selection li:nth-child(6) {
+    transform: rotate(300deg) skew(30deg);
+}
+
+.circle-selection li a{
+    display: block;
+    width: 160px;
+    height: 160px;
+    margin-top: 40px;                                      
+    margin-left: 40px;                                    
+    background: #4900d1;
+    transform: skew(-30deg) rotate(-60deg);               
+    transition: background-color  0.5s;
+}
+
+.circle-menu li:nth-child(even) a {
+    background-color: #4900d1;
+}
+
+.circle-selection li a:hover {
+    background-color: #f304ab;
+}
