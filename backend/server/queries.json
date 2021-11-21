@@ -1,0 +1,37 @@
+{
+    "Lucrare":{
+        "Insert_Rel": "CREATE (:Lucrare {name: {}}})-[:KNOWS]->(:Lucrare {name: {}})",
+        "Insert": "CREATE (:Lucrare {name: {}})",
+        "Rel": "MATCH (a:Lucrare {name: {}}) MATCH (b:Lucrare {name: {}}) MERGE (a)-[:{}}]->(b)",
+        "Delete": "MATCH (p:Lucrare) WHERE p.name = {} DELETE p",
+        "Delete_Detach": "MATCH (p:Lucrare) WHERE p.name = {} DETACH DELETE p",
+        "Get": "CREATE (:Lucrare {name: {}})-[:KNOWS]->(:Lucrare {name: {}})"
+    },
+    "Studenti":{
+        "Insert_Rel": "CREATE (:Lucrare {name: {}}})-[:KNOWS]->(:Lucrare {name: {}})",
+        "Insert": "CREATE (:Lucrare {name: {}})",
+        "Rel": "MATCH (a:Lucrare {name: {}}) MATCH (b:Lucrare {name: {}}) MERGE (a)-[:{}}]->(b)",
+        "Delete": "MATCH (p:Lucrare) WHERE p.name = {} DELETE p",
+        "Delete_Detach": "MATCH (p:Lucrare) WHERE p.name = {} DETACH DELETE p",
+        "Get": "CREATE (:Lucrare {name: {}})-[:KNOWS]->(:Lucrare {name: {}})"
+    },
+    "Profesori":{
+        "Insert_Rel": "CREATE (:Lucrare {name: {}}})-[:KNOWS]->(:Lucrare {name: {}})",
+        "Insert": "CREATE (:Lucrare {name: {}})",
+        "Rel": "MATCH (a:Lucrare {name: {}}) MATCH (b:Lucrare {name: {}}) MERGE (a)-[:{}}]->(b)",
+        "Delete": "MATCH (p:Lucrare) WHERE p.name = {} DELETE p",
+        "Delete_Detach": "MATCH (p:Lucrare) WHERE p.name = {} DETACH DELETE p",
+        "Get": "CREATE (:Lucrare {name: {}})-[:KNOWS]->(:Lucrare {name: {}})"
+    },
+    "Topicuri":{
+        "Insert_Rel": "CREATE (:Lucrare {name: {}}})-[:KNOWS]->(:Lucrare {name: {}})",
+        "Insert": "CREATE (:Lucrare {name: {}})",
+        "Rel": "MATCH (a:Lucrare {name: {}}) MATCH (b:Lucrare {name: {}}) MERGE (a)-[:{}}]->(b)",
+        "Delete": "MATCH (p:Lucrare) WHERE p.name = {} DELETE p",
+        "Delete_Detach": "MATCH (p:Lucrare) WHERE p.name = {} DETACH DELETE p",
+        "Get": "CREATE (:Lucrare {name: {}})-[:KNOWS]->(:Lucrare {name: {}})"
+    },
+    "Lucrari_dupa_topic":{
+        "Get":"MATCH (t:Topic)-[r]->(l:Lucrare) RETURN r, t, l"
+    }
+}

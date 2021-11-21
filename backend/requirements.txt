@@ -1,0 +1,9 @@
+fastapi==0.68.1
+fastapi_mail==1.0.1
+fastapi-utils==0.2.1
+neomodel==4.0.6
+pydantic==1.8.2
+PyJWT==2.3.0
+requests==2.24.0
+starlette==0.14.2
+uvicorn==0.13.4
