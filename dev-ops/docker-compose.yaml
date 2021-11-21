@@ -20,9 +20,19 @@ services:
     volumes:
       - /images:/images
 
+  frontend:
+    container_name: frontend
+    image: isw_frontend:latest
+    command: ["ng", "serve", "--host", "0.0.0.0"]
+    networks:
+      - testnw
+    ports:
+      - "5000:4200"
+    volumes:
+      - /images:/images
+
 volumes:
   store:
-    external: true
+
 networks:
   testnw:
-    external: true
