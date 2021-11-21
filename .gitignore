@@ -1,4 +1,5 @@
 *.fig
 *.pdf
 backend/isw-astroswipe.postman_collection.json
-dev-ops/*
+dev-ops/*.yaml
+dev-ops/*.yml
