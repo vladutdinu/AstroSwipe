@@ -1,0 +1,28 @@
+version: '3'
+services:
+  backend:
+    container_name: backend
+    image: isw_backend:latest
+    environment:
+      - FASTAPI_PASS=Astroswipe2021@
+      - FASTAPI_URL=http://127.0.0.1
+      - FASTAPI_USER=astroswipe2021
+      - JWT_SECRET_FASTAPI=asoidgasupbdaslkdnasojubdv9aiusdpaslkdnasjdasvas
+      - PASSWORD=37IepyF829icjiK_SDaRQrOl0-0I6Zl73XCSxuvRdLo
+      - PORT_NEO=7687
+      - SERVER=d9bc060c.databases.neo4j.io
+      - USER=neo4j
+    command: ["uvicorn", "server.main:app", "--host=0.0.0.0", "--port=8000", "--reload"]
+    networks:
+      - testnw
+    ports:
+      - "8000:8000"
+    volumes:
+      - /images:/images
+
+volumes:
+  store:
+    external: true
+networks:
+  testnw:
+    external: true
