@@ -27,7 +27,11 @@
                                     <input type="text" class="form-control" placeholder="Last Name" value="" />
                                 </div>
                                 <div class="form-group mb-2">
-                                    <input type="text" class="form-control" placeholder="Your Sex" value="" />
+                                   <select name="sex" id="sex" class="form-control">
+                                     <option hidden selected>Your sex</option>
+                                     <option value="M">M</option>
+                                     <option value="F">F</option>
+                                   </select>
                                 </div>
                             </div>
                             <div class="col-md-6">
@@ -46,25 +50,29 @@
                             </div>
                             <div class="circle-selection">
                               <div class="center"></div>
-                              <ul>
-                                <li><a href="" class="icon-gist-secret"></a></li>
-                                <li><a href="" class="icon-hubot"></a></li>
-                                <li><a href="" class="icon-hourglass"></a></li>
-                                <li><a href="" class="icon-light-bulb"></a></li>
-                                <li><a href="" class="icon-squirrel"></a></li>
-                                <li><a href="" class="icon-law"></a></li>
-                                <li><a href="" class="icon-gist-secret"></a></li>
-                                <li><a href="" class="icon-hubot"></a></li>
-                                <li><a href="" class="icon-hourglass"></a></li>
-                                <li><a href="" class="icon-light-bulb"></a></li>
-                                <li><a href="" class="icon-squirrel"></a></li>
-                                <li><a href="" class="icon-law"></a></li>
-                              </ul>
+                                <div class="board">
+                                  <div class="spinner-table"> 
+                                    <ul class="dial">
+                                      <li class="slice"><div class="label"><a href="#"><img src="../../../assets/img/zodiac/aquarius.svg" alt=""></a></div></li>
+                                      <li class="slice"><div class="label"><a href="#"><img src="../../../assets/img/zodiac/aries.svg" alt=""></a></div></li>
+                                      <li class="slice"><div class="label"><a href="#"><img src="../../../assets/img/zodiac/cancer.svg" alt=""></a></div></li>
+                                      <li class="slice"><div class="label"><a href="#"><img src="../../../assets/img/zodiac/capricorn.svg" alt=""></a></div></li>
+                                      <li class="slice"><div class="label"><a href="#"><img src="../../../assets/img/zodiac/gemini.svg" alt=""></a></div></li>
+                                      <li class="slice"><div class="label"><a href="#"><img src="../../../assets/img/zodiac/leo.svg" alt=""></a></div></li>
+                                      <li class="slice"><div class="label"><a href="#"><img src="../../../assets/img/zodiac/libra.svg" alt=""></a></div></li>
+                                      <li class="slice"><div class="label"><a href="#"><img src="../../../assets/img/zodiac/Pisces.svg" alt=""></a></div></li>
+                                      <li class="slice"><div class="label"><a href="#"><img src="../../../assets/img/zodiac/sagittarius.svg" alt=""></a></div></li>
+                                      <li class="slice"><div class="label"><a href="#"><img src="../../../assets/img/zodiac/scorpio.svg" alt=""></a></div></li>
+                                      <li class="slice"><div class="label"><a href="#"><img src="../../../assets/img/zodiac/taurus.svg" alt=""></a></div></li>
+                                      <li class="slice"><div class="label"><a href="#"><img src="../../../assets/img/zodiac/virgo.svg" alt=""></a></div></li>
+                                    </ul>
+                                  </div>
+                                </div>
                             </div>  
                         </div>
-                      <div class="d-grid mt-2">
-                        <button class="btn btn-lg btn-primary btn-login text-uppercase fw-bold mb-2 complete-btn" type="submit">Complete</button>
-                      </div>
+                        <div class="d-grid mt-2">
+                          <button class="btn btn-lg btn-primary btn-login text-uppercase fw-bold mb-2 complete-btn" type="submit">Complete</button>
+                        </div>
       
                     </form>
                   </div>

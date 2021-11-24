@@ -32,6 +32,12 @@ input {
     border-image-slice: 1;
 }
 
+select {
+    border-image-source: linear-gradient(to left,#4900d1,#be0787);
+    border-width: 1.5pt;
+    border-image-slice: 1; 
+}
+
 .datepicker input {
     border: none;
     background-image: linear-gradient(to left,#4900d1,#be0787);
@@ -113,61 +119,109 @@ input {
     background: white;
 }
 
-.circle-selection ul {
+.spinner-table {
+    height: 348px;
+    width: 348px;
+    position: relative;
+    border-radius: 100%;
+    overflow: hidden;
+}
+
+.dial .slice {
+    z-index: 150;
     position: absolute;
-    width: 300px;
-    height: 300px;
-    margin: 50px;
-    padding: 0;
-    list-style: none;
-    border-radius: 50%;                                   
-    overflow: hidden;                                    
-}
-
-.circle-selection li {
-    position: absolute;
-    top: -10px;                                           
-    left: -10px;                                         
-    width: 200px;
-    height: 160px;
-    transform-origin: 100% 100%;                          
-    overflow: hidden;                                      
-}
-
-.circle-selection li:nth-child(1) {
-    transform: rotate(0deg) skew(30deg);
-}
-.circle-selection li:nth-child(2) {
-     transform: rotate(60deg) skew(30deg);
-}
-.circle-selection li:nth-child(3) {
-    transform: rotate(120deg) skew(30deg);
-}
-.circle-selection li:nth-child(4) {
-    transform: rotate(180deg) skew(30deg);
-}
-.circle-selection li:nth-child(5) {
-    transform: rotate(240deg) skew(30deg);
-}
-.circle-selection li:nth-child(6) {
-    transform: rotate(300deg) skew(30deg);
-}
-
-.circle-selection li a{
+    top: calc(50% - 45.8148928635px);
+    height: 91.6297857271px;
+    left: 50%;
+    width: 50%;
+    color: white;
+    text-align: right;
+    padding-right: 10px;
     display: block;
-    width: 160px;
-    height: 160px;
-    margin-top: 40px;                                      
-    margin-left: 40px;                                    
-    background: #4900d1;
-    transform: skew(-30deg) rotate(-60deg);               
-    transition: background-color  0.5s;
+    transform-origin: left center;
+}
+.dial .slice:before, .dial .slice:after {
+    content: "";
+    display: block;
+    width: 0;
+    height: 0;
+    border-style: solid;
+}
+.dial .slice:before {
+    margin-bottom: -1px;
+    margin-top: -2px;
+    border-width: 0 0 49.8148928635px 175px;
+    border-color: transparent transparent #4900d1 transparent;
+}
+.dial .slice:after {
+    margin-top: -1px;
+    margin-bottom: -2px;
+    border-width: 0 175px 49.8148928635px 0;
+    border-color: transparent #4900d1 transparent transparent;
+}
+.dial .slice:nth-child(even):after {
+    border-color: transparent #a9117b transparent transparent;
+}
+.dial .slice:nth-child(even):before {
+    border-color: transparent transparent #a9117b transparent;
 }
 
-.circle-menu li:nth-child(even) a {
-    background-color: #4900d1;
+
+.dial .slice .label {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 70%;
+    line-height: 91.6297857271px;
+    padding-top: 1px;
+    padding-bottom: 1px;
+    font-size: 16px;
+    text-align: right;
+    margin-left: 10px;
+    padding-left: 20px;
 }
 
-.circle-selection li a:hover {
-    background-color: #f304ab;
+.dial .slice .label a img {
+    height: 50px;
+    width: 50px;
+}
+
+.dial .slice .label:hover {
+    border-color: #fff;
+}
+.dial .slice:nth-child(1) {
+    transform: rotate(0deg);
+}
+.dial .slice:nth-child(2) {
+    transform: rotate(30deg);
+}
+.dial .slice:nth-child(3) {
+    transform: rotate(60deg);
+}
+.dial .slice:nth-child(4) {
+    transform: rotate(90deg);
+}
+.dial .slice:nth-child(5) {
+    transform: rotate(120deg);
+}
+.dial .slice:nth-child(6) {
+    transform: rotate(150deg);
+}
+.dial .slice:nth-child(7) {
+    transform: rotate(180deg);
+}
+.dial .slice:nth-child(8) {
+    transform: rotate(210deg);
+}
+.dial .slice:nth-child(9) {
+    transform: rotate(240deg);
+}
+.dial .slice:nth-child(10) {
+    transform: rotate(270deg);
+}
+.dial .slice:nth-child(11) {
+    transform: rotate(300deg);
+}
+.dial .slice:nth-child(12) {
+    transform: rotate(330deg);
 }
