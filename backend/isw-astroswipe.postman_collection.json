@@ -149,7 +149,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://127.0.0.1:8000/get_persons_by_age?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJwZXJzb24iOnsidW5pcXVlX2lkIjoiNzllZGFmMDA1YTY1N2U3ZTdhOWFiY2QwZjEyM2Y2ZmM5MmQwNzk0YzE1NjVlN2E4ODllY2FhODljZGVlZmJmMSIsImVtYWlsIjoiZGludWlvbnV0dmxhZHV0OTlAZ21haWwuY29tIiwicGFzc3dvcmQiOiI1Yzc3ZDdmZDhmNTFlZDBjMmE5MTNlNDYzMjZmZjZkMmVhMmU5NWM4ZWNmMTY2N2M3MmViNzJjY2MzZmMyYjQ2IiwiZmlyc3RfbmFtZSI6IlZsYWR1dCIsImxhc3RfbmFtZSI6IkRpbnUiLCJjb3VudHJ5IjoiUm9tYW5pYSIsImNpdHkiOiJQbG9pZXN0aSIsInNleCI6Ik0iLCJwcmVmZmVyZWRfem9kaWFjX3NpZ24iOiIiLCJ6b2RpYWNfc2lnbiI6IkFxdWFyaXVzIiwicGVyc29uYWxfYmlvIjoiRG9yZXNjIG8gZmVtZWllIG1lc3Rlclx1MDEwMyIsImFnZSI6MjEsImFjdGl2YXRlZCI6dHJ1ZSwibGlrZV9uciI6MTAsInVzZXJfdHlwZSI6IlAiLCJpZCI6MTF9LCJleHBpcmVzIjoxNjM3MTgwNjkzLjE3ODQzM30.6ZJ_apuledcDEG5ujp0q9LbiJEMQXOEqsucSprOgVMg",
+							"raw": "http://127.0.0.1:8000/get_persons_by_age?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJwZXJzb24iOnsidW5pcXVlX2lkIjoiMjcyOWFiYTM3YTUyNGQ2OTQyYzEyOGUzYTgxNmYxNDBjYTA2YTdjNDE4YTZkYzZkYWZhNWQxZjJjZmM3MGJkYSIsImVtYWlsIjoiYXN0cm9zd2lwZTIwMjFAZ21haWwuY29tIiwicGFzc3dvcmQiOiI1Yzc3ZDdmZDhmNTFlZDBjMmE5MTNlNDYzMjZmZjZkMmVhMmU5NWM4ZWNmMTY2N2M3MmViNzJjY2MzZmMyYjQ2IiwiZmlyc3RfbmFtZSI6IlZsYWR1dCIsImxhc3RfbmFtZSI6IkRpbnUiLCJjb3VudHJ5IjoiUm9tYW5pYSIsImNpdHkiOiJQbG9pZXN0aSIsInNleCI6IkYiLCJwcmVmZmVyZWRfem9kaWFjX3NpZ24iOiIiLCJ6b2RpYWNfc2lnbiI6IkFxdWFyaXVzIiwicGVyc29uYWxfYmlvIjoiRG9yZXNjIHVuIGJhcmJhdCBtZXN0ZXIiLCJhZ2UiOjIxLCJhY3RpdmF0ZWQiOnRydWUsImxpa2VfbnIiOjEwLCJ1c2VyX3R5cGUiOiJQIiwicHJlZl9hZ2UxIjoxLCJwcmVmX2FnZTIiOjEsInN1cGVyX2xpa2UiOjUsImlkIjoxMH0sImV4cGlyZXMiOjE2Mzc2MDU0ODAuMjA2Mjk4fQ.FY4wv6zJuyYQbJJatr4WXs37ogG-W16RA1BzULW4kaU",
 							"protocol": "http",
 							"host": [
 								"127",
@@ -164,7 +164,7 @@
 							"query": [
 								{
 									"key": "token",
-									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJwZXJzb24iOnsidW5pcXVlX2lkIjoiNzllZGFmMDA1YTY1N2U3ZTdhOWFiY2QwZjEyM2Y2ZmM5MmQwNzk0YzE1NjVlN2E4ODllY2FhODljZGVlZmJmMSIsImVtYWlsIjoiZGludWlvbnV0dmxhZHV0OTlAZ21haWwuY29tIiwicGFzc3dvcmQiOiI1Yzc3ZDdmZDhmNTFlZDBjMmE5MTNlNDYzMjZmZjZkMmVhMmU5NWM4ZWNmMTY2N2M3MmViNzJjY2MzZmMyYjQ2IiwiZmlyc3RfbmFtZSI6IlZsYWR1dCIsImxhc3RfbmFtZSI6IkRpbnUiLCJjb3VudHJ5IjoiUm9tYW5pYSIsImNpdHkiOiJQbG9pZXN0aSIsInNleCI6Ik0iLCJwcmVmZmVyZWRfem9kaWFjX3NpZ24iOiIiLCJ6b2RpYWNfc2lnbiI6IkFxdWFyaXVzIiwicGVyc29uYWxfYmlvIjoiRG9yZXNjIG8gZmVtZWllIG1lc3Rlclx1MDEwMyIsImFnZSI6MjEsImFjdGl2YXRlZCI6dHJ1ZSwibGlrZV9uciI6MTAsInVzZXJfdHlwZSI6IlAiLCJpZCI6MTF9LCJleHBpcmVzIjoxNjM3MTgwNjkzLjE3ODQzM30.6ZJ_apuledcDEG5ujp0q9LbiJEMQXOEqsucSprOgVMg"
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJwZXJzb24iOnsidW5pcXVlX2lkIjoiMjcyOWFiYTM3YTUyNGQ2OTQyYzEyOGUzYTgxNmYxNDBjYTA2YTdjNDE4YTZkYzZkYWZhNWQxZjJjZmM3MGJkYSIsImVtYWlsIjoiYXN0cm9zd2lwZTIwMjFAZ21haWwuY29tIiwicGFzc3dvcmQiOiI1Yzc3ZDdmZDhmNTFlZDBjMmE5MTNlNDYzMjZmZjZkMmVhMmU5NWM4ZWNmMTY2N2M3MmViNzJjY2MzZmMyYjQ2IiwiZmlyc3RfbmFtZSI6IlZsYWR1dCIsImxhc3RfbmFtZSI6IkRpbnUiLCJjb3VudHJ5IjoiUm9tYW5pYSIsImNpdHkiOiJQbG9pZXN0aSIsInNleCI6IkYiLCJwcmVmZmVyZWRfem9kaWFjX3NpZ24iOiIiLCJ6b2RpYWNfc2lnbiI6IkFxdWFyaXVzIiwicGVyc29uYWxfYmlvIjoiRG9yZXNjIHVuIGJhcmJhdCBtZXN0ZXIiLCJhZ2UiOjIxLCJhY3RpdmF0ZWQiOnRydWUsImxpa2VfbnIiOjEwLCJ1c2VyX3R5cGUiOiJQIiwicHJlZl9hZ2UxIjoxLCJwcmVmX2FnZTIiOjEsInN1cGVyX2xpa2UiOjUsImlkIjoxMH0sImV4cGlyZXMiOjE2Mzc2MDU0ODAuMjA2Mjk4fQ.FY4wv6zJuyYQbJJatr4WXs37ogG-W16RA1BzULW4kaU"
 								},
 								{
 									"key": "age1",
@@ -186,8 +186,17 @@
 					"request": {
 						"method": "POST",
 						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"country\": \"Romania\",\r\n    \"city\": \"Ploiesti\",\r\n    \"personal_bio\": \"personal_bio\",\r\n    \"preffered_zodiac_sign\": \"Scorpius\",\r\n    \"pref_age1\": 1,\r\n    \"pref_age2\": 33\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
 						"url": {
-							"raw": "http://127.0.0.1:8000/update_bio?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJwZXJzb24iOnsidW5pcXVlX2lkIjoiNzllZGFmMDA1YTY1N2U3ZTdhOWFiY2QwZjEyM2Y2ZmM5MmQwNzk0YzE1NjVlN2E4ODllY2FhODljZGVlZmJmMSIsImVtYWlsIjoiZGludWlvbnV0dmxhZHV0OTlAZ21haWwuY29tIiwicGFzc3dvcmQiOiI1Yzc3ZDdmZDhmNTFlZDBjMmE5MTNlNDYzMjZmZjZkMmVhMmU5NWM4ZWNmMTY2N2M3MmViNzJjY2MzZmMyYjQ2IiwiZmlyc3RfbmFtZSI6IlZsYWR1dCIsImxhc3RfbmFtZSI6IkRpbnUiLCJjb3VudHJ5IjoiUm9tYW5pYSIsImNpdHkiOiJQbG9pZXN0aSIsInNleCI6Ik0iLCJwcmVmZmVyZWRfem9kaWFjX3NpZ24iOiIiLCJ6b2RpYWNfc2lnbiI6IkFxdWFyaXVzIiwicGVyc29uYWxfYmlvIjoiRG9yZXNjIG8gZmVtZWllIG1lc3RlcsSDIiwiYWdlIjoyMSwiYWN0aXZhdGVkIjp0cnVlLCJsaWtlX25yIjoxMCwidXNlcl90eXBlIjoiUCIsInByZWZfYWdlMSI6MiwicHJlZl9hZ2UyIjoyMiwiaWQiOjEyfSwiZXhwaXJlcyI6MTYzNzE4MTc4Mi40OTA4MTV9.h2CGMlz13yHiN_mM3WXdczA48Xl_aRypCOP7kCtKNIs",
+							"raw": "http://127.0.0.1:8000/update_bio?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJwZXJzb24iOnsidW5pcXVlX2lkIjoiMjcyOWFiYTM3YTUyNGQ2OTQyYzEyOGUzYTgxNmYxNDBjYTA2YTdjNDE4YTZkYzZkYWZhNWQxZjJjZmM3MGJkYSIsImVtYWlsIjoiYXN0cm9zd2lwZTIwMjFAZ21haWwuY29tIiwicGFzc3dvcmQiOiI1Yzc3ZDdmZDhmNTFlZDBjMmE5MTNlNDYzMjZmZjZkMmVhMmU5NWM4ZWNmMTY2N2M3MmViNzJjY2MzZmMyYjQ2IiwiZmlyc3RfbmFtZSI6IlZsYWR1dCIsImxhc3RfbmFtZSI6IkRpbnUiLCJjb3VudHJ5IjoiUm9tYW5pYSIsImNpdHkiOiJQbG9pZXN0aSIsInNleCI6IkYiLCJwcmVmZmVyZWRfem9kaWFjX3NpZ24iOiIiLCJ6b2RpYWNfc2lnbiI6IkFxdWFyaXVzIiwicGVyc29uYWxfYmlvIjoiRG9yZXNjIHVuIGJhcmJhdCBtZXN0ZXIiLCJhZ2UiOjIxLCJhY3RpdmF0ZWQiOnRydWUsImxpa2VfbnIiOjEwLCJ1c2VyX3R5cGUiOiJQIiwicHJlZl9hZ2UxIjoxLCJwcmVmX2FnZTIiOjEsInN1cGVyX2xpa2UiOjUsImlkIjoxMH0sImV4cGlyZXMiOjE2Mzc2MDU0ODAuMjA2Mjk4fQ.FY4wv6zJuyYQbJJatr4WXs37ogG-W16RA1BzULW4kaU",
 							"protocol": "http",
 							"host": [
 								"127",
@@ -202,7 +211,7 @@
 							"query": [
 								{
 									"key": "token",
-									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJwZXJzb24iOnsidW5pcXVlX2lkIjoiNzllZGFmMDA1YTY1N2U3ZTdhOWFiY2QwZjEyM2Y2ZmM5MmQwNzk0YzE1NjVlN2E4ODllY2FhODljZGVlZmJmMSIsImVtYWlsIjoiZGludWlvbnV0dmxhZHV0OTlAZ21haWwuY29tIiwicGFzc3dvcmQiOiI1Yzc3ZDdmZDhmNTFlZDBjMmE5MTNlNDYzMjZmZjZkMmVhMmU5NWM4ZWNmMTY2N2M3MmViNzJjY2MzZmMyYjQ2IiwiZmlyc3RfbmFtZSI6IlZsYWR1dCIsImxhc3RfbmFtZSI6IkRpbnUiLCJjb3VudHJ5IjoiUm9tYW5pYSIsImNpdHkiOiJQbG9pZXN0aSIsInNleCI6Ik0iLCJwcmVmZmVyZWRfem9kaWFjX3NpZ24iOiIiLCJ6b2RpYWNfc2lnbiI6IkFxdWFyaXVzIiwicGVyc29uYWxfYmlvIjoiRG9yZXNjIG8gZmVtZWllIG1lc3RlcsSDIiwiYWdlIjoyMSwiYWN0aXZhdGVkIjp0cnVlLCJsaWtlX25yIjoxMCwidXNlcl90eXBlIjoiUCIsInByZWZfYWdlMSI6MiwicHJlZl9hZ2UyIjoyMiwiaWQiOjEyfSwiZXhwaXJlcyI6MTYzNzE4MTc4Mi40OTA4MTV9.h2CGMlz13yHiN_mM3WXdczA48Xl_aRypCOP7kCtKNIs"
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJwZXJzb24iOnsidW5pcXVlX2lkIjoiMjcyOWFiYTM3YTUyNGQ2OTQyYzEyOGUzYTgxNmYxNDBjYTA2YTdjNDE4YTZkYzZkYWZhNWQxZjJjZmM3MGJkYSIsImVtYWlsIjoiYXN0cm9zd2lwZTIwMjFAZ21haWwuY29tIiwicGFzc3dvcmQiOiI1Yzc3ZDdmZDhmNTFlZDBjMmE5MTNlNDYzMjZmZjZkMmVhMmU5NWM4ZWNmMTY2N2M3MmViNzJjY2MzZmMyYjQ2IiwiZmlyc3RfbmFtZSI6IlZsYWR1dCIsImxhc3RfbmFtZSI6IkRpbnUiLCJjb3VudHJ5IjoiUm9tYW5pYSIsImNpdHkiOiJQbG9pZXN0aSIsInNleCI6IkYiLCJwcmVmZmVyZWRfem9kaWFjX3NpZ24iOiIiLCJ6b2RpYWNfc2lnbiI6IkFxdWFyaXVzIiwicGVyc29uYWxfYmlvIjoiRG9yZXNjIHVuIGJhcmJhdCBtZXN0ZXIiLCJhZ2UiOjIxLCJhY3RpdmF0ZWQiOnRydWUsImxpa2VfbnIiOjEwLCJ1c2VyX3R5cGUiOiJQIiwicHJlZl9hZ2UxIjoxLCJwcmVmX2FnZTIiOjEsInN1cGVyX2xpa2UiOjUsImlkIjoxMH0sImV4cGlyZXMiOjE2Mzc2MDU0ODAuMjA2Mjk4fQ.FY4wv6zJuyYQbJJatr4WXs37ogG-W16RA1BzULW4kaU"
 								}
 							]
 						}
