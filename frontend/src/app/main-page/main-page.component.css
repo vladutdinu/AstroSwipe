@@ -1,0 +1,94 @@
+.background-main {
+    background: url('../../assets/img/swipe-background.gif') no-repeat center center fixed;
+    background-size: cover;
+    background-attachment: fixed;
+    min-height: 100vh;
+    width: 100%;
+}
+
+.content {
+    padding-top: 100px;
+    margin: auto;
+}
+
+.profile-card-2{
+    max-width: 700px;
+    max-height: 700px;
+    background-color: #FFF;
+    box-shadow: 0px 0px 25px rgba(0, 0, 0, 0.1);
+    background-position: center;
+    overflow: hidden;
+    position: relative;
+    margin: auto;
+    cursor: pointer;
+    border-radius: 10px;
+}
+
+.profile-card-2 img {
+    transition: all linear 0.25s;
+    width: 100%;
+}
+
+.profile-card-2 .profile-name {
+    position: absolute;
+    left: 30px;
+    bottom: 70px;
+    font-size: 30px;
+    color: #FFF;
+    text-shadow: 0px 0px 20px rgba(0, 0, 0, 0.5);
+    font-weight: bold;
+    transition: all linear 0.25s;
+}
+
+.profile-card-2 .profile-username {
+    position: absolute;
+    bottom: 50px;
+    left: 30px;
+    color: #FFF;
+    font-size: 13px;
+    transition: all linear 0.25s;
+}
+
+
+.profile-card-2:hover img {
+    filter: grayscale(100%);
+}
+
+.profile-card-2:hover .profile-name {
+    bottom: 80px;
+}
+
+.profile-card-2:hover .profile-username {
+    bottom: 60px;
+}
+
+.swipe-buttons {
+    margin-top: 30px;
+}
+
+.swipe-buttons .button-space {
+   margin-left: 30px;
+}
+
+.swipe-buttons button {
+    color: #45505b;
+    padding: 10px 18px;
+    margin-bottom: 8px;
+    transition: 0.3s;
+    font-size: 15px;
+    border-radius: 50px;
+    background: #f2f3f5;
+    height: 80px;
+    width: 80px;
+    overflow: hidden;
+    transition: 0.3s;
+}
+
+.swipe-buttons button i {
+    font-size: 30px;
+}
+
+.swipe-buttons button:hover{
+    background:#4900d1 ;
+    color: #FFF;
+}

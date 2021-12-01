@@ -1,0 +1,248 @@
+.register-background {
+    min-height: 100vh;
+    width: 100%;
+    background: url('../../assets/img/background.jpg') no-repeat center center fixed;
+    background-size: cover;
+    background-attachment: fixed;
+}
+
+.login {
+    min-height: 100vh;
+}
+
+.img-wrap {
+    position: relative;
+    margin-left: 15px;
+}
+
+.img-wrap img {
+    height: 130px;
+    width: 130px;
+    border-radius: 100px;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+.img-wrap #clear {
+    position: absolute;
+    top: 2px;
+    right: 2px;
+    z-index: 100;
+    background: none;
+    border: none;
+    color: #fff;
+    font-size: 30px;
+    font-weight: bold;
+}
+
+.login-heading {
+    font-weight: 300;
+    font-size: 50px;
+    background: -webkit-linear-gradient(right,#4900d1,#be0787);
+    background-clip: border-box;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+input {
+    border-image-source: linear-gradient(to left,#4900d1,#be0787);
+    border-width: 1.5pt;
+    border-image-slice: 1;
+}
+
+select {
+    border-image-source: linear-gradient(to left,#4900d1,#be0787);
+    border-width: 1.5pt;
+    border-image-slice: 1; 
+}
+
+.datepicker input {
+    border: none;
+    background-image: linear-gradient(to left,#4900d1,#be0787);
+    color: #fff;
+    height: 40px;
+}
+
+.datepicker input::placeholder {
+    color: #fff;
+}
+
+::-webkit-calendar-picker-indicator {
+    filter: invert(1);
+}
+  
+.btn-login {
+    font-size: 0.9rem;
+    letter-spacing: 0.05rem;
+    padding: 0.75rem 1rem;
+}
+
+.complete-btn {
+    color: #ffff;
+    background: -webkit-linear-gradient(right,#4900d1,#f304ab);
+    border: none;
+}
+
+.complete-btn:hover {
+    color: #f304ab;
+    background: #fff;
+    border: solid 1px;
+    border-color: #4900d1;
+}
+
+.wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 30px;
+}
+.wrapper .file-upload {
+    height: 130px;
+    width: 130px;
+    border-radius: 100px;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 4px solid #fff;
+    overflow: hidden;
+    background-image: linear-gradient(to bottom, #4900d1 50%, #fff 50%);
+    background-size: 100% 200%;
+    transition: all 1s;
+    color: #fff;
+    font-size: 50px;
+}
+.wrapper .file-upload input[type='file'] {
+    height: 200px;
+    width: 200px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0;
+    cursor: pointer;
+}
+.wrapper .file-upload:hover {
+    background-position: 0 -100%;
+    color: #4900d1;
+}
+
+
+/*Circle selection*/
+
+.circle-selection {
+    position: relative;
+    width: 400px;
+    height: 400px;
+    margin: 5px auto;   
+    background: transparent;
+}
+
+.spinner-table {
+    height: 348px;
+    width: 348px;
+    position: relative;
+    border-radius: 100%;
+    overflow: hidden;
+}
+
+.dial .slice {
+    z-index: 150;
+    position: absolute;
+    top: calc(50% - 45.8148928635px);
+    height: 91.6297857271px;
+    left: 50%;
+    width: 50%;
+    color: white;
+    text-align: right;
+    padding-right: 10px;
+    display: block;
+    transform-origin: left center;
+}
+.dial .slice:before, .dial .slice:after {
+    content: "";
+    display: block;
+    width: 0;
+    height: 0;
+    border-style: solid;
+}
+.dial .slice:before {
+    margin-bottom: -1px;
+    margin-top: -2px;
+    border-width: 0 0 49.8148928635px 175px;
+    border-color: transparent transparent #4900d1 transparent;
+}
+.dial .slice:after {
+    margin-top: -1px;
+    margin-bottom: -2px;
+    border-width: 0 175px 49.8148928635px 0;
+    border-color: transparent #4900d1 transparent transparent;
+}
+.dial .slice:nth-child(even):after {
+    border-color: transparent #a9117b transparent transparent;
+}
+.dial .slice:nth-child(even):before {
+    border-color: transparent transparent #a9117b transparent;
+}
+
+
+.dial .slice .label {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 70%;
+    line-height: 91.6297857271px;
+    padding-top: 1px;
+    padding-bottom: 1px;
+    font-size: 16px;
+    text-align: right;
+    margin-left: 10px;
+    padding-left: 20px;
+}
+
+.dial .slice .label a img {
+    height: 50px;
+    width: 50px;
+}
+
+.dial .slice .label:hover {
+    border-color: #fff;
+}
+.dial .slice:nth-child(1) {
+    transform: rotate(0deg);
+}
+.dial .slice:nth-child(2) {
+    transform: rotate(30deg);
+}
+.dial .slice:nth-child(3) {
+    transform: rotate(60deg);
+}
+.dial .slice:nth-child(4) {
+    transform: rotate(90deg);
+}
+.dial .slice:nth-child(5) {
+    transform: rotate(120deg);
+}
+.dial .slice:nth-child(6) {
+    transform: rotate(150deg);
+}
+.dial .slice:nth-child(7) {
+    transform: rotate(180deg);
+}
+.dial .slice:nth-child(8) {
+    transform: rotate(210deg);
+}
+.dial .slice:nth-child(9) {
+    transform: rotate(240deg);
+}
+.dial .slice:nth-child(10) {
+    transform: rotate(270deg);
+}
+.dial .slice:nth-child(11) {
+    transform: rotate(300deg);
+}
+.dial .slice:nth-child(12) {
+    transform: rotate(330deg);
+}

@@ -1,0 +1,88 @@
+<div class="register-background">
+    <app-menu-bar></app-menu-bar>
+    <div class="container-fluid ps-md-0">
+        <div class="row g-0">
+          <div class="col-md-12">
+            <div class="login d-flex align-items-center py-5">
+              <div class="container">
+                <div class="row">
+                  <div class="col-md-9 col-lg-8 mx-auto">
+                    <h3 class="login-heading" style="margin-bottom: 10px;">Profile details</h3>
+                    <div class="wrapper">
+                        <div class="file-upload">
+                          <input type="file" />
+                          <i class="fa fa-camera-retro"></i>
+                        </div>
+                        <div class="img-wrap">
+                            <button id="clear" class="hide">x</button>
+                            <img src="../../assets/img/test-user.jpg"> 
+                        </div>   
+                    </div>
+      
+                    <form>
+                        <div class="row register-form">
+                            <div class="col-md-6">
+                                <div class="form-group mb-2">
+                                    <input type="text" class="form-control" placeholder="First Name" value="" />
+                                </div>
+                                <div class="form-group mb-2">
+                                    <input type="text" class="form-control" placeholder="Last Name" value="" />
+                                </div>
+                                <div class="form-group mb-2">
+                                   <select name="sex" id="sex" class="form-control">
+                                     <option hidden selected>Your sex</option>
+                                     <option value="M">M</option>
+                                     <option value="F">F</option>
+                                   </select>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group mb-2">
+                                    <input type="text" class="form-control" placeholder="Your Country" value="" />
+                                </div>
+                                <div class="form-group mb-2">
+                                    <input type="text"  class="form-control" placeholder="Your City" value="" />
+                                </div>
+                                <div class="form-group datepicker">
+                                  <input placeholder="Choose birth Day" class="textbox-n form-control" type="text" onfocus="(this.type='date')" id="date">
+                                </div>
+                            </div>
+                            <div class="wrapper">
+                              <h3 class="login-heading">Zodiac</h3>
+                            </div>
+                            <div class="circle-selection">
+                              <div class="center"></div>
+                                <div class="board">
+                                  <div class="spinner-table"> 
+                                    <ul class="dial">
+                                      <li class="slice"><div class="label"><a href="#"><img src="../../../assets/img/zodiac/aquarius.svg" alt=""></a></div></li>
+                                      <li class="slice"><div class="label"><a href="#"><img src="../../../assets/img/zodiac/aries.svg" alt=""></a></div></li>
+                                      <li class="slice"><div class="label"><a href="#"><img src="../../../assets/img/zodiac/cancer.svg" alt=""></a></div></li>
+                                      <li class="slice"><div class="label"><a href="#"><img src="../../../assets/img/zodiac/capricorn.svg" alt=""></a></div></li>
+                                      <li class="slice"><div class="label"><a href="#"><img src="../../../assets/img/zodiac/gemini.svg" alt=""></a></div></li>
+                                      <li class="slice"><div class="label"><a href="#"><img src="../../../assets/img/zodiac/leo.svg" alt=""></a></div></li>
+                                      <li class="slice"><div class="label"><a href="#"><img src="../../../assets/img/zodiac/libra.svg" alt=""></a></div></li>
+                                      <li class="slice"><div class="label"><a href="#"><img src="../../../assets/img/zodiac/Pisces.svg" alt=""></a></div></li>
+                                      <li class="slice"><div class="label"><a href="#"><img src="../../../assets/img/zodiac/sagittarius.svg" alt=""></a></div></li>
+                                      <li class="slice"><div class="label"><a href="#"><img src="../../../assets/img/zodiac/scorpio.svg" alt=""></a></div></li>
+                                      <li class="slice"><div class="label"><a href="#"><img src="../../../assets/img/zodiac/taurus.svg" alt=""></a></div></li>
+                                      <li class="slice"><div class="label"><a href="#"><img src="../../../assets/img/zodiac/virgo.svg" alt=""></a></div></li>
+                                    </ul>
+                                  </div>
+                                </div>
+                            </div>  
+                        </div>
+                        <div class="d-grid mt-2">
+                          <button class="btn btn-lg btn-primary btn-login text-uppercase fw-bold mb-2 complete-btn" type="submit">Update Account</button>
+                          <button class="btn btn-lg btn-primary btn-login text-uppercase fw-bold mb-2 complete-btn" type="submit">Delete Account</button>
+                        </div>
+      
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+</div>

@@ -1,0 +1,22 @@
+<div class="background-main">
+    <app-menu-bar></app-menu-bar>
+    <div class="content">
+        <div class="profile-card-2"
+        [@cardAnimator]="animationState" 
+        (@cardAnimator.done)="resetAnimationState()"
+        (swipeleft)="startAnimation('slideOutLeft')"
+        (swiperight)="startAnimation('slideOutRight')"
+        (swipeup)="startAnimation('fadeOutUp')"
+        (swipedown)="startAnimation('flipOutY')"
+        >
+            <img src="http://envato.jayasankarkr.in/code/profile/assets/img/profile-2.jpg" class="img img-responsive">
+            <div class="profile-name">JOHN DOE</div>
+            <div class="profile-username">@johndoesurname</div>
+        </div>
+        <div class="col-md-12 d-flex justify-content-center swipe-buttons">
+            <button (click)="startAnimation('slideOutLeft')"><i class="fa fa-times"></i></button>
+            <button class="button-space" (click)="startAnimation('fadeOutUp')"><i class="fa fa-star"></i></button>
+            <button class="button-space" (click)="startAnimation('slideOutRight')"><i class="fa fa-heart"></i></button>
+        </div>
+    </div>
+</div>
