@@ -17,6 +17,7 @@ from server.neo4j_model.zodiac import Zodiac
 from server.fastapi_model.person_model import PersonModel
 from server.fastapi_model.zodiac_model import ZodiacModel
 from server.fastapi_model.match_model import MatchModel
+from server.fastapi_model.bio_model import BioModel
 from server.fastapi_model.like_model import LikeModel
 from server.fastapi_model.login_model import LoginModel
 from server.fastapi_model.register_model import RegisterModel
@@ -288,12 +289,20 @@ async def get_persons_by_age(token) -> JSONResponse:
         payload = utl.decodeJWT(token, os.environ['JWT_SECRET_FASTAPI'])
         if payload is not None:
             return_value = []
-            var1 = int(payload['person']['pref_age1'])      
-            var2 = int(payload['person']['pref_age2'])         
+            p = Person.nodes.get(unique_id=str(
+                hashlib.sha256(payload['person']['email'].encode('utf-8')).hexdigest()))
+            
+            var1 = p.pref_age1      
+            var2 = p.pref_age2
+            print(p)         
             for i in range(var1, var2):
-                persons = Person.nodes.filter(age = i)
-                for person in persons:
-                        return_value.append(person.__properties__)
+                try:
+                    persons = Person.nodes.filter(age = i)
+                    print(persons)
+                    for person in persons:
+                            return_value.append(person.__properties__)
+                except:
+                    pass
             return JSONResponse(return_value)
         else:
             return JSONResponse(
@@ -392,24 +401,19 @@ async def get_matches(token) -> JSONResponse:
             )
 
 @app.post('/update_bio')
-async def update_bio(token):
+async def update_bio(token, bio_model: BioModel):
     with db.transaction:
-        print(token)
         payload = utl.decodeJWT(token, os.environ['JWT_SECRET_FASTAPI'])
         
         if payload is not None:
             p = Person.nodes.get(unique_id=str(
                 hashlib.sha256(payload['person']['email'].encode('utf-8')).hexdigest()))
-            print(p)
-            p.country = payload['person']['country']
-            p.city = payload['person']['city']
-            p.sex = payload['person']['sex']
-            p.zodiac_sign = payload['person']['zodiac_sign']
-            p.personal_bio = payload['person']['personal_bio']
-            p.preffered_zodiac_sign = payload['person']['preffered_zodiac_sign']
-            p.age = payload['person']['age']
-            p.pref_age1 = payload['person']['pref_age1']
-            p.pref_age2 = payload['person']['pref_age2']
+            p.country = bio_model.country
+            p.city = bio_model.city
+            p.personal_bio = bio_model.personal_bio
+            p.preffered_zodiac_sign = bio_model.preffered_zodiac_sign
+            p.pref_age1 = bio_model.pref_age1
+            p.pref_age2 = bio_model.pref_age2
             p.save()
             return JSONResponse(
                 status_code=200,
