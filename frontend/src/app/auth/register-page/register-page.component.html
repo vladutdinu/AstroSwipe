@@ -17,34 +17,43 @@
                         </div>
                     </div>
       
-                    <form>
+                    <form [formGroup]="signupForm">
                         <div class="row register-form">
                             <div class="col-md-6">
                                 <div class="form-group mb-2">
-                                    <input type="text" class="form-control" placeholder="First Name" value="" />
+                                    <input type="text" [formControlName]="'first_name'" class="form-control" placeholder="First Name" value="" />
                                 </div>
                                 <div class="form-group mb-2">
-                                    <input type="text" class="form-control" placeholder="Last Name" value="" />
+                                    <input type="text" [formControlName]="'last_name'" class="form-control" placeholder="Last Name" value="" />
                                 </div>
                                 <div class="form-group mb-2">
-                                   <select name="sex" id="sex" class="form-control">
-                                     <option hidden selected>Your sex</option>
-                                     <option value="M">M</option>
-                                     <option value="F">F</option>
+                                   <select name="sex" id="sex" [formControlName]="'sex'"  class="form-control">
+                                     <option value="" selected hidden>Your sex</option>
+                                     <option *ngFor="let sex of Sex" [ngValue]="sex">{{sex}}</option>
                                    </select>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group mb-2">
-                                    <input type="text" class="form-control" placeholder="Your Country" value="" />
+                                    <input type="text" [formControlName]="'country'" class="form-control" placeholder="Your Country" value="" />
                                 </div>
                                 <div class="form-group mb-2">
-                                    <input type="text"  class="form-control" placeholder="Your City" value="" />
+                                    <input type="text" [formControlName]="'city'" class="form-control" placeholder="Your City" value="" />
                                 </div>
-                                <div class="form-group datepicker">
-                                  <input placeholder="Choose birth Day" class="textbox-n form-control" type="text" onfocus="(this.type='date')" id="date">
-                                </div>
+                                <div class="form-group mb-2">
+                                  <input type="text" [formControlName]="'age'" class="form-control" placeholder="Your Age" value="" />
+                              </div>
                             </div>
+                            <div class="col-md-12">
+                                <select name="preffered_zodiac_sign" id="preffered_zodiac_sign" [formControlName]="'preffered_zodiac_sign'"  class="form-control">
+                                  <option value="" selected hidden>Your preffered zodiac sign</option>
+                                  <option *ngFor="let zodiac of zodiacSign" [ngValue]="zodiac">{{zodiac}}</option>
+                                </select>
+                            </div>
+                            <div class="col-md-12">
+                              <textarea type="text" [formControlName]="'personal_bio'" class="form-control" placeholder="Your Description"></textarea>
+                            </div>
+                          </div>
                             <div class="wrapper">
                               <h3 class="login-heading">Zodiac</h3>
                             </div>
@@ -53,23 +62,22 @@
                                 <div class="board">
                                   <div class="spinner-table"> 
                                     <ul class="dial">
-                                      <li class="slice"><div class="label"><a href="#"><img src="../../../assets/img/zodiac/aquarius.svg" alt=""></a></div></li>
-                                      <li class="slice"><div class="label"><a href="#"><img src="../../../assets/img/zodiac/aries.svg" alt=""></a></div></li>
-                                      <li class="slice"><div class="label"><a href="#"><img src="../../../assets/img/zodiac/cancer.svg" alt=""></a></div></li>
-                                      <li class="slice"><div class="label"><a href="#"><img src="../../../assets/img/zodiac/capricorn.svg" alt=""></a></div></li>
-                                      <li class="slice"><div class="label"><a href="#"><img src="../../../assets/img/zodiac/gemini.svg" alt=""></a></div></li>
-                                      <li class="slice"><div class="label"><a href="#"><img src="../../../assets/img/zodiac/leo.svg" alt=""></a></div></li>
-                                      <li class="slice"><div class="label"><a href="#"><img src="../../../assets/img/zodiac/libra.svg" alt=""></a></div></li>
-                                      <li class="slice"><div class="label"><a href="#"><img src="../../../assets/img/zodiac/Pisces.svg" alt=""></a></div></li>
-                                      <li class="slice"><div class="label"><a href="#"><img src="../../../assets/img/zodiac/sagittarius.svg" alt=""></a></div></li>
-                                      <li class="slice"><div class="label"><a href="#"><img src="../../../assets/img/zodiac/scorpio.svg" alt=""></a></div></li>
-                                      <li class="slice"><div class="label"><a href="#"><img src="../../../assets/img/zodiac/taurus.svg" alt=""></a></div></li>
-                                      <li class="slice"><div class="label"><a href="#"><img src="../../../assets/img/zodiac/virgo.svg" alt=""></a></div></li>
+                                      <li class="slice"><div class="label"><button class="buton" (click)="choseZodiacSign('Aquarius')"><img src="../../../assets/img/zodiac/aquarius.svg"></button></div></li>
+                                      <li class="slice"><div class="label"><button class="buton" (click)="choseZodiacSign('Aries')"><img src="../../../assets/img/zodiac/aries.svg"></button></div></li>
+                                      <li class="slice"><div class="label"><button class="buton" (click)="choseZodiacSign('Cancer')"><img src="../../../assets/img/zodiac/cancer.svg"></button></div></li>
+                                      <li class="slice"><div class="label"><button class="buton" (click)="choseZodiacSign('Capricornus')"><img src="../../../assets/img/zodiac/capricorn.svg"></button></div></li>
+                                      <li class="slice"><div class="label"><button class="buton" (click)="choseZodiacSign('Gemini')"><img src="../../../assets/img/zodiac/gemini.svg"></button></div></li>
+                                      <li class="slice"><div class="label"><button class="buton" (click)="choseZodiacSign('Leo')"><img src="../../../assets/img/zodiac/leo.svg"></button></div></li>
+                                      <li class="slice"><div class="label"><button class="buton" (click)="choseZodiacSign('Libra')"><img src="../../../assets/img/zodiac/libra.svg"></button></div></li>
+                                      <li class="slice"><div class="label"><button class="buton" (click)="choseZodiacSign('Pisces')"><img src="../../../assets/img/zodiac/Pisces.svg"></button></div></li>
+                                      <li class="slice"><div class="label"><button class="buton" (click)="choseZodiacSign('Sagittarius')"><img src="../../../assets/img/zodiac/sagittarius.svg"></button></div></li>
+                                      <li class="slice"><div class="label"><button class="buton" (click)="choseZodiacSign('Scorpius')"><img src="../../../assets/img/zodiac/scorpio.svg"></button></div></li>
+                                      <li class="slice"><div class="label"><button class="buton" (click)="choseZodiacSign('Taurus')"><img src="../../../assets/img/zodiac/taurus.svg"></button></div></li>
+                                      <li class="slice"><div class="label"><button class="buton" (click)="choseZodiacSign('Virgo')"><img src="../../../assets/img/zodiac/virgo.svg"></button></div></li>
                                     </ul>
                                   </div>
                                 </div>
                             </div>  
-                        </div>
                         <div class="d-grid mt-2">
                           <button class="btn btn-lg btn-primary btn-login text-uppercase fw-bold mb-2 complete-btn" type="submit" [routerLink] = "['/swipe']">Complete</button>
                         </div>

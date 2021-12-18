@@ -18,6 +18,8 @@ import { HammerGestureConfig, HAMMER_GESTURE_CONFIG } from '@angular/platform-br
 import { ChatPageComponent } from './chat-page/chat-page.component';
 import { MatchPageComponent } from './match-page/match-page.component';
 import { ProfilePageComponent } from './profile-page/profile-page.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 
 @Injectable()
 export class MyHammerConfig extends HammerGestureConfig  {
@@ -45,7 +47,9 @@ export class MyHammerConfig extends HammerGestureConfig  {
     AppRoutingModule,
     BrowserAnimationsModule,
     MatCardModule,
-    MatButtonModule
+    MatButtonModule,
+    ReactiveFormsModule,
+    HttpClientModule
   ],
   providers: [ { 
     provide: HAMMER_GESTURE_CONFIG, 

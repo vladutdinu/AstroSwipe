@@ -2,6 +2,7 @@ from enum import unique
 from typing import List, Optional
 from fastapi import Depends, FastAPI, BackgroundTasks
 from fastapi.param_functions import Query
+from fastapi.middleware.cors import CORSMiddleware
 from neomodel import config, db
 import os
 import uvicorn
@@ -37,6 +38,14 @@ STATUS_CODES = {
 }
 
 app = FastAPI()
+origins = ["*"]
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 conf = ConnectionConfig(
     MAIL_USERNAME=os.environ['FASTAPI_USER'],
     MAIL_PASSWORD=os.environ['FASTAPI_PASS'],
