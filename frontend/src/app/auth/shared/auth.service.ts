@@ -23,4 +23,8 @@ export class AuthService {
   login(loginPayload: LoginPayload): Observable<any> {
     return this.http.post('http://localhost:8000/login', loginPayload);
   }
+
+  codeVerif(token: string): Promise<any>{
+    return fetch('http://localhost:8000/code_verif?token='+token).then(response => response.json());
+  }
 }

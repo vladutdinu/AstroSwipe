@@ -20,6 +20,7 @@ import { MatchPageComponent } from './match-page/match-page.component';
 import { ProfilePageComponent } from './profile-page/profile-page.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { VerifyPageComponent } from './auth/verify-page/verify-page.component';
 
 @Injectable()
 export class MyHammerConfig extends HammerGestureConfig  {
@@ -41,6 +42,7 @@ export class MyHammerConfig extends HammerGestureConfig  {
     ChatPageComponent,
     MatchPageComponent,
     ProfilePageComponent,
+    VerifyPageComponent,
   ],
   imports: [
     BrowserModule,

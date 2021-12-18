@@ -16,7 +16,7 @@ export class RegisterPageComponent implements OnInit {
   selectedZodiac!: string;
   secondRegisterPayload!: SecondRegisterPayload;
   signupForm!: FormGroup;
-  zodiacSign: any = ['Pisces' , 'Gemini', 'Aries', 'Aquarius', 'Taurus', 'Leo', 'Cancer', 'Libra', 'Virgo', 'Capricornus', 'Sagittarius']; 
+  zodiacSign: any[] = ['Pisces' , 'Gemini', 'Aries', 'Aquarius', 'Taurus', 'Leo', 'Cancer', 'Libra', 'Virgo', 'Capricornus', 'Sagittarius']; 
   Sex: any = ['M', 'F'];
   passedEmail!: string;
   adresaEmail!: string;
@@ -82,7 +82,8 @@ export class RegisterPageComponent implements OnInit {
       console.log('Register Failed');
     });
 
-    this.router.navigate(['/swipe']);
+
+    this.router.navigate(['/verify']);
   }
 
 }

@@ -34,7 +34,9 @@ STATUS_CODES = {
     "UNMATCH_USER_CODE": 233,
     "UNMATCH_USER_MESSAGE": "USER HAS SUCESSFULY UNMATCH ANOTHER USER",
     "NOT_ENOUGH_LIKES_CODE": 490,
-    "NOT_ENOUGH_LIKES_MESSAGE": "USER DOES NOT HAVE ENOUGH LIKES"
+    "NOT_ENOUGH_LIKES_MESSAGE": "USER DOES NOT HAVE ENOUGH LIKES",
+    "NOT_ACTIVATED_USER_CODE": 491,
+    "NOT_ACTIVATED_USER_MESSAGE": "USER HAS NOT ACTIVATED"
 }
 
 app = FastAPI()
@@ -63,7 +65,8 @@ config.DATABASE_URL = 'neo4j+s://{}:{}@{}:{}'.format(
 db.set_connection(config.DATABASE_URL)
 html = """
 Thanks for registering to Astro swipe!
-This is your verification link: {}:8000/code_verif?token={}
+This is your verification link: 
+{}
 
 Please click on the link to complete the registration
 """
@@ -126,7 +129,7 @@ async def register_step2(person: PersonModel) -> JSONResponse:
     message = MessageSchema(
         subject="Astroswipe account validation",
         recipients=[p.email],
-        body=html.format(os.environ['FASTAPI_URL'], str(token, "utf-8"))
+        body=html.format(str(token, "utf-8"))
     )
     fm = FastMail(conf)
     await fm.send_message(message)
@@ -165,13 +168,19 @@ async def home(login_model: LoginModel) -> JSONResponse:
     with db.transaction:
         try:
             p = Person.nodes.get(unique_id=email_hash, password=pass_hash)
-            token = utl.signJWT(p, os.environ['JWT_SECRET_FASTAPI'])
-            return JSONResponse(
-                status_code=200,
-                content={
-                    "token": str(token, "utf-8")
-                }
-            )
+            if p.activated == False:
+                return JSONResponse(
+                    status_code= STATUS_CODES["NOT_ACTIVATED_USER_CODE"],
+                    content=STATUS_CODES["NOT_ACTIVATED_USER_MESSAGE"]
+                )
+            else:
+                token = utl.signJWT(p, os.environ['JWT_SECRET_FASTAPI'])
+                return JSONResponse(
+                    status_code=200,
+                    content={
+                        "token": str(token, "utf-8")
+                    }
+                )
         except:
             return JSONResponse(
                 status_code=401
@@ -264,13 +273,17 @@ async def get_persons(token) -> JSONResponse:
             )
 
 @app.get("/get_persons_by_zodiac")
-async def get_persons_by_zodiac(token, zodiac) -> JSONResponse:
+async def get_persons_by_zodiac(token) -> JSONResponse:
     with db.transaction:
         payload = utl.decodeJWT(token, os.environ['JWT_SECRET_FASTAPI'])
+        email_hash = str(hashlib.sha256(payload['person']['email'].encode('utf-8')).hexdigest())
+        p = Person.nodes.get(unique_id=email_hash)
         if payload is not None:
             return_value = []
-            persons = Person.nodes.filter(zodiac_sign=zodiac)
+            persons = Person.nodes.filter(zodiac_sign=payload['person']['preffered_zodiac_sign'])
+            print(p.__properties__)
             for person in persons:
+                if person.unique_id != p.likes.relationship(person).end_node().unique_id:
                     return_value.append(person.__properties__)
             return JSONResponse(return_value)
         else:

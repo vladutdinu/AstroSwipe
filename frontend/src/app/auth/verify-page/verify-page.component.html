@@ -1,0 +1,31 @@
+<div class="background-image">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-5 mx-auto">
+                <div class="myform form">
+                    <div class="logo md-3">
+                        <div class="col-md-12 text-center">
+                            <h1 style="font-size: 80px;">Verify Account</h1>
+                            <h3 style="margin-top: 4%; margin-bottom: 4%;">We have sent you the code on your email</h3>
+                        </div>
+                    </div>
+                    <form [formGroup]="verifyForm">
+                        <div class="form-input">
+                            <input type="text" [formControlName]="'token'" name="token" class="form-control" id="token" placeholder="token">
+                        </div>      
+                        <div class="col-md-12 text-center ">
+                            <button type="submit" class=" btn btn-block mybtn btn-primary tx-tfm"  (click)="confirm()" ><span style="font-weight: bold;">Confirm token</span></button>
+                        </div>
+                        <div class="col-md-12 ">
+                            <div class="login-or">
+                               <hr class="hr-or">
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>   
+
+

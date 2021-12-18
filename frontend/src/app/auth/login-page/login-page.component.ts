@@ -13,12 +13,16 @@ export class LoginPageComponent implements OnInit {
 
   loginPayload!: LoginPayload;
   loginForm!: FormGroup;
-  loginToken!: string;
+  props!: any;
   loginService!: any;
   constructor(private authService: AuthService, private router: Router) { 
     this.loginPayload = {
       email: "",
       password: ""
+    }
+    this.props = {
+      email: "",
+      token: ""
     }
   }
   
@@ -35,9 +39,10 @@ export class LoginPageComponent implements OnInit {
     this.loginPayload.password = this.loginForm.get('password')?.value;
     
     this.loginService = this.authService.login(this.loginPayload).subscribe((params) => {
-      
-      this.loginToken = params.token;
-      this.router.navigate(['/swipe'], {state: {token: this.loginToken}});
+      this.props.token = params.token;
+      localStorage.setItem('token', params.token);
+      localStorage.setItem('email', this.loginPayload.email);
+      this.router.navigate(['/swipe']);
       console.log('Login Successful');
     }, () => {
       this.router.navigate(['/login']);
