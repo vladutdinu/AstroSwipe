@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { NavigationExtras, Router } from '@angular/router';
 import { AuthService } from '../shared/auth.service';
 import { FirstRegisterPayload } from '../shared/first-register.payload';
 
@@ -13,7 +13,6 @@ export class SignupPageComponent implements OnInit {
 
   firstRegisterPayload: FirstRegisterPayload;
   signupForm!: FormGroup;
-
   constructor(private authService: AuthService, private router: Router) {
     this.firstRegisterPayload = {
       email: '',
@@ -34,7 +33,6 @@ export class SignupPageComponent implements OnInit {
     this.firstRegisterPayload.email = this.signupForm.get('email')?.value;
     this.firstRegisterPayload.password = this.signupForm.get('password')?.value;
     this.firstRegisterPayload.conf_password = this.signupForm.get('conf_password')?.value;
-
     console.log(this.firstRegisterPayload);
 
     this.authService.signup(this.firstRegisterPayload).subscribe(() => {
@@ -42,8 +40,8 @@ export class SignupPageComponent implements OnInit {
     }, () => {
       console.log('Signup Failed');
     });
-
-    this.router.navigateByUrl('/register', { state: { email: this.firstRegisterPayload.email } });
+  
+    this.router.navigate(['/register'],  { state: { email: this.firstRegisterPayload.email } });
 
   }
 

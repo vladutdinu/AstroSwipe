@@ -115,7 +115,8 @@ async def register_step2(person: PersonModel) -> JSONResponse:
         p.city        =person.city
         p.sex         =person.sex
         p.user_type   =person.user_type
-        p.super_like  =2   
+        p.preffered_zodiac_sign = person.preffered_zodiac_sign
+        p.super_like  = 2   
         z = Zodiac.nodes.get(zodiac_sign=p.zodiac_sign)
         p.save()
         z.person.connect(p)
@@ -155,7 +156,7 @@ async def code_verif(token: str) -> JSONResponse:
 async def home() -> JSONResponse:
     return JSONResponse("hello world")
 
-@app.get('/login')
+@app.post('/login')
 async def home(login_model: LoginModel) -> JSONResponse:
     email_hash = str(hashlib.sha256(
         login_model.email.encode('utf-8')).hexdigest())
