@@ -92,3 +92,9 @@
     background:#4900d1 ;
     color: #FFF;
 }
+
+.noAstro {
+    color: #FFF;
+    font-size: 2rem;
+    line-height: 500px;
+}

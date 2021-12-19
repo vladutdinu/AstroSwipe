@@ -1,6 +1,6 @@
 import { Component, OnInit , Input} from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, NavigationExtras, Router } from '@angular/router';
 import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { AuthService } from '../shared/auth.service';
@@ -13,16 +13,39 @@ import { SecondRegisterPayload } from '../shared/second-register.payload';
 })
 export class RegisterPageComponent implements OnInit {
 
-  adresaEmail!: string;
+  selectedZodiac!: string;
   secondRegisterPayload!: SecondRegisterPayload;
   signupForm!: FormGroup;
-  zodiacSign: any = ['Pisces' , 'Gemini', 'Aries', 'Aquarius', 'Taurus', 'Leo', 'Cancer', 'Libra', 'Virgo', 'Capricornus', 'Sagittarius']; 
+  zodiacSign: any[] = ['Pisces' , 'Gemini', 'Aries', 'Aquarius', 'Taurus', 'Leo', 'Cancer', 'Libra', 'Virgo', 'Capricornus', 'Sagittarius']; 
   Sex: any = ['M', 'F'];
+  passedEmail!: string;
+  adresaEmail!: string;
 
+  constructor(private authService: AuthService, private router: Router, public activatedRoute: ActivatedRoute) { 
+    this.secondRegisterPayload = {
+      email: "",
+      first_name: "",
+      last_name: "",
+      country: "",
+      city: "",
+      sex: "",
+      zodiac_sign: "",
+      personal_bio: "",
+      preffered_zodiac_sign: "",
+      age: 0,
+      user_type: "",
+    }
 
-  constructor(private authService: AuthService, private router: Router, public activatedRoute: ActivatedRoute) { }
+    try {
+      this.passedEmail = this.router.getCurrentNavigation()!.extras.state!.email;
+    } catch (error) {
+      this.router.navigate(['/sign-up']);
+    }
+
+  }
 
   ngOnInit() {
+    console.log(this.passedEmail);
     this.signupForm = new FormGroup({
       first_name: new FormControl('', Validators.required),
       last_name: new FormControl('', Validators.required),
@@ -33,20 +56,16 @@ export class RegisterPageComponent implements OnInit {
       personal_bio: new FormControl('', Validators.required),
       preffered_zodiac_sign: new FormControl('', Validators.required),
     });
-
-    this.activatedRoute.paramMap
-      .pipe(this.adresaEmail = window.history.state);
-    
-    console.log(this.adresaEmail);
+    this.adresaEmail = this.passedEmail;
   }
 
 
   choseZodiacSign(zodiac: string){
-    this.secondRegisterPayload.zodiac_sign = zodiac;
+    this.selectedZodiac = zodiac;
   }
-
   register(){
     this.secondRegisterPayload.age = this.signupForm.get('age')!.value;
+    this.secondRegisterPayload.zodiac_sign = this.selectedZodiac;
     this.secondRegisterPayload.city = this.signupForm.get('city')!.value;
     this.secondRegisterPayload.country = this.signupForm.get('country')!.value;
     this.secondRegisterPayload.first_name = this.signupForm.get('first_name')!.value;
@@ -55,14 +74,16 @@ export class RegisterPageComponent implements OnInit {
     this.secondRegisterPayload.preffered_zodiac_sign = this.signupForm.get('preffered_zodiac_sign')!.value;
     this.secondRegisterPayload.sex = this.signupForm.get('sex')!.value;
     this.secondRegisterPayload.user_type = 'B';
-
+    this.secondRegisterPayload.email = this.adresaEmail;
     this.authService.register(this.secondRegisterPayload).subscribe(() =>{
+
       console.log('Register succesffuly!')
     }, () => {
       console.log('Register Failed');
     });
 
-    this.router.navigate(['/swipe']);
+
+    this.router.navigate(['/verify']);
   }
 
 }

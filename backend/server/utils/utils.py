@@ -29,6 +29,8 @@ def give_like(p, p1):
     p.likes.connect(p1)
     if p in p1.likes and p1 in p.likes:
         p.matched.connect(p1)
+        return True
+    return False
     
 def super_like_and_match(p, p1):
     p.likes.connect(p1)
@@ -41,16 +43,16 @@ def like_person(likes):
         hashlib.sha256(likes.email2.encode('utf-8')).hexdigest()))
     if p.user_type == "B":
         if p.like_nr > 0:
-            give_like(p, p1)
+            matched = give_like(p, p1)
             p.like_nr-=1
             p.save()
-            return True
+            return True, matched
         else:
-            return False
+            return False, False
     elif p.user_type == "P" or p.user_type == "A":
-        give_like(p, p1)
+        matched = give_like(p, p1)
         
-        return True
+        return True, matched
     
 
 def super_like(likes):

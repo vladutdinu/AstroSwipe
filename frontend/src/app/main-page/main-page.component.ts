@@ -2,7 +2,10 @@ import { Component, OnInit } from '@angular/core';
 
 import { trigger, keyframes, animate, transition } from '@angular/animations';
 import * as kf from './keyframes';
-
+import { Router } from '@angular/router';
+import { SwipeService } from '../services/swipe.service';
+import { compileClassMetadata } from '@angular/compiler';
+import { LikePayload } from '../models/like.payload';
 @Component({
   selector: 'app-main-page',
   templateUrl: './main-page.component.html',
@@ -24,21 +27,112 @@ import * as kf from './keyframes';
   ]
 })
 export class MainPageComponent implements OnInit {
-
+  
   animationState!: string;
-
+  props!: any;
+  people: any = [];
+  peopleShown!: any;
+  index: number = 1;
+  superLikeTrigger: boolean = false;
+  likeTrigger: boolean = false;
+  likePayload!: LikePayload;
+  constructor(private router: Router, private swipeService: SwipeService){
+    this.props={
+      email: localStorage.getItem('email'),
+      token: localStorage.getItem('token')
+    }
+    if(this.props.email === null)
+      this.router.navigate(['/login'])
+    this.likePayload = {
+      email1: '',
+      email2: ''
+    }
+  }
   startAnimation(state: string) {
     console.log(state)
     if (!this.animationState) {
       this.animationState = state;
     }
   }
-
+  
   resetAnimationState() {
     this.animationState = '';
   }
-
-  ngOnInit(): void {
+ 
+  async ngOnInit() {
+    await this.getPersonsByZodiac().then((r) => this.people = r);
+    this.peopleShown = this.people[this.index];
+    console.log(this.people)
   }
 
+
+  async getPersonsByZodiac(){
+    return this.swipeService.getPersonsByZodiac(this.props.token);
+  }
+
+  like(){
+    try {
+      if(this.people.length - this.index == 0){
+        this.likePayload.email1 = this.props.email;
+        this.likePayload.email2 = this.people.at(-1).email;
+        this.swipeService.likePerson(this.likePayload, this.props.token).subscribe((params) => {
+          if(params.matched)
+            alert("Suma data in cadrul acestei aplicatii a fost folosita cu cap. Acu poti sa stai si in spate!");
+        });
+        this.people = []
+      }
+      else{
+       this.likePayload.email1 = this.props.email;
+       this.likePayload.email2 = this.people.at(-1).email;
+       this.swipeService.likePerson(this.likePayload, this.props.token).subscribe((params) => {
+        if(params.matched)
+          alert("Suma data in cadrul acestei aplicatii a fost folosita cu cap. Acu poti sa stai si in spate!");
+      });
+       this.people = this.people.slice(0, this.people.length - this.index)
+       
+      }
+    } catch (error) {
+      
+    }
+  }
+  superLike(){
+    try {
+      if(this.people.length - this.index == 0){
+        this.likePayload.email1 = this.props.email;
+        this.likePayload.email2 = this.people.at(-1).email;
+        this.swipeService.superLikePerson(this.likePayload, this.props.token).subscribe((params) => {
+          if(params.matched)
+            alert("Suma data in cadrul acestei aplicatii a fost folosita cu cap. Acu poti sa stai si in spate!");
+          
+        });
+        this.people = []
+      }
+      else{
+      this.likePayload.email1 = this.props.email;
+       this.likePayload.email2 = this.people.at(-1).email;
+       this.swipeService.superLikePerson(this.likePayload, this.props.token).subscribe((params) => {
+        if(params.matched)
+          alert("Suma data in cadrul acestei aplicatii a fost folosita cu cap. Acu poti sa stai si in spate!");
+      });
+       this.people = this.people.slice(0, this.people.length - this.index)
+      }
+    } catch (error) {
+      
+    }
+  }
+
+  pass(){
+    try {
+      if(this.people.length - this.index == 0){
+        this.people = []
+      }
+      else{
+       this.people = this.people.slice(0, this.people.length - this.index)
+      }
+    } catch (error) {
+      
+    }
+  }
+
+  
 }

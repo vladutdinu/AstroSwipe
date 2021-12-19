@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { LoginPageComponent } from './auth/login-page/login-page.component';
 import { RegisterPageComponent } from './auth/register-page/register-page.component';
 import { SignupPageComponent } from './auth/signup-page/signup-page.component';
+import { VerifyPageComponent } from './auth/verify-page/verify-page.component';
 import { ChatPageComponent } from './chat-page/chat-page.component';
 import { MainPageComponent } from './main-page/main-page.component';
 import { MatchPageComponent } from './match-page/match-page.component';
@@ -20,7 +21,8 @@ const routes: Routes = [
   { path: 'swipe', component: MainPageComponent },
   { path: 'chat', component: ChatPageComponent },
   { path: 'match', component: MatchPageComponent },
-  { path: 'profile', component: ProfilePageComponent }
+  { path: 'profile', component: ProfilePageComponent },
+  { path: 'verify', component: VerifyPageComponent }
 ];
 
 @NgModule({

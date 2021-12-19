@@ -41,7 +41,7 @@
                                     <input type="text" [formControlName]="'city'" class="form-control" placeholder="Your City" value="" />
                                 </div>
                                 <div class="form-group mb-2">
-                                  <input type="text" [formControlName]="'age'" class="form-control" placeholder="Your Age" value="" />
+                                  <input type="number" [formControlName]="'age'" class="form-control" placeholder="Your Age" value="" />
                               </div>
                             </div>
                             <div class="col-md-12">
@@ -79,7 +79,7 @@
                                 </div>
                             </div>  
                         <div class="d-grid mt-2">
-                          <button class="btn btn-lg btn-primary btn-login text-uppercase fw-bold mb-2 complete-btn" type="submit" [routerLink] = "['/swipe']">Complete</button>
+                          <button class="btn btn-lg btn-primary btn-login text-uppercase fw-bold mb-2 complete-btn" (click)="register()" type="submit" [routerLink] = "['/swipe']">Complete</button>
                         </div>
       
                     </form>

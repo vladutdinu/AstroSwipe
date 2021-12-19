@@ -8,15 +8,15 @@
                             <h1 style="font-size: 80px;">Login</h1>
                         </div>
                     </div>
-                    <form action="">
+                    <form [formGroup]="loginForm">
                         <div class="form-input">
-                            <input type="email" class="" name="email"  class="form-control" id="email" placeholder="email">
+                            <input type="email" [formControlName]="'email'" name="email" class="form-control" id="email" placeholder="email">
                         </div>     
                         <div class="form-input" style="margin-top: 20px;">
-                                <input type="password" name="password" id="password"  class="form-control" placeholder="password">
+                            <input type="password" [formControlName]="'password'" name="password" id="password" class="form-control" placeholder="password">
                         </div>    
                         <div class="col-md-12 text-center ">
-                            <button type="submit" class=" btn btn-block mybtn btn-primary tx-tfm"><span style="font-weight: bold;">Login</span></button>
+                            <button type="submit" class=" btn btn-block mybtn btn-primary tx-tfm"  (click)="login()" ><span style="font-weight: bold;">Login</span></button>
                         </div>
                         <div class="col-md-12 ">
                             <div class="login-or">

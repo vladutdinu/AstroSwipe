@@ -34,7 +34,9 @@ STATUS_CODES = {
     "UNMATCH_USER_CODE": 233,
     "UNMATCH_USER_MESSAGE": "USER HAS SUCESSFULY UNMATCH ANOTHER USER",
     "NOT_ENOUGH_LIKES_CODE": 490,
-    "NOT_ENOUGH_LIKES_MESSAGE": "USER DOES NOT HAVE ENOUGH LIKES"
+    "NOT_ENOUGH_LIKES_MESSAGE": "USER DOES NOT HAVE ENOUGH LIKES",
+    "NOT_ACTIVATED_USER_CODE": 491,
+    "NOT_ACTIVATED_USER_MESSAGE": "USER HAS NOT ACTIVATED"
 }
 
 app = FastAPI()
@@ -63,7 +65,8 @@ config.DATABASE_URL = 'neo4j+s://{}:{}@{}:{}'.format(
 db.set_connection(config.DATABASE_URL)
 html = """
 Thanks for registering to Astro swipe!
-This is your verification link: {}:8000/code_verif?token={}
+This is your verification link: 
+{}
 
 Please click on the link to complete the registration
 """
@@ -115,17 +118,26 @@ async def register_step2(person: PersonModel) -> JSONResponse:
         p.city        =person.city
         p.sex         =person.sex
         p.user_type   =person.user_type
-        p.super_like  =2   
+        p.preffered_zodiac_sign = person.preffered_zodiac_sign
+        p.super_like  = 2   
         z = Zodiac.nodes.get(zodiac_sign=p.zodiac_sign)
         p.save()
         z.person.connect(p)
 
     token = utl.signJWT(p, os.environ['JWT_SECRET_FASTAPI'])
 
-    message = MessageSchema(
+    
+    try:
+        message = MessageSchema(
         subject="Astroswipe account validation",
         recipients=[p.email],
-        body=html.format(os.environ['FASTAPI_URL'], str(token, "utf-8"))
+        body=html.format(str(token, "utf-8"))
+    )
+    except:
+        message = MessageSchema(
+        subject="Astroswipe account validation",
+        recipients=[p.email],
+        body=html.format(str(token))
     )
     fm = FastMail(conf)
     await fm.send_message(message)
@@ -155,7 +167,7 @@ async def code_verif(token: str) -> JSONResponse:
 async def home() -> JSONResponse:
     return JSONResponse("hello world")
 
-@app.get('/login')
+@app.post('/login')
 async def home(login_model: LoginModel) -> JSONResponse:
     email_hash = str(hashlib.sha256(
         login_model.email.encode('utf-8')).hexdigest())
@@ -164,13 +176,27 @@ async def home(login_model: LoginModel) -> JSONResponse:
     with db.transaction:
         try:
             p = Person.nodes.get(unique_id=email_hash, password=pass_hash)
-            token = utl.signJWT(p, os.environ['JWT_SECRET_FASTAPI'])
-            return JSONResponse(
-                status_code=200,
-                content={
-                    "token": str(token, "utf-8")
-                }
-            )
+            if p.activated == False:
+                return JSONResponse(
+                    status_code= STATUS_CODES["NOT_ACTIVATED_USER_CODE"],
+                    content=STATUS_CODES["NOT_ACTIVATED_USER_MESSAGE"]
+                )
+            else:
+                token = utl.signJWT(p, os.environ['JWT_SECRET_FASTAPI'])
+                try:
+                        return JSONResponse(
+                        status_code=200,
+                        content={
+                            "token": str(token, "utf-8")
+                        }
+                    )
+                except:
+                    return JSONResponse(
+                    status_code=200,
+                    content={
+                        "token": str(token)
+                    }
+                )
         except:
             return JSONResponse(
                 status_code=401
@@ -263,13 +289,20 @@ async def get_persons(token) -> JSONResponse:
             )
 
 @app.get("/get_persons_by_zodiac")
-async def get_persons_by_zodiac(token, zodiac) -> JSONResponse:
+async def get_persons_by_zodiac(token) -> JSONResponse:
     with db.transaction:
         payload = utl.decodeJWT(token, os.environ['JWT_SECRET_FASTAPI'])
+        email_hash = str(hashlib.sha256(payload['person']['email'].encode('utf-8')).hexdigest())
+        p = Person.nodes.get(unique_id=email_hash)
         if payload is not None:
             return_value = []
-            persons = Person.nodes.filter(zodiac_sign=zodiac)
+            persons = Person.nodes.filter(zodiac_sign=payload['person']['preffered_zodiac_sign'])
+            print(p.__properties__)
             for person in persons:
+                try:
+                    if person.unique_id != p.likes.relationship(person).end_node().unique_id:
+                        return_value.append(person.__properties__)
+                except:
                     return_value.append(person.__properties__)
             return JSONResponse(return_value)
         else:
@@ -328,6 +361,7 @@ async def superlike(likes: LikeModel, token) -> JSONResponse:
                     status_code=STATUS_CODES['LIKED_USER_CODE'],
                     content={
                         "message": STATUS_CODES['LIKED_USER_MESSAGE'],
+                        "matched": True,
                         "token" : token
                     }
                 )
@@ -349,11 +383,13 @@ async def like(likes: LikeModel, token) -> JSONResponse:
     with db.transaction:
         payload = utl.decodeJWT(token, os.environ['JWT_SECRET_FASTAPI'])
         if payload is not None:
-            if utl.like_person(likes):
+            like_action, matched = utl.like_person(likes)
+            if like_action:
                 return JSONResponse(
                     status_code=STATUS_CODES['LIKED_USER_CODE'],
                     content={
                         "message": STATUS_CODES['LIKED_USER_MESSAGE'],
+                        "matched": matched,
                         "token" : token
                     }
                 )
@@ -362,6 +398,7 @@ async def like(likes: LikeModel, token) -> JSONResponse:
                     status_code=STATUS_CODES['NOT_ENOUGH_LIKES_CODE'],
                     content={
                         "message": STATUS_CODES['NOT_ENOUGH_LIKES_MESSAGE'],
+                        "matched": False,
                         "token" : token
                     }
                 )
@@ -417,12 +454,15 @@ async def update_bio(token, bio_model: BioModel):
         if payload is not None:
             p = Person.nodes.get(unique_id=str(
                 hashlib.sha256(payload['person']['email'].encode('utf-8')).hexdigest()))
+            
+            p.first_name = bio_model.first_name
+            p.last_name = bio_model.last_name
             p.country = bio_model.country
             p.city = bio_model.city
             p.personal_bio = bio_model.personal_bio
             p.preffered_zodiac_sign = bio_model.preffered_zodiac_sign
-            p.pref_age1 = bio_model.pref_age1
-            p.pref_age2 = bio_model.pref_age2
+            p.age = bio_model.age
+
             p.save()
             return JSONResponse(
                 status_code=200,
@@ -443,10 +483,42 @@ async def become_premium(token):
             p.user_type = 'P'
             p.super_like = 5
             p.save()
+            print(p)
             return JSONResponse(
                 status_code=200,
                 content={
                     "token": str(utl.signJWT(p, os.environ['JWT_SECRET_FASTAPI']), "utf-8")
+                }
+            )
+
+@app.get('/get_profile_data')
+async def get_profile_data(token):
+    with db.transaction:
+        payload = utl.decodeJWT(token, os.environ['JWT_SECRET_FASTAPI'])
+        print(token)
+        if payload is not None:
+            p = Person.nodes.get(unique_id=str(
+                hashlib.sha256(payload['person']['email'].encode('utf-8')).hexdigest()))
+            return JSONResponse(
+                status_code=200,
+                content={
+                   "info": p.__properties__
+                }
+            )
+
+@app.delete('/delete_profile')
+async def delete_profile(token):
+    with db.transaction:
+        payload = utl.decodeJWT(token, os.environ['JWT_SECRET_FASTAPI'])
+        print(token)
+        if payload is not None:
+            p = Person.nodes.get(unique_id=str(
+                hashlib.sha256(payload['person']['email'].encode('utf-8')).hexdigest()))
+            p.delete()
+            return JSONResponse(
+                status_code=200,
+                content={
+                   "message": "User has been deleted"
                 }
             )
 
