@@ -29,3 +29,10 @@
     box-shadow: #222 1px 0 10px;
     text-decoration: underline;
   }
+
+  .noMatch {
+    color: #fff;
+    font-size: 40px;
+    font-weight: 400;
+    margin-top: 420px;
+  }

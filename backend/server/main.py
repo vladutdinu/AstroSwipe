@@ -129,7 +129,7 @@ async def register_step2(person: PersonModel) -> JSONResponse:
     message = MessageSchema(
         subject="Astroswipe account validation",
         recipients=[p.email],
-        body=html.format(str(token, "utf-8"))
+        body=html.format(str(token))
     )
     fm = FastMail(conf)
     await fm.send_message(message)
@@ -178,7 +178,7 @@ async def home(login_model: LoginModel) -> JSONResponse:
                 return JSONResponse(
                     status_code=200,
                     content={
-                        "token": str(token, "utf-8")
+                        "token": str(token)
                     }
                 )
         except:
