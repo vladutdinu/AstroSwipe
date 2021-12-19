@@ -1,7 +1,7 @@
 <div class="match-background">
     <div class="container mx-auto"  style="padding-top: 20px;">
         <app-menu-bar></app-menu-bar>
-        <div class="row" *ngIf="(people.length > 1)">
+        <div class="row" *ngIf="(people.length >= 1)">
             <div class="col-md-4" *ngFor="let p of people">
                 <div class="card" style="width: 20rem;">
                     <img src="../../assets/img/test-user.jpg" class="card-img-top" alt="...">
@@ -15,7 +15,7 @@
             </div>                   
         </div> 
     </div>
-    <div class="col-md-12 d-flex justify-content-center align-items-center noMatch" *ngIf="(people.length == 1)">
+    <div class="col-md-12 d-flex justify-content-center align-items-center noMatch" *ngIf="(people.length == 0)">
         <p>Nu ai meciuri inca boss. Mergi la <a [routerLink]="['/swipe']">swipe</a> si  incepe aventura AstroSwipe</p>
     </div> 
 </div>

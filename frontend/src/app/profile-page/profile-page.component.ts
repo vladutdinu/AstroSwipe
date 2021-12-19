@@ -37,6 +37,9 @@ export class ProfilePageComponent implements OnInit {
     console.log(this.profilePayload)
 
   }
+  becomePremium(){
+    this.profileService.becomePremium(localStorage.getItem("token")!).subscribe();
+  }
   getInfoHandler(value: any){
     this.profilePayload.age = value.age ;
     this.profilePayload.city = value.city ;

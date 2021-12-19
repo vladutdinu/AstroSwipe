@@ -20,4 +20,7 @@ export class ProfileService {
   deleteProfile(token: string): Observable<any>{
     return this.http.delete('http://localhost:8000/delete_profile?token='+token);
   }
+  becomePremium(token: string){
+    return this.http.post('http://localhost:8000/become_premium?token='+token, null);
+  }
 }

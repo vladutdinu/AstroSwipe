@@ -42,6 +42,7 @@ export class LoginPageComponent implements OnInit {
       this.props.token = params.token;
       localStorage.setItem('token', params.token);
       localStorage.setItem('email', this.loginPayload.email);
+
       this.router.navigate(['/swipe']);
       console.log('Login Successful');
     }, () => {

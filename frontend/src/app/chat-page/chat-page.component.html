@@ -18,7 +18,7 @@
                     <input placeholder="Search here" type="text">
                   </div>
                 </div>
-                <div *ngFor="let p in people">
+                <div *ngFor="let p of people">
                   <div class="friend-drawer friend-drawer--onhover">
                     <img class="profile-image" src="../../assets/img/test-user.jpg" alt="">
                     <div class="text">
@@ -29,7 +29,7 @@
                   </div>
                   <hr>
                 </div>
-                <div *ngIf="(people.length == 1)">
+                <div *ngIf="(people.length == 0)">
                   <div class="friend-drawer friend-drawer--onhover">
                     <div class="text">
                       <p class="text-muted">Nu ai meciuri inca boss. Mergi la <a [routerLink]="['/swipe']">swipe</a> si  incepe aventura AstroSwipe</p>

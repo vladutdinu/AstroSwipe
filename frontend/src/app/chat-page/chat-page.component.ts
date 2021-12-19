@@ -29,9 +29,15 @@ export class ChatPageComponent implements OnInit {
       $( '.chat-bubble' ).hide('slow').show('slow');
       
     });
-    await this.getMatches().then((r) => this.people = r);
+    await this.getMatches().then((r) => {
+        this.people = r; 
+      
+    });
+
     this.peopleShown = this.people[this.index];
-    console.log(this.people)
+    if(this.people[0].first_name === undefined)
+      this.people = [];
+
   }
 
 

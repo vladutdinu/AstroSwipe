@@ -126,7 +126,15 @@ async def register_step2(person: PersonModel) -> JSONResponse:
 
     token = utl.signJWT(p, os.environ['JWT_SECRET_FASTAPI'])
 
-    message = MessageSchema(
+    
+    try:
+        message = MessageSchema(
+        subject="Astroswipe account validation",
+        recipients=[p.email],
+        body=html.format(str(token, "utf-8"))
+    )
+    except:
+        message = MessageSchema(
         subject="Astroswipe account validation",
         recipients=[p.email],
         body=html.format(str(token))
@@ -175,7 +183,15 @@ async def home(login_model: LoginModel) -> JSONResponse:
                 )
             else:
                 token = utl.signJWT(p, os.environ['JWT_SECRET_FASTAPI'])
-                return JSONResponse(
+                try:
+                        return JSONResponse(
+                        status_code=200,
+                        content={
+                            "token": str(token, "utf-8")
+                        }
+                    )
+                except:
+                    return JSONResponse(
                     status_code=200,
                     content={
                         "token": str(token)
@@ -283,7 +299,10 @@ async def get_persons_by_zodiac(token) -> JSONResponse:
             persons = Person.nodes.filter(zodiac_sign=payload['person']['preffered_zodiac_sign'])
             print(p.__properties__)
             for person in persons:
-                #if person.unique_id != p.likes.relationship(person).end_node().unique_id:
+                try:
+                    if person.unique_id != p.likes.relationship(person).end_node().unique_id:
+                        return_value.append(person.__properties__)
+                except:
                     return_value.append(person.__properties__)
             return JSONResponse(return_value)
         else:

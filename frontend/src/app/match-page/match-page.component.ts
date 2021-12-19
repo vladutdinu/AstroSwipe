@@ -1,3 +1,4 @@
+import { i18nMetaToJSDoc } from '@angular/compiler/src/render3/view/i18n/meta';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { LikePayload } from '../models/like.payload';
@@ -13,12 +14,14 @@ export class MatchPageComponent implements OnInit {
   people: any = [];
   peopleShown!: any;
   index: number = 1;
+  hasMatches!: boolean;
   likePayload!: LikePayload;
   constructor(private router: Router, private matchService: MatchService){
     this.props={
       email: localStorage.getItem('email'),
       token: localStorage.getItem('token')
     }
+    this.hasMatches = false;
     if(this.props.email === null)
       this.router.navigate(['/login'])
     this.likePayload = {
@@ -28,10 +31,13 @@ export class MatchPageComponent implements OnInit {
   }
  
   async ngOnInit() {
-    await this.getMatches().then((r) => this.people = r);
+    await this.getMatches().then((r) => {
+      this.people = r;
+    });
     this.peopleShown = this.people[this.index];
-    console.log(this.people)
-    console.log(this.people.length)
+    if(this.people[0].first_name === undefined)
+      this.people = [];
+
   }
 
 
@@ -42,10 +48,11 @@ export class MatchPageComponent implements OnInit {
   unmatch(email: string){
     this.likePayload.email1 = this.props.email;
     this.likePayload.email2 = email;
-    this.matchService.unmatch(this.likePayload, this.props.token).subscribe((params) => console.log(params));
-    if(this.people.length > 1 ){
+    this.matchService.unmatch(this.likePayload, this.props.token).subscribe((params) => {
+
       window.location.reload();
-    }
+    });
+    
   }
 
 }
