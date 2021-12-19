@@ -283,7 +283,7 @@ async def get_persons_by_zodiac(token) -> JSONResponse:
             persons = Person.nodes.filter(zodiac_sign=payload['person']['preffered_zodiac_sign'])
             print(p.__properties__)
             for person in persons:
-                if person.unique_id != p.likes.relationship(person).end_node().unique_id:
+                #if person.unique_id != p.likes.relationship(person).end_node().unique_id:
                     return_value.append(person.__properties__)
             return JSONResponse(return_value)
         else:
@@ -363,11 +363,13 @@ async def like(likes: LikeModel, token) -> JSONResponse:
     with db.transaction:
         payload = utl.decodeJWT(token, os.environ['JWT_SECRET_FASTAPI'])
         if payload is not None:
-            if utl.like_person(likes):
+            like_action, matched = utl.like_person(likes)
+            if like_action:
                 return JSONResponse(
                     status_code=STATUS_CODES['LIKED_USER_CODE'],
                     content={
                         "message": STATUS_CODES['LIKED_USER_MESSAGE'],
+                        "matched": matched,
                         "token" : token
                     }
                 )
@@ -376,6 +378,7 @@ async def like(likes: LikeModel, token) -> JSONResponse:
                     status_code=STATUS_CODES['NOT_ENOUGH_LIKES_CODE'],
                     content={
                         "message": STATUS_CODES['NOT_ENOUGH_LIKES_MESSAGE'],
+                        "matched": False,
                         "token" : token
                     }
                 )

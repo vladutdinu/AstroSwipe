@@ -73,13 +73,13 @@ export class MainPageComponent implements OnInit {
       if(this.people.length - this.index == 0){
         this.likePayload.email1 = this.props.email;
         this.likePayload.email2 = this.people.at(-1).email;
-        this.swipeService.likePerson(this.likePayload, this.props.token).subscribe();
+        this.swipeService.likePerson(this.likePayload, this.props.token).subscribe((params) => console.log(params));
         this.people = []
       }
       else{
        this.likePayload.email1 = this.props.email;
        this.likePayload.email2 = this.people.at(-1).email;
-       this.swipeService.likePerson(this.likePayload, this.props.token).subscribe();
+       this.swipeService.likePerson(this.likePayload, this.props.token).subscribe((params) => console.log(params));
        this.people = this.people.slice(0, this.people.length - this.index)
        
       }
