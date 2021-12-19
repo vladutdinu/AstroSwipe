@@ -1,106 +1,21 @@
 <div class="match-background">
     <div class="container mx-auto"  style="padding-top: 20px;">
         <app-menu-bar></app-menu-bar>
-        <div class="row">
-            <div class="col-md-4">
+        <div class="row" *ngIf="(people.length > 1)">
+            <div class="col-md-4" *ngFor="let p of people">
                 <div class="card" style="width: 20rem;">
                     <img src="../../assets/img/test-user.jpg" class="card-img-top" alt="...">
                     <div class="card-body">
-                        <h5 class="card-title">Username</h5>
-                        <p class="card-text">Some description here!.</p>
-                        <a href="#" class="btn mr-2"><i class="fa fa-times"></i> Unmatch</a>
+                        <h5 class="card-title">{{p.first_name}} {{p.last_name}}</h5>
+                        <p class="card-text">{{p.personal_bio}}</p>
+                        <button class="btn mr-2" (click)="unmatch(p.email)"><i class="fa fa-times"></i> Unmatch</button>
                         <a [routerLink]="['/chat']" class="btn "><i class="fa fa-comments-o"></i> Chat</a>
                     </div>
                 </div>
-            </div>    
-            <div class="col-md-4">
-                <div class="card" style="width: 20rem;">
-                    <img src="../../assets/img/test-user.jpg" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title">Username</h5>
-                        <p class="card-text">Some description here!.</p>
-                        <a href="#" class="btn mr-2"><i class="fa fa-times"></i> Unmatch</a>
-                        <a [routerLink]="['/chat']" class="btn "><i class="fa fa-comments-o"></i> Chat</a>
-                    </div>
-                </div>
-            </div>    
-            <div class="col-md-4">
-                <div class="card" style="width: 20rem;">
-                    <img src="../../assets/img/test-user.jpg" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title">Username</h5>
-                        <p class="card-text">Some description here!.</p>
-                        <a href="#" class="btn mr-2"><i class="fa fa-times"></i> Unmatch</a>
-                        <a [routerLink]="['/chat']" class="btn "><i class="fa fa-comments-o"></i> Chat</a>
-                    </div>
-                </div>
-            </div>    
-            <div class="col-md-4">
-                <div class="card" style="width: 20rem;">
-                    <img src="../../assets/img/test-user.jpg" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title">Username</h5>
-                        <p class="card-text">Some description here!.</p>
-                        <a href="#" class="btn mr-2"><i class="fa fa-times"></i> Unmatch</a>
-                        <a [routerLink]="['/chat']" class="btn "><i class="fa fa-comments-o"></i> Chat</a>
-                    </div>
-                </div>
-            </div>    
-            <div class="col-md-4">
-                <div class="card" style="width: 20rem;">
-                    <img src="../../assets/img/test-user.jpg" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title">Username</h5>
-                        <p class="card-text">Some description here!.</p>
-                        <a href="#" class="btn mr-2"><i class="fa fa-times"></i> Unmatch</a>
-                        <a [routerLink]="['/chat']" class="btn "><i class="fa fa-comments-o"></i> Chat</a>
-                    </div>
-                </div>
-            </div>    
-            <div class="col-md-4">
-                <div class="card" style="width: 20rem;">
-                    <img src="../../assets/img/test-user.jpg" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title">Username</h5>
-                        <p class="card-text">Some description here!.</p>
-                        <a href="#" class="btn mr-2"><i class="fa fa-times"></i> Unmatch</a>
-                        <a [routerLink]="['/chat']" class="btn "><i class="fa fa-comments-o"></i> Chat</a>
-                    </div>
-                </div>
-            </div>    
-            <div class="col-md-4">
-                <div class="card" style="width: 20rem;">
-                    <img src="../../assets/img/test-user.jpg" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title">Username</h5>
-                        <p class="card-text">Some description here!.</p>
-                        <a href="#" class="btn mr-2"><i class="fa fa-times"></i> Unmatch</a>
-                        <a [routerLink]="['/chat']" class="btn "><i class="fa fa-comments-o"></i> Chat</a>
-                    </div>
-                </div>
-            </div>    
-            <div class="col-md-4">
-                <div class="card" style="width: 20rem;">
-                    <img src="../../assets/img/test-user.jpg" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title">Username</h5>
-                        <p class="card-text">Some description here!.</p>
-                        <a href="#" class="btn mr-2"><i class="fa fa-times"></i> Unmatch</a>
-                        <a [routerLink]="['/chat']" class="btn "><i class="fa fa-comments-o"></i> Chat</a>
-                    </div>
-                </div>
-            </div>    
-            <div class="col-md-4">
-                <div class="card" style="width: 20rem;">
-                    <img src="../../assets/img/test-user.jpg" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title">Username</h5>
-                        <p class="card-text">Some description here!.</p>
-                        <a href="#" class="btn mr-2"><i class="fa fa-times"></i> Unmatch</a>
-                        <a [routerLink]="['/chat']" class="btn "><i class="fa fa-comments-o"></i> Chat</a>
-                    </div>
-                </div>
-            </div>     
-        </div>
+            </div>                   
+        </div> 
     </div>
+    <div class="col-md-12 d-flex justify-content-center align-items-center noMatch" *ngIf="(people.length == 1)">
+        <p>Nu ai meciuri inca boss. Mergi la <a [routerLink]="['/swipe']">swipe</a> si  incepe aventura AstroSwipe</p>
+    </div> 
 </div>
