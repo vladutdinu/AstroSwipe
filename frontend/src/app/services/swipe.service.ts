@@ -16,4 +16,7 @@ export class SwipeService {
   likePerson(likePayload: LikePayload, token: string): Observable<any>{
       return this.http.post('http://localhost:8000/like?token=' + token, likePayload);
   }
+  superLikePerson(likePayload: LikePayload, token: string): Observable<any>{
+    return this.http.post('http://localhost:8000/superlike?token=' + token, likePayload);
+  } 
 }

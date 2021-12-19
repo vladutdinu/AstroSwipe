@@ -18,7 +18,7 @@ import { HammerGestureConfig, HAMMER_GESTURE_CONFIG } from '@angular/platform-br
 import { ChatPageComponent } from './chat-page/chat-page.component';
 import { MatchPageComponent } from './match-page/match-page.component';
 import { ProfilePageComponent } from './profile-page/profile-page.component';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { VerifyPageComponent } from './auth/verify-page/verify-page.component';
 
@@ -51,7 +51,8 @@ export class MyHammerConfig extends HammerGestureConfig  {
     MatCardModule,
     MatButtonModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    FormsModule
   ],
   providers: [ { 
     provide: HAMMER_GESTURE_CONFIG, 

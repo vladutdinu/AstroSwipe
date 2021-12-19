@@ -78,6 +78,7 @@ select {
     font-size: 0.9rem;
     letter-spacing: 0.05rem;
     padding: 0.75rem 1rem;
+    margin-top: 2%;
 }
 
 .complete-btn {
@@ -207,6 +208,11 @@ select {
     width: 50px;
 }
 
+.dial .slice .label .buton img {
+    height: 50px;
+    width: 50px;
+}
+
 .dial .slice .label:hover {
     border-color: #fff;
 }
@@ -245,4 +251,15 @@ select {
 }
 .dial .slice:nth-child(12) {
     transform: rotate(330deg);
+}
+.buton {
+    background: none;
+    border:none;
+    justify-content: center;
+}
+textarea {
+    border-image-source: linear-gradient(to left,#4900d1,#be0787);
+    border-width: 1.5pt;
+    border-image-slice: 1;
+    margin-top: 10px;
 }

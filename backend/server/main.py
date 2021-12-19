@@ -342,6 +342,7 @@ async def superlike(likes: LikeModel, token) -> JSONResponse:
                     status_code=STATUS_CODES['LIKED_USER_CODE'],
                     content={
                         "message": STATUS_CODES['LIKED_USER_MESSAGE'],
+                        "matched": True,
                         "token" : token
                     }
                 )
@@ -434,12 +435,15 @@ async def update_bio(token, bio_model: BioModel):
         if payload is not None:
             p = Person.nodes.get(unique_id=str(
                 hashlib.sha256(payload['person']['email'].encode('utf-8')).hexdigest()))
+            
+            p.first_name = bio_model.first_name
+            p.last_name = bio_model.last_name
             p.country = bio_model.country
             p.city = bio_model.city
             p.personal_bio = bio_model.personal_bio
             p.preffered_zodiac_sign = bio_model.preffered_zodiac_sign
-            p.pref_age1 = bio_model.pref_age1
-            p.pref_age2 = bio_model.pref_age2
+            p.age = bio_model.age
+
             p.save()
             return JSONResponse(
                 status_code=200,
@@ -460,10 +464,42 @@ async def become_premium(token):
             p.user_type = 'P'
             p.super_like = 5
             p.save()
+            print(p)
             return JSONResponse(
                 status_code=200,
                 content={
                     "token": str(utl.signJWT(p, os.environ['JWT_SECRET_FASTAPI']), "utf-8")
+                }
+            )
+
+@app.get('/get_profile_data')
+async def get_profile_data(token):
+    with db.transaction:
+        payload = utl.decodeJWT(token, os.environ['JWT_SECRET_FASTAPI'])
+        print(token)
+        if payload is not None:
+            p = Person.nodes.get(unique_id=str(
+                hashlib.sha256(payload['person']['email'].encode('utf-8')).hexdigest()))
+            return JSONResponse(
+                status_code=200,
+                content={
+                   "info": p.__properties__
+                }
+            )
+
+@app.delete('/delete_profile')
+async def delete_profile(token):
+    with db.transaction:
+        payload = utl.decodeJWT(token, os.environ['JWT_SECRET_FASTAPI'])
+        print(token)
+        if payload is not None:
+            p = Person.nodes.get(unique_id=str(
+                hashlib.sha256(payload['person']['email'].encode('utf-8')).hexdigest()))
+            p.delete()
+            return JSONResponse(
+                status_code=200,
+                content={
+                   "message": "User has been deleted"
                 }
             )
 
