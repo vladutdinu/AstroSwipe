@@ -11,26 +11,24 @@
                     <form [formGroup]="loginForm">
                         <div class="form-input">
                             <input type="email" [formControlName]="'email'" name="email" class="form-control" id="email" placeholder="email">
-                        </div>     
+                        </div>
                         <div class="form-input" style="margin-top: 20px;">
                             <input type="password" [formControlName]="'password'" name="password" id="password" class="form-control" placeholder="password">
-                        </div>    
+                        </div>
                         <div class="col-md-12 text-center ">
-                            <button type="submit" class=" btn btn-block mybtn btn-primary tx-tfm"  (click)="login()" ><span style="font-weight: bold;">Login</span></button>
+                            <button type="submit" class=" btn btn-block mybtn btn-primary tx-tfm" (click)="login()" name="login"><span style="font-weight: bold;">Login</span></button>
                         </div>
                         <div class="col-md-12 ">
                             <div class="login-or">
-                               <hr class="hr-or">
+                                <hr class="hr-or">
                             </div>
                         </div>
                         <div class="form-group">
-                            <p class="text-center" style="color: white;">Don't have account? <a [routerLink] = "['/sign-up']" id="signup">Sign up here</a></p>
+                            <p class="text-center" style="color: white;">Don't have account? <a [routerLink]="['/sign-up']" id="signup">Sign up here</a></p>
                         </div>
                     </form>
                 </div>
             </div>
         </div>
     </div>
-</div>   
-
-
+</div>
