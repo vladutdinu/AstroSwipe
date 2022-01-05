@@ -2,7 +2,7 @@ import unittest
 from unittest.mock import MagicMock
 import requests
 
-token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJwZXJzb24iOnsidW5pcXVlX2lkIjoiNGMzZjFlNmNmOGYwNjliZjRiZjIxMjNjNGQxNjBhYTgzNWU3OWNlOTU1ZTQ5ODEwODA5MGQ1NWEwYzlkNmJhNiIsImVtYWlsIjoicG9wYW1vcmVuYTNAZ21haWwuY29tIiwicGFzc3dvcmQiOiI1Yzc3ZDdmZDhmNTFlZDBjMmE5MTNlNDYzMjZmZjZkMmVhMmU5NWM4ZWNmMTY2N2M3MmViNzJjY2MzZmMyYjQ2IiwiZmlyc3RfbmFtZSI6Ik1vcmVuYSIsImxhc3RfbmFtZSI6IlBvcGEiLCJjb3VudHJ5IjoiUm9tYW5pYSIsImNpdHkiOiJCYWNhdSIsInNleCI6IkYiLCJwcmVmZmVyZWRfem9kaWFjX3NpZ24iOiIiLCJ6b2RpYWNfc2lnbiI6IkdlbWluaSIsInBlcnNvbmFsX2JpbyI6IkRvcmVzYyB1biBiYXJiYXQgbWVzdGVyIiwiYWdlIjoyMSwiYWN0aXZhdGVkIjp0cnVlLCJsaWtlX25yIjoxMCwidXNlcl90eXBlIjoiUCIsInByZWZfYWdlMSI6MSwicHJlZl9hZ2UyIjoxLCJzdXBlcl9saWtlIjoyLCJpZCI6MTJ9LCJleHBpcmVzIjoxNjM5MDA5MzcyLjI4ODQ2NjJ9.qy8fGOVn366s26ItOkMhscGq3M8p3dCM516TjEVfo0M"
+token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJwZXJzb24iOnsidW5pcXVlX2lkIjoiNGMzZjFlNmNmOGYwNjliZjRiZjIxMjNjNGQxNjBhYTgzNWU3OWNlOTU1ZTQ5ODEwODA5MGQ1NWEwYzlkNmJhNiIsImVtYWlsIjoicG9wYW1vcmVuYTNAZ21haWwuY29tIiwicGFzc3dvcmQiOiI1Yzc3ZDdmZDhmNTFlZDBjMmE5MTNlNDYzMjZmZjZkMmVhMmU5NWM4ZWNmMTY2N2M3MmViNzJjY2MzZmMyYjQ2IiwiZmlyc3RfbmFtZSI6ImFzZHNhZCIsImxhc3RfbmFtZSI6ImFzZGFzIiwiY291bnRyeSI6ImRzYSIsImNpdHkiOiJkYXMiLCJzZXgiOiJNIiwicHJlZmZlcmVkX3pvZGlhY19zaWduIjoiR2VtaW5pIiwiem9kaWFjX3NpZ24iOiJBcmllcyIsInBlcnNvbmFsX2JpbyI6ImFzZGFzIiwiYWdlIjoyMiwiYWN0aXZhdGVkIjpmYWxzZSwibGlrZV9uciI6MTAsInVzZXJfdHlwZSI6IkIiLCJwcmVmX2FnZTEiOjEsInByZWZfYWdlMiI6MSwic3VwZXJfbGlrZSI6MiwiaWQiOjEzfSwiZXhwaXJlcyI6MTY0MTQxNjY1OC43Nzg0MzY0fQ.AcxPIGF_4R4CLGu6F1g4gNkygfcYY9kmtbz8YEspD-I"
 class RegistrationTest(unittest.TestCase):
 
     def PasswordsNotMatch(self):
@@ -56,9 +56,9 @@ class RegistrationTest(unittest.TestCase):
         try:
             print(response.status_code)
             self.assertEqual(response.status_code, 401)
-            print("Test 4 succesful")
+            print("Test 5 succesful")
         except:
-            print("Test 4 failed")
+            print("Test 5 failed")
 
 
     def get_zodiacWorks(self):
@@ -68,9 +68,9 @@ class RegistrationTest(unittest.TestCase):
         try:
             print(response.status_code)
             self.assertEqual(response.status_code, 200)
-            print("Test 4 succesful")
+            print("Test 6 succesful")
         except:
-            print("Test 4 failed")
+            print("Test 6 failed")
 
     def get_zodiacFaild(self):
         reg ='{"email": "popamorena3@gmail.com","password": "kid","conf_password": "kid"}'
@@ -79,9 +79,9 @@ class RegistrationTest(unittest.TestCase):
         try:
             print(response.status_code)
             self.assertEqual(response.status_code, 401)
-            print("Test 4 succesful")
+            print("Test 7 succesful")
         except:
-            print("Test 4 failed")       
+            print("Test 7 failed")       
 
     def get_matchesWorks(self):
         reg ='{"email": "popamorena3@gmail.com","password": "kid","conf_password": "kid"}'
@@ -90,9 +90,9 @@ class RegistrationTest(unittest.TestCase):
         try:
             print(response.status_code)
             self.assertEqual(response.status_code, 200)
-            print("Test 4 succesful")
+            print("Test 8 succesful")
         except:
-            print("Test 4 failed")
+            print("Test 8 failed")
 
     def get_matchesFaild(self):
         reg ='{"email": "popamorena3@gmail.com","password": "kid","conf_password": "kid"}'
@@ -101,9 +101,9 @@ class RegistrationTest(unittest.TestCase):
         try:
             print(response.status_code)
             self.assertEqual(response.status_code, 401)
-            print("Test 4 succesful")
+            print("Test 9 succesful")
         except:
-            print("Test 4 failed")
+            print("Test 9 failed")
 
     def get_persons_by_sexWorks(self):
         reg ='{"email": "popamorena3@gmail.com","password": "kid","conf_password": "kid"}'
@@ -112,9 +112,9 @@ class RegistrationTest(unittest.TestCase):
         try:
             print(response.status_code)
             self.assertEqual(response.status_code, 200)
-            print("Test 4 succesful")
+            print("Test 10 succesful")
         except:
-            print("Test 4 failed")
+            print("Test 10 failed")
 
 if __name__ == '__main__':
         reg = RegistrationTest()

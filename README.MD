@@ -32,3 +32,8 @@ Rulare aplicatie:
 - Se intra in directorul "backend" si se ruleaza comanda `docker build -t isw_backend .`
 - Se intra in directorul "dev-ops" si se ruleaza comanda `docker-compose up -d`.
 - Se asteapta 2 minute si apoi se acceseaza link-ul "localhost:5000".
+
+Diagrame:
+====
+![Diagrama frontend](_frontend.png)
+![Diagrama backend](Backend-flow.drawio.png)
