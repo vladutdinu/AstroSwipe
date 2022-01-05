@@ -10,23 +10,23 @@
                     </div>
                     <form [formGroup]="signupForm" (ngSubmit)="signup()">
                         <div class="form-input">
-                            <input type="email" [formControlName]="'email'" name="email"  class="form-control" id="email" placeholder="Email">
+                            <input type="email" [formControlName]="'email'" name="email" class="form-control" id="email" placeholder="Email">
                             <span *ngIf="!signupForm.get('email')?.valid && signupForm.get('email')!.touched" class="help-block">Please enter a valid email!</span>
-                        </div>     
+                        </div>
                         <div class="form-input" style="margin-top: 20px;">
-                            <input type="password" [formControlName]="'password'" name="password" id="password"  class="form-control" placeholder="Password">
+                            <input type="password" [formControlName]="'password'" name="password" id="password" class="form-control" placeholder="Password">
                             <span *ngIf="!signupForm.get('password')!.valid && signupForm.get('password')!.touched" class="help-block">Please enter a valid password!</span>
                         </div>
                         <div class="form-input" style="margin-top: 20px;">
-                            <input type="password" [formControlName]="'conf_password'" name="conf_password" id="conf_password"  class="form-control" placeholder="Confirm password">
+                            <input type="password" [formControlName]="'conf_password'" name="conf_password" id="conf_password" class="form-control" placeholder="Confirm password">
                             <span *ngIf="!signupForm.get('conf_password')!.valid && signupForm.get('conf_password')!.touched" class="help-block">Please enter a valid password!</span>
-                        </div>    
+                        </div>
                         <div class="col-md-12 text-center ">
-                            <button type="submit" class=" btn btn-block mybtn btn-primary tx-tfm"><span style="font-weight: bold;">Sign Up</span></button>
+                            <button type="submit" class=" btn btn-block mybtn btn-primary tx-tfm" name="submit"><span style="font-weight: bold;">Sign Up</span></button>
                         </div>
                         <div class="col-md-12 ">
                             <div class="login-or">
-                               <hr class="hr-or">
+                                <hr class="hr-or">
                             </div>
                         </div>
                         <div class="form-group">
@@ -37,6 +37,4 @@
             </div>
         </div>
     </div>
-</div>   
-
-
+</div>

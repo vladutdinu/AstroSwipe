@@ -1,0 +1,26 @@
+C:\Users\rolpop\Desktop\faculta\Selenium\Selenium\bin\Debug\Selenium.exe.config
+C:\Users\rolpop\Desktop\faculta\Selenium\Selenium\bin\Debug\Selenium.exe
+C:\Users\rolpop\Desktop\faculta\Selenium\Selenium\bin\Debug\Selenium.pdb
+C:\Users\rolpop\Desktop\faculta\Selenium\Selenium\bin\Debug\WebDriver.dll
+C:\Users\rolpop\Desktop\faculta\Selenium\Selenium\obj\Debug\Selenium.csproj.AssemblyReference.cache
+C:\Users\rolpop\Desktop\faculta\Selenium\Selenium\obj\Debug\Selenium.csproj.CoreCompileInputs.cache
+C:\Users\rolpop\Desktop\faculta\Selenium\Selenium\obj\Debug\Selenium.exe
+C:\Users\rolpop\Desktop\faculta\Selenium\Selenium\obj\Debug\Selenium.pdb
+C:\Users\rolpop\OneDrive - Waters Corporation\Desktop\faculta\Selenium\Selenium\obj\Debug\Selenium.csproj.AssemblyReference.cache
+C:\Users\rolpop\OneDrive - Waters Corporation\Desktop\faculta\Selenium\Selenium\obj\Debug\Selenium.csproj.CoreCompileInputs.cache
+C:\Users\rolpop\OneDrive - Waters Corporation\Desktop\faculta\Selenium\Selenium\obj\Debug\Selenium.exe
+C:\Users\rolpop\OneDrive - Waters Corporation\Desktop\faculta\Selenium\Selenium\obj\Debug\Selenium.pdb
+C:\Users\rolpop\OneDrive - Waters Corporation\Desktop\faculta\Selenium\Selenium\bin\Debug\Selenium.exe.config
+C:\Users\rolpop\OneDrive - Waters Corporation\Desktop\faculta\Selenium\Selenium\bin\Debug\Selenium.exe
+C:\Users\rolpop\OneDrive - Waters Corporation\Desktop\faculta\Selenium\Selenium\bin\Debug\Selenium.pdb
+C:\Users\rolpop\OneDrive - Waters Corporation\Desktop\faculta\Selenium\Selenium\bin\Debug\WebDriver.dll
+C:\Users\rolpop\OneDrive - Waters Corporation\Desktop\faculta\Selenium\Selenium\obj\Debug\Selenium.csproj.CopyComplete
+D:\Facultate\Selenium\Selenium\Selenium\bin\Debug\Selenium.exe.config
+D:\Facultate\Selenium\Selenium\Selenium\bin\Debug\Selenium.exe
+D:\Facultate\Selenium\Selenium\Selenium\bin\Debug\Selenium.pdb
+D:\Facultate\Selenium\Selenium\Selenium\bin\Debug\WebDriver.dll
+D:\Facultate\Selenium\Selenium\Selenium\obj\Debug\Selenium.csprojAssemblyReference.cache
+D:\Facultate\Selenium\Selenium\Selenium\obj\Debug\Selenium.csproj.CoreCompileInputs.cache
+D:\Facultate\Selenium\Selenium\Selenium\obj\Debug\Selenium.csproj.CopyComplete
+D:\Facultate\Selenium\Selenium\Selenium\obj\Debug\Selenium.exe
+D:\Facultate\Selenium\Selenium\Selenium\obj\Debug\Selenium.pdb
