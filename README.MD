@@ -45,21 +45,28 @@ Prezentarea aplicatie
 
 Main page
 ---
+![](documentatie/img/main.JPG)
 
 Login page
 ---
+![](documentatie/img/login.JPG)
 
 Sign up page
 ---
-
-Profile page
----
+![](documentatie/img/signup.JPG)
 
 Profile-sign-up page
 ---
+![](documentatie/img/signupbio.JPG)
+
+Profile page
+---
+![](documentatie/img/profile.JPG)
 
 Matches page
 ---
+![](documentatie/img/matches.JPG)
 
 Chat page
 ---
+![](documentatie/img/chat.JPG)
