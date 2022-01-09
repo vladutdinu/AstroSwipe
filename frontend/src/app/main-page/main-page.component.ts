@@ -48,12 +48,7 @@ export class MainPageComponent implements OnInit {
       email2: ''
     }
   }
-  startAnimation(state: string) {
-    console.log(state)
-    if (!this.animationState) {
-      this.animationState = state;
-    }
-  }
+ 
   
   resetAnimationState() {
     this.animationState = '';
@@ -134,5 +129,15 @@ export class MainPageComponent implements OnInit {
     }
   }
 
-  
+  startAnimation(state: string) {
+    console.log(state)
+    if (!this.animationState) {
+      this.animationState = state;
+    }
+    if(state == 'slideOutLeft')
+      this.like();
+    else if(state == 'fadeOutUp')
+      this.superLike();
+  }
+
 }

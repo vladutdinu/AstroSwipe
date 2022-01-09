@@ -467,7 +467,7 @@ async def update_bio(token, bio_model: BioModel):
             return JSONResponse(
                 status_code=200,
                 content={
-                    "token": str(utl.signJWT(p, os.environ['JWT_SECRET_FASTAPI']), "utf-8")
+                    "token": str(utl.signJWT(p, os.environ['JWT_SECRET_FASTAPI']))
                 }
             )
 
@@ -487,7 +487,7 @@ async def become_premium(token):
             return JSONResponse(
                 status_code=200,
                 content={
-                    "token": str(utl.signJWT(p, os.environ['JWT_SECRET_FASTAPI']), "utf-8")
+                    "token": str(utl.signJWT(p, os.environ['JWT_SECRET_FASTAPI']))
                 }
             )
 

@@ -26,14 +26,40 @@ Docker:
 
 Rulare aplicatie:
 ====
-
+- IMPORTANT: Pentru rularea aplicatiei este nevoie sa aveti instalat Docker Desktop, respectiv componentele mentionate mai sus in sectiunea *Docker*
+- IMPORTANT: Se recomanda folosirea browser-ului Firefox deoarece Chrome nu functioneaza corect.
 - Se cloneaza repository-ul prin comanda `git clone https://github.com/VladutDinu/AstroSwipe.git`.
 - Se intra in directorul "frontend" si se ruleaza comanda `docker build -t isw_frontend .`
 - Se intra in directorul "backend" si se ruleaza comanda `docker build -t isw_backend .`
 - Se intra in directorul "dev-ops" si se ruleaza comanda `docker-compose up -d`.
-- Se asteapta 2 minute si apoi se acceseaza link-ul "localhost:5000".
+- Se asteapta 2 minute pentru build-ul intern a front-end-ului si apoi se acceseaza link-ul "localhost:5000".
+- IMPORTANT: In cazul in care logarea in aplicatie nu functioneaza, va rugam sa ne contactati pe email-ul AstroSwipe@gmail.com, deoarece baza de date online este una free tier si intra in pauza odata la 3 zile.
 
 Diagrame:
 ====
-![Diagrama frontend](_frontend.png)
-![Diagrama backend](Backend-flow.drawio.png)
+![Diagrama frontend](documentatie/_frontend.png)
+![Diagrama backend](documentatie/Backend-flow.drawio.png)
+
+Prezentarea aplicatie
+====
+
+Main page
+---
+
+Login page
+---
+
+Sign up page
+---
+
+Profile page
+---
+
+Profile-sign-up page
+---
+
+Matches page
+---
+
+Chat page
+---

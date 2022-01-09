@@ -14,6 +14,7 @@ export class SwipeService {
     return fetch('http://localhost:8000/get_persons_by_zodiac?token='+token).then(response => response.json());
   }
   likePerson(likePayload: LikePayload, token: string): Observable<any>{
+      console.log('Like')
       return this.http.post('http://localhost:8000/like?token=' + token, likePayload);
   }
   superLikePerson(likePayload: LikePayload, token: string): Observable<any>{
