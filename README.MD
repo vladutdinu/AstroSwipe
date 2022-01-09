@@ -33,7 +33,7 @@ Rulare aplicatie:
 - Se intra in directorul "backend" si se ruleaza comanda `docker build -t isw_backend .`
 - Se intra in directorul "dev-ops" si se ruleaza comanda `docker-compose up -d`.
 - Se asteapta 2 minute pentru build-ul intern a front-end-ului si apoi se acceseaza link-ul "localhost:5000".
-- IMPORTANT: In cazul in care logarea in aplicatie nu functioneaza, va rugam sa ne contactati pe email-ul AstroSwipe@gmail.com, deoarece baza de date online este una free tier si intra in pauza odata la 3 zile.
+- IMPORTANT: In cazul in care niciun serviciu din aplicatie nu functioneaza, va rugam sa ne contactati pe email-ul AstroSwipe@gmail.com, deoarece baza de date online este una free tier si intra in pauza odata la 3 zile.
 
 Diagrame:
 ====
