@@ -4,7 +4,7 @@
         <div class="profile-card-2" [@cardAnimator]="animationState" (@cardAnimator.done)="resetAnimationState()" (swipeleft)="startAnimation('slideOutLeft')" (swiperight)="startAnimation('slideOutRight')" (swipeup)="startAnimation('fadeOutUp')" (swipedown)="startAnimation('flipOutY')"
             *ngFor="let p of people.slice(people.length-index)">
             <img src="http://envato.jayasankarkr.in/code/profile/assets/img/profile-2.jpg" class="img img-responsive">
-            <span class="profile-name">{{p.first_name}} {{p.last_name}} , {{p.age}}</span>
+            <span class="profile-name">{{p.first_name}} {{p.last_name}}, {{p.age}}</span>
             <span class="profile-username">{{p.personal_bio}}</span>
 
         </div>

@@ -39,6 +39,7 @@ export class ProfilePageComponent implements OnInit {
   }
   becomePremium(){
     this.profileService.becomePremium(localStorage.getItem("token")!).subscribe();
+    alert("Ai devenit user premium");
   }
   getInfoHandler(value: any){
     this.profilePayload.age = value.age ;
@@ -73,6 +74,8 @@ export class ProfilePageComponent implements OnInit {
     }, () => {
       console.log('Delete Failed');
     });
+    alert("Contul tau a fost sters");
     this.router.navigate(['/']);
+    
   }
 }

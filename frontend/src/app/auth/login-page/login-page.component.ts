@@ -44,9 +44,11 @@ export class LoginPageComponent implements OnInit {
       localStorage.setItem('email', this.loginPayload.email);
 
       this.router.navigate(['/swipe']);
+      alert("Ai fost logat cu succes");
       console.log('Login Successful');
     }, () => {
       this.router.navigate(['/login']);
+      alert("Contul nu exista");
       console.log('Login Failed');
     });
 

@@ -72,7 +72,7 @@ export class MainPageComponent implements OnInit {
         this.likePayload.email2 = this.people.at(-1).email;
         this.swipeService.likePerson(this.likePayload, this.props.token).subscribe((params) => {
           if(params.matched)
-            alert("Suma data in cadrul acestei aplicatii a fost folosita cu cap. Acu poti sa stai si in spate!");
+            alert("Ai facut match");
         });
         this.people = []
       }
@@ -81,7 +81,7 @@ export class MainPageComponent implements OnInit {
        this.likePayload.email2 = this.people.at(-1).email;
        this.swipeService.likePerson(this.likePayload, this.props.token).subscribe((params) => {
         if(params.matched)
-          alert("Suma data in cadrul acestei aplicatii a fost folosita cu cap. Acu poti sa stai si in spate!");
+        alert("Ai facut match");
       });
        this.people = this.people.slice(0, this.people.length - this.index)
        
@@ -97,7 +97,7 @@ export class MainPageComponent implements OnInit {
         this.likePayload.email2 = this.people.at(-1).email;
         this.swipeService.superLikePerson(this.likePayload, this.props.token).subscribe((params) => {
           if(params.matched)
-            alert("Suma data in cadrul acestei aplicatii a fost folosita cu cap. Acu poti sa stai si in spate!");
+            alert("Ai facut match");
           
         });
         this.people = []
@@ -107,7 +107,7 @@ export class MainPageComponent implements OnInit {
        this.likePayload.email2 = this.people.at(-1).email;
        this.swipeService.superLikePerson(this.likePayload, this.props.token).subscribe((params) => {
         if(params.matched)
-          alert("Suma data in cadrul acestei aplicatii a fost folosita cu cap. Acu poti sa stai si in spate!");
+          alert("Ai facut match");
       });
        this.people = this.people.slice(0, this.people.length - this.index)
       }

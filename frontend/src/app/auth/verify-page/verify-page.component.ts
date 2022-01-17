@@ -28,6 +28,7 @@ export class VerifyPageComponent implements OnInit {
   async confirm(){
     await this.sendCodeToVerif().then((r) => localStorage.setItem("token", r));
     console.log(localStorage);
+    alert("Cont creat cu succes, acum te poti loga.");
     this.router.navigate(['/login']);
   }
   async sendCodeToVerif(){

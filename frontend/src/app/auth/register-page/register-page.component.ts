@@ -82,7 +82,7 @@ export class RegisterPageComponent implements OnInit {
       console.log('Register Failed');
     });
 
-
+    alert("Cont creat cu succes, te rugam sa iti activezi contul in sectiunea urmatoare");
     this.router.navigate(['/verify']);
   }
 
